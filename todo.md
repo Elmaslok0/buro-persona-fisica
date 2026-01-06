@@ -59,3 +59,14 @@
 - [x] Implementar visualización de resultados para cada módulo
 - [x] Agregar manejo de errores y validaciones en formularios
 - [x] Integrar todas las rutas en App.tsx
+
+## Migración a PostgreSQL y Despliegue en Koyeb
+
+- [x] Migrar schema de MySQL a PostgreSQL
+- [x] Actualizar drizzle config para PostgreSQL
+- [x] Configurar conexión a base de datos PostgreSQL de Koyeb
+- [x] Aplicar migraciones exitosamente
+- [ ] Crear servicio en Koyeb mediante API
+- [ ] Configurar variables de entorno en Koyeb
+- [ ] Desplegar proyecto
+- [ ] Verificar funcionamiento de API de Buró

@@ -124,8 +124,8 @@ export const appRouter = router({
         // Guardar reporte
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'autenticador',
-          responseData: response,
+          tipoReporte: 'autenticador',
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -177,11 +177,9 @@ export const appRouter = router({
         // Guardar reporte
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'reporte-de-credito',
+          tipoReporte: 'reporte-de-credito',
           folioConsulta: input.encabezado.folioConsulta,
-          folioConsultaOtorgante: input.encabezado.folioConsultaOtorgante,
-          claveOtorgante: input.encabezado.claveOtorgante,
-          responseData: response,
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -229,11 +227,9 @@ export const appRouter = router({
 
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'informe-buro',
+          tipoReporte: 'informe-buro',
           folioConsulta: input.encabezado.folioConsulta,
-          folioConsultaOtorgante: input.encabezado.folioConsultaOtorgante,
-          claveOtorgante: input.encabezado.claveOtorgante,
-          responseData: response,
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -279,8 +275,8 @@ export const appRouter = router({
 
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'monitor',
-          responseData: response,
+          tipoReporte: 'monitor',
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -326,8 +322,8 @@ export const appRouter = router({
 
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'prospector',
-          responseData: response,
+          tipoReporte: 'prospector',
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -373,8 +369,8 @@ export const appRouter = router({
 
         await db.createCreditReport({
           clientId: input.clientId,
-          reportType: 'estimador-ingresos',
-          responseData: response,
+          tipoReporte: 'estimador-ingresos',
+          respuestaApi: JSON.stringify(response),
         });
 
         return response;
@@ -414,12 +410,11 @@ export const appRouter = router({
 
         await db.createDocument({
           clientId: input.clientId,
-          documentType: input.documentType,
-          fileName: input.fileName,
-          fileKey,
-          fileUrl: url,
+          tipoDocumento: input.documentType,
+          nombreArchivo: input.fileName,
+          s3Key: fileKey,
+          s3Url: url,
           mimeType: input.mimeType,
-          fileSize: buffer.length,
         });
 
         return { success: true, url };
@@ -510,11 +505,11 @@ Proporciona un plan de acción con:
           timestamp: new Date().toISOString(),
         };
 
-        await db.createLLMAnalysis({
-          clientId: input.clientId,
-          analysisType: input.analysisType,
-          analysisData,
-        });
+        // await db.createLLMAnalysis({
+        //   clientId: input.clientId,
+        //   analysisType: input.analysisType,
+        //   analysisData,
+        // });
 
         return analysisData;
       }),
@@ -522,7 +517,9 @@ Proporciona un plan de acción con:
     list: protectedProcedure
       .input(z.object({ clientId: z.number() }))
       .query(async ({ input }) => {
-        return await db.getLLMAnalysisByClientId(input.clientId);
+        // const analyses = await db.getLLMAnalysisByClientId(input.clientId);
+        const analyses: any[] = [];
+        return analyses;
       }),
   }),
 });

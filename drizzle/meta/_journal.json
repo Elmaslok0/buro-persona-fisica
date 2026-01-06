@@ -1,19 +1,12 @@
 {
   "version": "7",
-  "dialect": "mysql",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1767730023043,
-      "tag": "0000_familiar_captain_marvel",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1767730500932,
-      "tag": "0001_familiar_bulldozer",
+      "version": "7",
+      "when": 1767732595156,
+      "tag": "0000_deep_masque",
       "breakpoints": true
     }
   ]

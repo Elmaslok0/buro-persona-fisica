@@ -1,5 +1,6 @@
 import { eq, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import { 
   InsertUser, users,
   clients, InsertClient,
@@ -10,16 +11,18 @@ import {
   creditReports, InsertCreditReport,
   documents, InsertDocument,
   alerts, InsertAlert,
-  llmAnalysis, InsertLLMAnalysis
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
+let _client: ReturnType<typeof postgres> | null = null;
 
+// Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      _client = postgres(process.env.DATABASE_URL);
+      _db = drizzle(_client);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -40,47 +43,33 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
 
   try {
-    const values: InsertUser = {
-      openId: user.openId,
-    };
-    const updateSet: Record<string, unknown> = {};
-
-    const textFields = ["name", "email", "loginMethod"] as const;
-    type TextField = (typeof textFields)[number];
-
-    const assignNullable = (field: TextField) => {
-      const value = user[field];
-      if (value === undefined) return;
-      const normalized = value ?? null;
-      values[field] = normalized;
-      updateSet[field] = normalized;
-    };
-
-    textFields.forEach(assignNullable);
-
-    if (user.lastSignedIn !== undefined) {
-      values.lastSignedIn = user.lastSignedIn;
-      updateSet.lastSignedIn = user.lastSignedIn;
+    const existing = await db.select().from(users).where(eq(users.openId, user.openId)).limit(1);
+    
+    if (existing.length > 0) {
+      // Update existing user
+      const updateData: Partial<InsertUser> = {};
+      if (user.name !== undefined) updateData.name = user.name;
+      if (user.email !== undefined) updateData.email = user.email;
+      if (user.loginMethod !== undefined) updateData.loginMethod = user.loginMethod;
+      if (user.lastSignedIn !== undefined) updateData.lastSignedIn = user.lastSignedIn;
+      if (user.role !== undefined) updateData.role = user.role;
+      
+      updateData.updatedAt = new Date();
+      
+      await db.update(users).set(updateData).where(eq(users.openId, user.openId));
+    } else {
+      // Insert new user
+      const values: InsertUser = {
+        openId: user.openId,
+        name: user.name,
+        email: user.email,
+        loginMethod: user.loginMethod,
+        role: user.openId === ENV.ownerOpenId ? 'admin' : (user.role || 'user'),
+        lastSignedIn: user.lastSignedIn || new Date(),
+      };
+      
+      await db.insert(users).values(values);
     }
-    if (user.role !== undefined) {
-      values.role = user.role;
-      updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
-    }
-
-    if (!values.lastSignedIn) {
-      values.lastSignedIn = new Date();
-    }
-
-    if (Object.keys(updateSet).length === 0) {
-      updateSet.lastSignedIn = new Date();
-    }
-
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
-      set: updateSet,
-    });
   } catch (error) {
     console.error("[Database] Failed to upsert user:", error);
     throw error;
@@ -104,8 +93,8 @@ export async function createClient(client: InsertClient) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(clients).values(client);
-  return result;
+  const result = await db.insert(clients).values(client).returning();
+  return result[0];
 }
 
 export async function getClientsByUserId(userId: number) {
@@ -262,23 +251,5 @@ export async function markAlertAsRead(alertId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  return await db.update(alerts).set({ isRead: 1 }).where(eq(alerts.id, alertId));
-}
-
-// ============ LLM ANALYSIS FUNCTIONS ============
-
-export async function createLLMAnalysis(analysis: InsertLLMAnalysis) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  
-  return await db.insert(llmAnalysis).values(analysis);
-}
-
-export async function getLLMAnalysisByClientId(clientId: number) {
-  const db = await getDb();
-  if (!db) return [];
-  
-  return await db.select().from(llmAnalysis)
-    .where(eq(llmAnalysis.clientId, clientId))
-    .orderBy(desc(llmAnalysis.createdAt));
+  return await db.update(alerts).set({ leida: 1 }).where(eq(alerts.id, alertId));
 }
