@@ -1,0 +1,1442 @@
+{
+  "definitions" : {
+    "AR" : {
+      "type" : "object",
+      "properties" : {
+        "claveOPasswordErroneo" : {
+          "type" : "string"
+        },
+        "errorReporteBloqueado" : {
+          "type" : "string"
+        },
+        "errorSistemaBC" : {
+          "type" : "string"
+        },
+        "etiquetaSegmentoErronea" : {
+          "type" : "string"
+        },
+        "faltaCampoRequerido" : {
+          "type" : "string"
+        },
+        "referenciaOperador" : {
+          "type" : "string"
+        },
+        "sujetoNoAutenticado" : {
+          "type" : "string"
+        }
+      },
+      "title" : "AR"
+    },
+    "ConsultaBC" : {
+      "type" : "object",
+      "required" : [ "persona" ],
+      "properties" : {
+        "persona" : {
+          "$ref" : "#/definitions/PersonaBC"
+        }
+      },
+      "title" : "ConsultaBC"
+    },
+    "ConsultaEfectuadaRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "claveOtorgante" : {
+          "type" : "string"
+        },
+        "claveUnidadMonetaria" : {
+          "type" : "string"
+        },
+        "consumidorNuevo" : {
+          "type" : "string"
+        },
+        "fechaConsulta" : {
+          "type" : "string"
+        },
+        "identificacionBuro" : {
+          "type" : "string"
+        },
+        "identificadorOrigenConsulta" : {
+          "type" : "string"
+        },
+        "importeContrato" : {
+          "type" : "string"
+        },
+        "indicadorTipoResponsabilidad" : {
+          "type" : "string"
+        },
+        "nombreOtorgante" : {
+          "type" : "string"
+        },
+        "resultadoFinal" : {
+          "type" : "string"
+        },
+        "telefonoOtorgante" : {
+          "type" : "string"
+        },
+        "tipoContrato" : {
+          "type" : "string"
+        }
+      },
+      "title" : "ConsultaEfectuadaRespBC"
+    },
+    "CreditReportRequest" : {
+      "type" : "object",
+      "required" : [ "consulta" ],
+      "properties" : {
+        "consulta" : {
+          "$ref" : "#/definitions/ConsultaBC"
+        }
+      },
+      "title" : "CreditReportRequest"
+    },
+    "CreditReportResponse" : {
+      "type" : "object",
+      "properties" : {
+        "respuesta" : {
+          "$ref" : "#/definitions/RespuestaBC"
+        },
+        "respuestaAutenticador" : {
+          "type" : "string"
+        }
+      },
+      "title" : "CreditReportResponse"
+    },
+    "CuentaClienteBC" : {
+      "type" : "object",
+      "properties" : {
+        "claveOtorgante" : {
+          "example" : "",
+          "type" : "string"
+        },
+        "nombreOtorgante" : {
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroCuenta" : {
+          "example" : "1234567890123456",
+          "type" : "string"
+        }
+      },
+      "title" : "CuentaClienteBC"
+    },
+    "CuentasRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "claveObservacion" : {
+          "type" : "string"
+        },
+        "claveOtorgante" : {
+          "type" : "string"
+        },
+        "claveUnidadMonetaria" : {
+          "type" : "string"
+        },
+        "creditoMaximo" : {
+          "type" : "string"
+        },
+        "fechaActualizacion" : {
+          "type" : "string"
+        },
+        "fechaAperturaCAN" : {
+          "type" : "string"
+        },
+        "fechaAperturaCuenta" : {
+          "type" : "string"
+        },
+        "fechaCancelacionCAN" : {
+          "type" : "string"
+        },
+        "fechaCierreCuenta" : {
+          "type" : "string"
+        },
+        "fechaHistoricaMorosidadMasGrave" : {
+          "type" : "string"
+        },
+        "fechaInicioReestructura" : {
+          "type" : "string"
+        },
+        "fechaMasAntiguaHistoricoCAN" : {
+          "type" : "string"
+        },
+        "fechaMasAntiguaHistoricoPagos" : {
+          "type" : "string"
+        },
+        "fechaMasRecienteHistoricoCAN" : {
+          "type" : "string"
+        },
+        "fechaMasRecienteHistoricoPagos" : {
+          "type" : "string"
+        },
+        "fechaReporte" : {
+          "type" : "string"
+        },
+        "fechaUltimaCompra" : {
+          "type" : "string"
+        },
+        "fechaUltimoPago" : {
+          "type" : "string"
+        },
+        "formaPagoActual" : {
+          "type" : "string"
+        },
+        "frecuenciaPagos" : {
+          "type" : "string"
+        },
+        "garantia" : {
+          "type" : "string"
+        },
+        "historicoCAN" : {
+          "type" : "string"
+        },
+        "historicoPagos" : {
+          "type" : "string"
+        },
+        "identificadorCAN" : {
+          "type" : "string"
+        },
+        "identificadorCredito" : {
+          "type" : "string"
+        },
+        "identificadorSociedadInformacionCrediticia" : {
+          "type" : "string"
+        },
+        "importeSaldoMorosidadHistMasGrave" : {
+          "type" : "string"
+        },
+        "indicadorTipoResponsabilidad" : {
+          "type" : "string"
+        },
+        "limiteCredito" : {
+          "type" : "string"
+        },
+        "modoReportar" : {
+          "type" : "string"
+        },
+        "montoPagar" : {
+          "type" : "string"
+        },
+        "montoUltimoPago" : {
+          "type" : "string"
+        },
+        "mopHistoricoMorosidadMasGrave" : {
+          "type" : "string"
+        },
+        "nombreOtorgante" : {
+          "type" : "string"
+        },
+        "numeroCuentaActual" : {
+          "type" : "string"
+        },
+        "numeroPagos" : {
+          "type" : "string"
+        },
+        "numeroPagosVencidos" : {
+          "type" : "string"
+        },
+        "numeroTelefonoOtorgante" : {
+          "type" : "string"
+        },
+        "registroImpugnado" : {
+          "type" : "string"
+        },
+        "saldoActual" : {
+          "type" : "string"
+        },
+        "saldoVencido" : {
+          "type" : "string"
+        },
+        "tipoContrato" : {
+          "type" : "string"
+        },
+        "tipoCuenta" : {
+          "type" : "string"
+        },
+        "totalPagosCalificadosMOP2" : {
+          "type" : "string"
+        },
+        "totalPagosCalificadosMOP3" : {
+          "type" : "string"
+        },
+        "totalPagosCalificadosMOP4" : {
+          "type" : "string"
+        },
+        "totalPagosCalificadosMOP5" : {
+          "type" : "string"
+        },
+        "totalPagosReportados" : {
+          "type" : "string"
+        },
+        "ultimaFechaSaldoCero" : {
+          "type" : "string"
+        },
+        "valorActivoValuacion" : {
+          "type" : "string"
+        }
+      },
+      "title" : "CuentasRespBC"
+    },
+    "DeclaracionesClienteRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "declaracionConsumidor" : {
+          "type" : "string"
+        }
+      },
+      "title" : "DeclaracionesClienteRespBC"
+    },
+    "Direccion" : {
+      "type" : "object",
+      "properties" : {
+        "ciudad" : {
+          "description" : "<b>Ciudad donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "MEXICO",
+          "type" : "string"
+        },
+        "codPais" : {
+          "description" : "<b>Código del país donde vive el cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AF</td><td>Afganistán</td></tr><tr><td>AL</td><td>Albania</td></tr><tr><td>DE</td><td>Alemania</td></tr><tr><td>AD</td><td>Andorra</td></tr><tr><td>AO</td><td>Angola</td></tr><tr><td>AI</td><td>Anguila</td></tr><tr><td>AQ</td><td>Antártida</td></tr><tr><td>AG</td><td>Antigua y Barbuda</td></tr><tr><td>SA</td><td>Arabia Saudita</td></tr><tr><td>DZ</td><td>Argelia</td></tr><tr><td>AR</td><td>Argentina</td></tr><tr><td>AM</td><td>Armenia</td></tr><tr><td>AW</td><td>Aruba</td></tr><tr><td>AU</td><td>Australia</td></tr><tr><td>AT</td><td>Austria</td></tr><tr><td>AZ</td><td>Azerbaiyán</td></tr><tr><td>BS</td><td>Bahamas</td></tr><tr><td>BH</td><td>Bareín</td></tr><tr><td>BD</td><td>Bangladés</td></tr><tr><td>BB</td><td>Barbados</td></tr><tr><td>BE</td><td>Bélgica</td></tr><tr><td>BZ</td><td>Belice</td></tr><tr><td>BJ</td><td>Benin</td></tr><tr><td>BM</td><td>Bermudas</td></tr><tr><td>BY</td><td>Bielorrusia</td></tr><tr><td>BO</td><td>Bolivia</td></tr><tr><td>BQ</td><td>Bonaire</td></tr><tr><td>BA</td><td>Bosnia</td></tr><tr><td>BW</td><td>Botsuana</td></tr><tr><td>BR</td><td>Brasil</td></tr><tr><td>BN</td><td>Brunéi</td></tr><tr><td>BG</td><td>Bulgaria</td></tr><tr><td>BF</td><td>Burkina</td></tr><tr><td>BI</td><td>Burundi</td></tr><tr><td>BT</td><td>Bután</td></tr><tr><td>CV</td><td>Cabo Verde</td></tr><tr><td>KH</td><td>Camboya</td></tr><tr><td>CM</td><td>Camerún</td></tr><tr><td>CA</td><td>Canadá</td></tr><tr><td>CL</td><td>Chile</td></tr><tr><td>CN</td><td>China</td></tr><tr><td>CY</td><td>Chipre</td></tr><tr><td>CO</td><td>Colombia</td></tr><tr><td>CI</td><td>Costa de Marfil</td></tr><tr><td>CR</td><td>Costa Rica</td></tr><tr><td>HR</td><td>Croacia</td></tr><tr><td>CU</td><td>Cuba</td></tr><tr><td>CW</td><td>Curacao</td></tr><tr><td>DK</td><td>Dinamarca</td></tr><tr><td>DJ</td><td>Yibuti</td></tr><tr><td>DM</td><td>Dominica</td></tr><tr><td>EC</td><td>Ecuador</td></tr><tr><td>EG</td><td>Egipto</td></tr><tr><td>SV</td><td>El Salvador</td></tr><tr><td>ER</td><td>Eritrea</td></tr><tr><td>SK</td><td>Eslovaquia</td></tr><tr><td>SI</td><td>Eslovenia</td></tr><tr><td>ES</td><td>EspaÃ±a</td></tr><tr><td>US</td><td>Estados Unidos</td></tr><tr><td>EE</td><td>Estonia</td></tr><tr><td>ET</td><td>Etiopía</td></tr><tr><td>FJ</td><td>Fiji</td></tr><tr><td>PH</td><td>Filipinas</td></tr><tr><td>FI</td><td>Finlandia</td></tr><tr><td>FR</td><td>Francia</td></tr><tr><td>GA</td><td>Gabón</td></tr><tr><td>GM</td><td>Gambia</td></tr><tr><td>GS</td><td>Georgia del sur</td></tr><tr><td>GH</td><td>Ghana</td></tr><tr><td>GI</td><td>Gibraltar</td></tr><tr><td>GD</td><td>Granada</td></tr><tr><td>GR</td><td>Grecia</td></tr><tr><td>GL</td><td>Groenlandia</td></tr><tr><td>GP</td><td>Gudalupe</td></tr><tr><td>GU</td><td>Guam</td></tr><tr><td>GT</td><td>Guatemala</td></tr><tr><td>GY</td><td>Guayana</td></tr><tr><td>GF</td><td>Guayana Francesa</td></tr><tr><td>GG</td><td>Guernsey</td></tr><tr><td>GN</td><td>Guinea Bisáu</td></tr><tr><td>GQ</td><td>Guinea Ecuatorial</td></tr><tr><td>GW</td><td>Guinea Bissau</td></tr><tr><td>HT</td><td>Haití</td></tr><tr><td>HN</td><td>Honduras</td></tr><tr><td>HK</td><td>Hong Kong</td></tr><tr><td>HU</td><td>Hungría</td></tr><tr><td>IN</td><td>India</td></tr><tr><td>ID</td><td>Indonesia</td></tr><tr><td>IQ</td><td>Irak</td></tr><tr><td>IR</td><td>Irán</td></tr><tr><td>IE</td><td>Irlanda</td></tr><tr><td>BV</td><td>Bouvet</td></tr><tr><td>IM</td><td>Isla de Man</td></tr><tr><td>CX</td><td>Isla de Navidad</td></tr><tr><td>HM</td><td>Isla Heard</td></tr><tr><td>NF</td><td>Isla Norfolk</td></tr><tr><td>Is</td><td>Islandia</td></tr><tr><td>AX</td><td>Islas Aland</td></tr><tr><td>KY</td><td>Islas Caimán</td></tr><tr><td>CK</td><td>Islas Cook</td></tr><tr><td>FK</td><td>Islas Malvinas</td></tr><tr><td>FO</td><td>Islas Faroe</td></tr><tr><td>MP</td><td>Islas Marianas</td></tr><tr><td>MH</td><td>Islas Marshall</td></tr><tr><td>PN</td><td>Islas Pitcairn</td></tr><tr><td>RE</td><td>Islas Reunión</td></tr><tr><td>SB</td><td>Islas Salomón</td></tr><tr><td>VI</td><td>Islas Vírgenes</td></tr><tr><td>VG</td><td>Islas Británicas</td></tr><tr><td>IL</td><td>Israel</td></tr><tr><td>IT</td><td>Italia</td></tr><tr><td>JM</td><td>Jamaica</td></tr><tr><td>JP</td><td>Japón</td></tr><tr><td>JE</td><td>Jersey</td></tr><tr><td>JO</td><td>Jordania</td></tr><tr><td>QA</td><td>Catar</td></tr><tr><td>KZ</td><td>Kazajistán</td></tr><tr><td>KE</td><td>Kenia</td></tr><tr><td>KG</td><td>Kirguistán</td></tr><tr><td>KI</td><td>Kiribatí</td></tr><tr><td>KW</td><td>Kuwait</td></tr><tr><td>SY</td><td>Siria</td></tr><tr><td>KR</td><td>Corea del Sur</td></tr><tr><td>CD</td><td>Congo</td></tr><tr><td>KP</td><td>Corea del Norte</td></tr><tr><td>LA</td><td>Lao</td></tr><tr><td>UM</td><td>Islas de Ultramar</td></tr><tr><td>TC</td><td>Islas Turcas</td></tr><tr><td>LS</td><td>Lesoto</td></tr><tr><td>LV</td><td>Letonia</td></tr><tr><td>LB</td><td>Líbano</td></tr><tr><td>LR</td><td>Liberia</td></tr><tr><td>LY</td><td>Libia</td></tr><tr><td>LI</td><td>Liechtenstein</td></tr><tr><td>LT</td><td>Lituania</td></tr><tr><td>AE</td><td>Emiratos árabes</td></tr><tr><td>NL</td><td>Países Bajos</td></tr><tr><td>LU</td><td>Luxemburgo</td></tr><tr><td>MO</td><td>Macao</td></tr><tr><td>MK</td><td>Macedonia</td></tr><tr><td>MG</td><td>Madagascar</td></tr><tr><td>MY</td><td>Malasia</td></tr><tr><td>MW</td><td>Malaui</td></tr><tr><td>MV</td><td>Maldivias</td></tr><tr><td>ML</td><td>Mali</td></tr><tr><td>MT</td><td>Malta</td></tr><tr><td>MA</td><td>Marruecos</td></tr><tr><td>MQ</td><td>Martinica</td></tr><tr><td>MU</td><td>Mauricio</td></tr><tr><td>MR</td><td>Mauritania</td></tr><tr><td>YT</td><td>Mayotte</td></tr><tr><td>MX</td><td>México</td></tr><tr><td>FM</td><td>Micronesia</td></tr><tr><td>MD</td><td>República de Moldavia</td></tr><tr><td>MC</td><td>Mónaco</td></tr><tr><td>MN</td><td>Mongolia</td></tr><tr><td>ME</td><td>Montenegro</td></tr><tr><td>MS</td><td>Montserrat</td></tr><tr><td>MZ</td><td>Mozambique</td></tr><tr><td>NA</td><td>Namibia</td></tr><tr><td>NR</td><td>Nauru</td></tr><tr><td>NP</td><td>Nepal</td></tr><tr><td>NI</td><td>Nicaragua</td></tr><tr><td>NE</td><td>Níger</td></tr><tr><td>NG</td><td>Nigeria</td></tr><tr><td>NU</td><td>Niue</td></tr><tr><td>NO</td><td>Noruega</td></tr><tr><td>NC</td><td>Nueva Caledonia</td></tr><tr><td>NZ</td><td>Nueva Zelandia</td></tr><tr><td>OM</td><td>Omán</td></tr><tr><td>PK</td><td>Pakistán</td></tr><tr><td>PW</td><td>Palaos</td></tr><tr><td>PS</td><td>Palestina</td></tr><tr><td>PA</td><td>Panamá</td></tr><tr><td>PG</td><td>Nueva Guinea</td></tr><tr><td>PY</td><td>Paraguay</td></tr><tr><td>PE</td><td>Perú</td></tr><tr><td>PF</td><td>Polinesia Francesa</td></tr><tr><td>PL</td><td>Polonia</td></tr><tr><td>PT</td><td>Portugal</td></tr><tr><td>PR</td><td>Puerto Rico</td></tr><tr><td>GB</td><td>Reino Unido</td></tr><tr><td>CF</td><td>República Centro Africana</td></tr><tr><td>CZ</td><td>República Checa</td></tr><tr><td>GE</td><td>Georgia</td></tr><tr><td>MM</td><td>Myanmar</td></tr><tr><td>TD</td><td>Chad</td></tr><tr><td>CG</td><td>Congo</td></tr><tr><td>ST</td><td>Santo Tomé y Príncipe</td></tr><tr><td>TL</td><td>Timor Oriental</td></tr><tr><td>DO</td><td>República Dominicana</td></tr><tr><td>TZ</td><td>Tanzania</td></tr><tr><td>RW</td><td>Ruanda</td></tr><tr><td>RO</td><td>Rumania</td></tr><tr><td>RU</td><td>Rusia</td></tr><tr><td>EH</td><td>Sahara </td></tr><tr><td>AS</td><td>Samoa Americana</td></tr><tr><td>WS</td><td>Samoa</td></tr><tr><td>BL</td><td>San Bartolomé</td></tr><tr><td>KN</td><td>San Cristóbal y Nieves</td></tr><tr><td>SM</td><td>San Marino</td></tr><tr><td>MF</td><td>San Martín</td></tr><tr><td>PM</td><td>San Pedro y Miquelón</td></tr><tr><td>VC</td><td>San Vicente</td></tr><tr><td>SH</td><td>Santa Helena</td></tr><tr><td>LC</td><td>Santa Lucía</td></tr><tr><td>SN</td><td>Senegal</td></tr><tr><td>RS</td><td>Serbia</td></tr><tr><td>SC</td><td>Seychelles</td></tr><tr><td>SL</td><td>Sierra Leona</td></tr><tr><td>SG</td><td>Singapur</td></tr><tr><td>SX</td><td>Sint Maarten</td></tr><tr><td>SO</td><td>Somalia</td></tr><tr><td>LK</td><td>Sri Lanka</td></tr><tr><td>ZA</td><td>Sudáfrica</td></tr><tr><td>SD</td><td>Sudán del Norte</td></tr><tr><td>SS</td><td>Sudán del Sur</td></tr><tr><td>SE</td><td>Suecia</td></tr><tr><td>CH</td><td>Suiza</td></tr><tr><td>SR</td><td>Surinam</td></tr><tr><td>SJ</td><td>Svalbard</td></tr><tr><td>SZ</td><td>Swazilandia</td></tr><tr><td>TH</td><td>Tailandia</td></tr><tr><td>TW</td><td>Taiwán</td></tr><tr><td>TJ</td><td>Tayijistán</td></tr><tr><td>IO</td><td>Territorio Británico</td></tr><tr><td>CC</td><td>Islas Cocos</td></tr><tr><td>TF</td><td>Territorios Australes</td></tr><tr><td>TG</td><td>Togo</td></tr><tr><td>TK</td><td>Tokelau</td></tr><tr><td>TO</td><td>Tonga</td></tr><tr><td>TT</td><td>Trinidad y Tobago</td></tr><tr><td>TN</td><td>Túnes</td></tr><tr><td>TM</td><td>Turkmenistán</td></tr><tr><td>TR</td><td>Turquía</td></tr><tr><td>TV</td><td>Tuvalu</td></tr><tr><td>UA</td><td>Ucrania</td></tr><tr><td>UG</td><td>Uganda</td></tr><tr><td>KM</td><td>Unión de las Comoras</td></tr><tr><td>UY</td><td>Uruguay</td></tr><tr><td>UZ</td><td>Uzbekistán</td></tr><tr><td>VU</td><td>Vanuatu</td></tr><tr><td>VA</td><td>Ciudad del Vaticano</td></tr><tr><td>VE</td><td>Venezuela</td></tr><tr><td>VN</td><td>Viet Nam</td></tr><tr><td>WF</td><td>Wallis y Futuna</td></tr><tr><td>YE</td><td>Yemen</td></tr><tr><td>ZM</td><td>Zambia</td></tr><tr><td>ZW</td><td>Zimbabue</td></tr></tbody></table><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"AD\"", "\"AE\"", "\"AF\"", "\"AG\"", "\"AI\"", "\"AL\"", "\"AM\"", "\"AO\"", "\"AQ\"", "\"AR\"", "\"AS\"", "\"AT\"", "\"AU\"", "\"AW\"", "\"AX\"", "\"AZ\"", "\"BA\"", "\"BB\"", "\"BD\"", "\"BE\"", "\"BF\"", "\"BG\"", "\"BH\"", "\"BI\"", "\"BJ\"", "\"BL\"", "\"BM\"", "\"BN\"", "\"BO\"", "\"BQ\"", "\"BR\"", "\"BS\"", "\"BT\"", "\"BV\"", "\"BW\"", "\"BY\"", "\"BZ\"", "\"CA\"", "\"CC\"", "\"CD\"", "\"CF\"", "\"CG\"", "\"CH\"", "\"CI\"", "\"CK\"", "\"CL\"", "\"CM\"", "\"CN\"", "\"CO\"", "\"CR\"", "\"CU\"", "\"CV\"", "\"CW\"", "\"CX\"", "\"CY\"", "\"CZ\"", "\"DE\"", "\"DJ\"", "\"DK\"", "\"DM\"", "\"DO\"", "\"DZ\"", "\"EC\"", "\"EE\"", "\"EG\"", "\"EH\"", "\"ER\"", "\"ES\"", "\"ET\"", "\"FI\"", "\"FJ\"", "\"FK\"", "\"FM\"", "\"FO\"", "\"FR\"", "\"GA\"", "\"GB\"", "\"GD\"", "\"GE\"", "\"GF\"", "\"GG\"", "\"GH\"", "\"GI\"", "\"GL\"", "\"GM\"", "\"GN\"", "\"GP\"", "\"GQ\"", "\"GR\"", "\"GS\"", "\"GT\"", "\"GU\"", "\"GW\"", "\"GY\"", "\"HK\"", "\"HM\"", "\"HN\"", "\"HR\"", "\"HT\"", "\"HU\"", "\"ID\"", "\"IE\"", "\"IL\"", "\"IM\"", "\"IN\"", "\"IO\"", "\"IQ\"", "\"IR\"", "\"IT\"", "\"Is\"", "\"JE\"", "\"JM\"", "\"JO\"", "\"JP\"", "\"KE\"", "\"KG\"", "\"KH\"", "\"KI\"", "\"KM\"", "\"KN\"", "\"KP\"", "\"KR\"", "\"KW\"", "\"KY\"", "\"KZ\"", "\"LA\"", "\"LB\"", "\"LC\"", "\"LI\"", "\"LK\"", "\"LR\"", "\"LS\"", "\"LT\"", "\"LU\"", "\"LV\"", "\"LY\"", "\"MA\"", "\"MC\"", "\"MD\"", "\"ME\"", "\"MF\"", "\"MG\"", "\"MH\"", "\"MK\"", "\"ML\"", "\"MM\"", "\"MN\"", "\"MO\"", "\"MP\"", "\"MQ\"", "\"MR\"", "\"MS\"", "\"MT\"", "\"MU\"", "\"MV\"", "\"MW\"", "\"MX\"", "\"MY\"", "\"MZ\"", "\"NA\"", "\"NC\"", "\"NE\"", "\"NF\"", "\"NG\"", "\"NI\"", "\"NL\"", "\"NO\"", "\"NP\"", "\"NR\"", "\"NU\"", "\"NZ\"", "\"OM\"", "\"PA\"", "\"PE\"", "\"PF\"", "\"PG\"", "\"PH\"", "\"PK\"", "\"PL\"", "\"PM\"", "\"PN\"", "\"PR\"", "\"PS\"", "\"PT\"", "\"PW\"", "\"PY\"", "\"QA\"", "\"RE\"", "\"RO\"", "\"RS\"", "\"RU\"", "\"RW\"", "\"SA\"", "\"SB\"", "\"SC\"", "\"SD\"", "\"SE\"", "\"SG\"", "\"SH\"", "\"SI\"", "\"SJ\"", "\"SK\"", "\"SL\"", "\"SM\"", "\"SN\"", "\"SO\"", "\"SR\"", "\"SS\"", "\"ST\"", "\"SV\"", "\"SX\"", "\"SY\"", "\"SZ\"", "\"TC\"", "\"TD\"", "\"TF\"", "\"TG\"", "\"TH\"", "\"TJ\"", "\"TK\"", "\"TL\"", "\"TM\"", "\"TN\"", "\"TO\"", "\"TR\"", "\"TT\"", "\"TV\"", "\"TW\"", "\"TZ\"", "\"UA\"", "\"UG\"", "\"UM\"", "\"US\"", "\"UY\"", "\"UZ\"", "\"VA\"", "\"VC\"", "\"VE\"", "\"VG\"", "\"VI\"", "\"VN\"", "\"VU\"", "\"WF\"", "\"WS\"", "\"YE\"", "\"YT\"", "\"ZA\"", "\"ZM\"", "\"ZW\"" ],
+          "example" : "MX",
+          "type" : "string"
+        },
+        "coloniaPoblacion" : {
+          "description" : "<b>Colonia o población donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "JARDINES DE LA MONTANA",
+          "type" : "string"
+        },
+        "cp" : {
+          "description" : "<b>Código postal donde vive el cliente</b><br>MinLength: 5<br>MaxLength: 5<br><br><i>- Requerido -</i>",
+          "example" : "14210",
+          "type" : "string"
+        },
+        "delegacionMunicipio" : {
+          "description" : "<b>Alcaldía o municipio donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "TLALPAN",
+          "type" : "string"
+        },
+        "direccion1" : {
+          "description" : "<b>Calle y número de la dirección del cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "PERIFERICO SUR 4349",
+          "type" : "string"
+        },
+        "direccion2" : {
+          "description" : "<b>Se utiliza cuando no es suficiente el campo dirección1</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "estado" : {
+          "description" : "<b>Código del estado donde vive el cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AGS</td><td>Aguascalientes</td></tr></tbody><tr><td>BCN</td><td>Baja California</td></tr><tr><td>BCS</td><td>Baja California Sur</td></tr><tr><td>CAM</td><td>Campeche</td></tr><tr><td>CHS</td><td>Chiapas</td></tr><tr><td>CHI</td><td>Chihuahua</td></tr><tr><td>CDMX</td><td>Ciudad de México</td></tr><tr><td>COA</td><td>Coahuila</td></tr><tr><td>COL</td><td>Colima</td></tr><tr><td>DGO</td><td>Durango</td></tr><tr><td>EM</td><td>Estado de México</td></tr><tr><td>GTO</td><td>Guanajuato</td></tr><tr><td>GRO</td><td>Guerrero</td></tr><tr><td>HGO</td><td>Hidalgo</td></tr><tr><td>JAL</td><td>Jalisco</td></tr><tr><td>MICH</td><td>Michoacán</td></tr><tr><td>MOR</td><td>Morelos</td></tr><tr><td>NAY</td><td>Nayarit</td></tr><tr><td>NL</td><td>Nuevo León</td></tr><tr><td>OAX</td><td>Oaxaca</td></tr><tr><td>PUE</td><td>Puebla</td></tr><tr><td>QRO</td><td>Querétaro</td></tr><tr><td>QR</td><td>Quintana Roo</td></tr><tr><td>SLP</td><td>San Luis Potosí</td></tr><tr><td>SIN</td><td>Sinaloa</td></tr><tr><td>SON</td><td>Sonora</td></tr><tr><td>TAB</td><td>Tabasco</td></tr><tr><td>TAM</td><td>Tamaulipas</td></tr><tr><td>TLAX</td><td>Tlaxcala</td></tr><tr><td>VER</td><td>Veracruz</td></tr><tr><td>YUC</td><td>Yucatán</td></tr><tr><td>ZAC</td><td>Zacatecas</td></tr></table><br>MinLength: 2<br>MaxLength: 4<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"AGS\"", "\"BCN\"", "\"BCS\"", "\"CAM\"", "\"CDMX\"", "\"CHI\"", "\"CHS\"", "\"COA\"", "\"COL\"", "\"DGO\"", "\"EM\"", "\"GRO\"", "\"GTO\"", "\"HGO\"", "\"JAL\"", "\"MICH\"", "\"MOR\"", "\"NAY\"", "\"NL\"", "\"OAX\"", "\"PUE\"", "\"QR\"", "\"QRO\"", "\"SIN\"", "\"SLP\"", "\"SON\"", "\"TAB\"", "\"TAM\"", "\"TLAX\"", "\"VER\"", "\"YUC\"", "\"ZAC\"" ],
+          "example" : "CDMX",
+          "type" : "string"
+        },
+        "extension" : {
+          "description" : "<b>Extensión del número de teléfono</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fax" : {
+          "description" : "<b>Número telefónico del fax del cliente</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaResidencia" : {
+          "description" : "<b>Fecha desde la que ocupa la residencia, en formato DDMMAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "20121995",
+          "type" : "string"
+        },
+        "indicadorEspecialDomicilio" : {
+          "description" : "<b>Indica el tipo de ubicación del domicilio</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>M</td><td>Militar</td></tr><tr><td>R</td><td>Rural</td></tr><tr><td>K</td><td>Domicilio conocido</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"K\"", "\"M\"", "\"R\"" ],
+          "example" : "K",
+          "type" : "string"
+        },
+        "numeroTelefono" : {
+          "description" : "<b>Teléfono de la casa del cliente</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "5554494900",
+          "type" : "string"
+        },
+        "tipoDomicilio" : {
+          "description" : "<b>Tipo de domicilio del cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>B</td><td>Negocio</td></tr><tr><td>C</td><td>Domicilio</td></tr><tr><td>H</td><td>Casa</td></tr><tr><td>H</td><td>Apartado postal</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"B\"", "\"C\"", "\"H\"", "\"P\"" ],
+          "example" : "B",
+          "type" : "string"
+        }
+      },
+      "title" : "Direccion"
+    },
+    "DireccionRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "ciudad" : {
+          "description" : "<b>Ciudad donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "MEXICO",
+          "type" : "string"
+        },
+        "codPais" : {
+          "description" : "<b>Código del país donde vive el cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AF</td><td>Afganistán</td></tr><tr><td>AL</td><td>Albania</td></tr><tr><td>DE</td><td>Alemania</td></tr><tr><td>AD</td><td>Andorra</td></tr><tr><td>AO</td><td>Angola</td></tr><tr><td>AI</td><td>Anguila</td></tr><tr><td>AQ</td><td>Antártida</td></tr><tr><td>AG</td><td>Antigua y Barbuda</td></tr><tr><td>SA</td><td>Arabia Saudita</td></tr><tr><td>DZ</td><td>Argelia</td></tr><tr><td>AR</td><td>Argentina</td></tr><tr><td>AM</td><td>Armenia</td></tr><tr><td>AW</td><td>Aruba</td></tr><tr><td>AU</td><td>Australia</td></tr><tr><td>AT</td><td>Austria</td></tr><tr><td>AZ</td><td>Azerbaiyán</td></tr><tr><td>BS</td><td>Bahamas</td></tr><tr><td>BH</td><td>Bareín</td></tr><tr><td>BD</td><td>Bangladés</td></tr><tr><td>BB</td><td>Barbados</td></tr><tr><td>BE</td><td>Bélgica</td></tr><tr><td>BZ</td><td>Belice</td></tr><tr><td>BJ</td><td>Benin</td></tr><tr><td>BM</td><td>Bermudas</td></tr><tr><td>BY</td><td>Bielorrusia</td></tr><tr><td>BO</td><td>Bolivia</td></tr><tr><td>BQ</td><td>Bonaire</td></tr><tr><td>BA</td><td>Bosnia</td></tr><tr><td>BW</td><td>Botsuana</td></tr><tr><td>BR</td><td>Brasil</td></tr><tr><td>BN</td><td>Brunéi</td></tr><tr><td>BG</td><td>Bulgaria</td></tr><tr><td>BF</td><td>Burkina</td></tr><tr><td>BI</td><td>Burundi</td></tr><tr><td>BT</td><td>Bután</td></tr><tr><td>CV</td><td>Cabo Verde</td></tr><tr><td>KH</td><td>Camboya</td></tr><tr><td>CM</td><td>Camerún</td></tr><tr><td>CA</td><td>Canadá</td></tr><tr><td>CL</td><td>Chile</td></tr><tr><td>CN</td><td>China</td></tr><tr><td>CY</td><td>Chipre</td></tr><tr><td>CO</td><td>Colombia</td></tr><tr><td>CI</td><td>Costa de Marfil</td></tr><tr><td>CR</td><td>Costa Rica</td></tr><tr><td>HR</td><td>Croacia</td></tr><tr><td>CU</td><td>Cuba</td></tr><tr><td>CW</td><td>Curacao</td></tr><tr><td>DK</td><td>Dinamarca</td></tr><tr><td>DJ</td><td>Yibuti</td></tr><tr><td>DM</td><td>Dominica</td></tr><tr><td>EC</td><td>Ecuador</td></tr><tr><td>EG</td><td>Egipto</td></tr><tr><td>SV</td><td>El Salvador</td></tr><tr><td>ER</td><td>Eritrea</td></tr><tr><td>SK</td><td>Eslovaquia</td></tr><tr><td>SI</td><td>Eslovenia</td></tr><tr><td>ES</td><td>EspaÃ±a</td></tr><tr><td>US</td><td>Estados Unidos</td></tr><tr><td>EE</td><td>Estonia</td></tr><tr><td>ET</td><td>Etiopía</td></tr><tr><td>FJ</td><td>Fiji</td></tr><tr><td>PH</td><td>Filipinas</td></tr><tr><td>FI</td><td>Finlandia</td></tr><tr><td>FR</td><td>Francia</td></tr><tr><td>GA</td><td>Gabón</td></tr><tr><td>GM</td><td>Gambia</td></tr><tr><td>GS</td><td>Georgia del sur</td></tr><tr><td>GH</td><td>Ghana</td></tr><tr><td>GI</td><td>Gibraltar</td></tr><tr><td>GD</td><td>Granada</td></tr><tr><td>GR</td><td>Grecia</td></tr><tr><td>GL</td><td>Groenlandia</td></tr><tr><td>GP</td><td>Gudalupe</td></tr><tr><td>GU</td><td>Guam</td></tr><tr><td>GT</td><td>Guatemala</td></tr><tr><td>GY</td><td>Guayana</td></tr><tr><td>GF</td><td>Guayana Francesa</td></tr><tr><td>GG</td><td>Guernsey</td></tr><tr><td>GN</td><td>Guinea Bisáu</td></tr><tr><td>GQ</td><td>Guinea Ecuatorial</td></tr><tr><td>GW</td><td>Guinea Bissau</td></tr><tr><td>HT</td><td>Haití</td></tr><tr><td>HN</td><td>Honduras</td></tr><tr><td>HK</td><td>Hong Kong</td></tr><tr><td>HU</td><td>Hungría</td></tr><tr><td>IN</td><td>India</td></tr><tr><td>ID</td><td>Indonesia</td></tr><tr><td>IQ</td><td>Irak</td></tr><tr><td>IR</td><td>Irán</td></tr><tr><td>IE</td><td>Irlanda</td></tr><tr><td>BV</td><td>Bouvet</td></tr><tr><td>IM</td><td>Isla de Man</td></tr><tr><td>CX</td><td>Isla de Navidad</td></tr><tr><td>HM</td><td>Isla Heard</td></tr><tr><td>NF</td><td>Isla Norfolk</td></tr><tr><td>Is</td><td>Islandia</td></tr><tr><td>AX</td><td>Islas Aland</td></tr><tr><td>KY</td><td>Islas Caimán</td></tr><tr><td>CK</td><td>Islas Cook</td></tr><tr><td>FK</td><td>Islas Malvinas</td></tr><tr><td>FO</td><td>Islas Faroe</td></tr><tr><td>MP</td><td>Islas Marianas</td></tr><tr><td>MH</td><td>Islas Marshall</td></tr><tr><td>PN</td><td>Islas Pitcairn</td></tr><tr><td>RE</td><td>Islas Reunión</td></tr><tr><td>SB</td><td>Islas Salomón</td></tr><tr><td>VI</td><td>Islas Vírgenes</td></tr><tr><td>VG</td><td>Islas Británicas</td></tr><tr><td>IL</td><td>Israel</td></tr><tr><td>IT</td><td>Italia</td></tr><tr><td>JM</td><td>Jamaica</td></tr><tr><td>JP</td><td>Japón</td></tr><tr><td>JE</td><td>Jersey</td></tr><tr><td>JO</td><td>Jordania</td></tr><tr><td>QA</td><td>Catar</td></tr><tr><td>KZ</td><td>Kazajistán</td></tr><tr><td>KE</td><td>Kenia</td></tr><tr><td>KG</td><td>Kirguistán</td></tr><tr><td>KI</td><td>Kiribatí</td></tr><tr><td>KW</td><td>Kuwait</td></tr><tr><td>SY</td><td>Siria</td></tr><tr><td>KR</td><td>Corea del Sur</td></tr><tr><td>CD</td><td>Congo</td></tr><tr><td>KP</td><td>Corea del Norte</td></tr><tr><td>LA</td><td>Lao</td></tr><tr><td>UM</td><td>Islas de Ultramar</td></tr><tr><td>TC</td><td>Islas Turcas</td></tr><tr><td>LS</td><td>Lesoto</td></tr><tr><td>LV</td><td>Letonia</td></tr><tr><td>LB</td><td>Líbano</td></tr><tr><td>LR</td><td>Liberia</td></tr><tr><td>LY</td><td>Libia</td></tr><tr><td>LI</td><td>Liechtenstein</td></tr><tr><td>LT</td><td>Lituania</td></tr><tr><td>AE</td><td>Emiratos árabes</td></tr><tr><td>NL</td><td>Países Bajos</td></tr><tr><td>LU</td><td>Luxemburgo</td></tr><tr><td>MO</td><td>Macao</td></tr><tr><td>MK</td><td>Macedonia</td></tr><tr><td>MG</td><td>Madagascar</td></tr><tr><td>MY</td><td>Malasia</td></tr><tr><td>MW</td><td>Malaui</td></tr><tr><td>MV</td><td>Maldivias</td></tr><tr><td>ML</td><td>Mali</td></tr><tr><td>MT</td><td>Malta</td></tr><tr><td>MA</td><td>Marruecos</td></tr><tr><td>MQ</td><td>Martinica</td></tr><tr><td>MU</td><td>Mauricio</td></tr><tr><td>MR</td><td>Mauritania</td></tr><tr><td>YT</td><td>Mayotte</td></tr><tr><td>MX</td><td>México</td></tr><tr><td>FM</td><td>Micronesia</td></tr><tr><td>MD</td><td>República de Moldavia</td></tr><tr><td>MC</td><td>Mónaco</td></tr><tr><td>MN</td><td>Mongolia</td></tr><tr><td>ME</td><td>Montenegro</td></tr><tr><td>MS</td><td>Montserrat</td></tr><tr><td>MZ</td><td>Mozambique</td></tr><tr><td>NA</td><td>Namibia</td></tr><tr><td>NR</td><td>Nauru</td></tr><tr><td>NP</td><td>Nepal</td></tr><tr><td>NI</td><td>Nicaragua</td></tr><tr><td>NE</td><td>Níger</td></tr><tr><td>NG</td><td>Nigeria</td></tr><tr><td>NU</td><td>Niue</td></tr><tr><td>NO</td><td>Noruega</td></tr><tr><td>NC</td><td>Nueva Caledonia</td></tr><tr><td>NZ</td><td>Nueva Zelandia</td></tr><tr><td>OM</td><td>Omán</td></tr><tr><td>PK</td><td>Pakistán</td></tr><tr><td>PW</td><td>Palaos</td></tr><tr><td>PS</td><td>Palestina</td></tr><tr><td>PA</td><td>Panamá</td></tr><tr><td>PG</td><td>Nueva Guinea</td></tr><tr><td>PY</td><td>Paraguay</td></tr><tr><td>PE</td><td>Perú</td></tr><tr><td>PF</td><td>Polinesia Francesa</td></tr><tr><td>PL</td><td>Polonia</td></tr><tr><td>PT</td><td>Portugal</td></tr><tr><td>PR</td><td>Puerto Rico</td></tr><tr><td>GB</td><td>Reino Unido</td></tr><tr><td>CF</td><td>República Centro Africana</td></tr><tr><td>CZ</td><td>República Checa</td></tr><tr><td>GE</td><td>Georgia</td></tr><tr><td>MM</td><td>Myanmar</td></tr><tr><td>TD</td><td>Chad</td></tr><tr><td>CG</td><td>Congo</td></tr><tr><td>ST</td><td>Santo Tomé y Príncipe</td></tr><tr><td>TL</td><td>Timor Oriental</td></tr><tr><td>DO</td><td>República Dominicana</td></tr><tr><td>TZ</td><td>Tanzania</td></tr><tr><td>RW</td><td>Ruanda</td></tr><tr><td>RO</td><td>Rumania</td></tr><tr><td>RU</td><td>Rusia</td></tr><tr><td>EH</td><td>Sahara </td></tr><tr><td>AS</td><td>Samoa Americana</td></tr><tr><td>WS</td><td>Samoa</td></tr><tr><td>BL</td><td>San Bartolomé</td></tr><tr><td>KN</td><td>San Cristóbal y Nieves</td></tr><tr><td>SM</td><td>San Marino</td></tr><tr><td>MF</td><td>San Martín</td></tr><tr><td>PM</td><td>San Pedro y Miquelón</td></tr><tr><td>VC</td><td>San Vicente</td></tr><tr><td>SH</td><td>Santa Helena</td></tr><tr><td>LC</td><td>Santa Lucía</td></tr><tr><td>SN</td><td>Senegal</td></tr><tr><td>RS</td><td>Serbia</td></tr><tr><td>SC</td><td>Seychelles</td></tr><tr><td>SL</td><td>Sierra Leona</td></tr><tr><td>SG</td><td>Singapur</td></tr><tr><td>SX</td><td>Sint Maarten</td></tr><tr><td>SO</td><td>Somalia</td></tr><tr><td>LK</td><td>Sri Lanka</td></tr><tr><td>ZA</td><td>Sudáfrica</td></tr><tr><td>SD</td><td>Sudán del Norte</td></tr><tr><td>SS</td><td>Sudán del Sur</td></tr><tr><td>SE</td><td>Suecia</td></tr><tr><td>CH</td><td>Suiza</td></tr><tr><td>SR</td><td>Surinam</td></tr><tr><td>SJ</td><td>Svalbard</td></tr><tr><td>SZ</td><td>Swazilandia</td></tr><tr><td>TH</td><td>Tailandia</td></tr><tr><td>TW</td><td>Taiwán</td></tr><tr><td>TJ</td><td>Tayijistán</td></tr><tr><td>IO</td><td>Territorio Británico</td></tr><tr><td>CC</td><td>Islas Cocos</td></tr><tr><td>TF</td><td>Territorios Australes</td></tr><tr><td>TG</td><td>Togo</td></tr><tr><td>TK</td><td>Tokelau</td></tr><tr><td>TO</td><td>Tonga</td></tr><tr><td>TT</td><td>Trinidad y Tobago</td></tr><tr><td>TN</td><td>Túnes</td></tr><tr><td>TM</td><td>Turkmenistán</td></tr><tr><td>TR</td><td>Turquía</td></tr><tr><td>TV</td><td>Tuvalu</td></tr><tr><td>UA</td><td>Ucrania</td></tr><tr><td>UG</td><td>Uganda</td></tr><tr><td>KM</td><td>Unión de las Comoras</td></tr><tr><td>UY</td><td>Uruguay</td></tr><tr><td>UZ</td><td>Uzbekistán</td></tr><tr><td>VU</td><td>Vanuatu</td></tr><tr><td>VA</td><td>Ciudad del Vaticano</td></tr><tr><td>VE</td><td>Venezuela</td></tr><tr><td>VN</td><td>Viet Nam</td></tr><tr><td>WF</td><td>Wallis y Futuna</td></tr><tr><td>YE</td><td>Yemen</td></tr><tr><td>ZM</td><td>Zambia</td></tr><tr><td>ZW</td><td>Zimbabue</td></tr></tbody></table><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"AD\"", "\"AE\"", "\"AF\"", "\"AG\"", "\"AI\"", "\"AL\"", "\"AM\"", "\"AO\"", "\"AQ\"", "\"AR\"", "\"AS\"", "\"AT\"", "\"AU\"", "\"AW\"", "\"AX\"", "\"AZ\"", "\"BA\"", "\"BB\"", "\"BD\"", "\"BE\"", "\"BF\"", "\"BG\"", "\"BH\"", "\"BI\"", "\"BJ\"", "\"BL\"", "\"BM\"", "\"BN\"", "\"BO\"", "\"BQ\"", "\"BR\"", "\"BS\"", "\"BT\"", "\"BV\"", "\"BW\"", "\"BY\"", "\"BZ\"", "\"CA\"", "\"CC\"", "\"CD\"", "\"CF\"", "\"CG\"", "\"CH\"", "\"CI\"", "\"CK\"", "\"CL\"", "\"CM\"", "\"CN\"", "\"CO\"", "\"CR\"", "\"CU\"", "\"CV\"", "\"CW\"", "\"CX\"", "\"CY\"", "\"CZ\"", "\"DE\"", "\"DJ\"", "\"DK\"", "\"DM\"", "\"DO\"", "\"DZ\"", "\"EC\"", "\"EE\"", "\"EG\"", "\"EH\"", "\"ER\"", "\"ES\"", "\"ET\"", "\"FI\"", "\"FJ\"", "\"FK\"", "\"FM\"", "\"FO\"", "\"FR\"", "\"GA\"", "\"GB\"", "\"GD\"", "\"GE\"", "\"GF\"", "\"GG\"", "\"GH\"", "\"GI\"", "\"GL\"", "\"GM\"", "\"GN\"", "\"GP\"", "\"GQ\"", "\"GR\"", "\"GS\"", "\"GT\"", "\"GU\"", "\"GW\"", "\"GY\"", "\"HK\"", "\"HM\"", "\"HN\"", "\"HR\"", "\"HT\"", "\"HU\"", "\"ID\"", "\"IE\"", "\"IL\"", "\"IM\"", "\"IN\"", "\"IO\"", "\"IQ\"", "\"IR\"", "\"IT\"", "\"Is\"", "\"JE\"", "\"JM\"", "\"JO\"", "\"JP\"", "\"KE\"", "\"KG\"", "\"KH\"", "\"KI\"", "\"KM\"", "\"KN\"", "\"KP\"", "\"KR\"", "\"KW\"", "\"KY\"", "\"KZ\"", "\"LA\"", "\"LB\"", "\"LC\"", "\"LI\"", "\"LK\"", "\"LR\"", "\"LS\"", "\"LT\"", "\"LU\"", "\"LV\"", "\"LY\"", "\"MA\"", "\"MC\"", "\"MD\"", "\"ME\"", "\"MF\"", "\"MG\"", "\"MH\"", "\"MK\"", "\"ML\"", "\"MM\"", "\"MN\"", "\"MO\"", "\"MP\"", "\"MQ\"", "\"MR\"", "\"MS\"", "\"MT\"", "\"MU\"", "\"MV\"", "\"MW\"", "\"MX\"", "\"MY\"", "\"MZ\"", "\"NA\"", "\"NC\"", "\"NE\"", "\"NF\"", "\"NG\"", "\"NI\"", "\"NL\"", "\"NO\"", "\"NP\"", "\"NR\"", "\"NU\"", "\"NZ\"", "\"OM\"", "\"PA\"", "\"PE\"", "\"PF\"", "\"PG\"", "\"PH\"", "\"PK\"", "\"PL\"", "\"PM\"", "\"PN\"", "\"PR\"", "\"PS\"", "\"PT\"", "\"PW\"", "\"PY\"", "\"QA\"", "\"RE\"", "\"RO\"", "\"RS\"", "\"RU\"", "\"RW\"", "\"SA\"", "\"SB\"", "\"SC\"", "\"SD\"", "\"SE\"", "\"SG\"", "\"SH\"", "\"SI\"", "\"SJ\"", "\"SK\"", "\"SL\"", "\"SM\"", "\"SN\"", "\"SO\"", "\"SR\"", "\"SS\"", "\"ST\"", "\"SV\"", "\"SX\"", "\"SY\"", "\"SZ\"", "\"TC\"", "\"TD\"", "\"TF\"", "\"TG\"", "\"TH\"", "\"TJ\"", "\"TK\"", "\"TL\"", "\"TM\"", "\"TN\"", "\"TO\"", "\"TR\"", "\"TT\"", "\"TV\"", "\"TW\"", "\"TZ\"", "\"UA\"", "\"UG\"", "\"UM\"", "\"US\"", "\"UY\"", "\"UZ\"", "\"VA\"", "\"VC\"", "\"VE\"", "\"VG\"", "\"VI\"", "\"VN\"", "\"VU\"", "\"WF\"", "\"WS\"", "\"YE\"", "\"YT\"", "\"ZA\"", "\"ZM\"", "\"ZW\"" ],
+          "example" : "MX",
+          "type" : "string"
+        },
+        "coloniaPoblacion" : {
+          "description" : "<b>Colonia o población donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "JARDINES DE LA MONTANA",
+          "type" : "string"
+        },
+        "cp" : {
+          "description" : "<b>Código postal donde vive el cliente</b><br>MinLength: 5<br>MaxLength: 5<br><br><i>- Requerido -</i>",
+          "example" : "14210",
+          "type" : "string"
+        },
+        "delegacionMunicipio" : {
+          "description" : "<b>Alcaldía o municipio donde vive el cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "TLALPAN",
+          "type" : "string"
+        },
+        "direccion1" : {
+          "description" : "<b>Calle y número de la dirección del cliente</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Requerido -</i>",
+          "example" : "PERIFERICO SUR 4349",
+          "type" : "string"
+        },
+        "direccion2" : {
+          "description" : "<b>Se utiliza cuando no es suficiente el campo dirección1</b><br>MinLength: 2<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "estado" : {
+          "description" : "<b>Código del estado donde vive el cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AGS</td><td>Aguascalientes</td></tr></tbody><tr><td>BCN</td><td>Baja California</td></tr><tr><td>BCS</td><td>Baja California Sur</td></tr><tr><td>CAM</td><td>Campeche</td></tr><tr><td>CHS</td><td>Chiapas</td></tr><tr><td>CHI</td><td>Chihuahua</td></tr><tr><td>CDMX</td><td>Ciudad de México</td></tr><tr><td>COA</td><td>Coahuila</td></tr><tr><td>COL</td><td>Colima</td></tr><tr><td>DGO</td><td>Durango</td></tr><tr><td>EM</td><td>Estado de México</td></tr><tr><td>GTO</td><td>Guanajuato</td></tr><tr><td>GRO</td><td>Guerrero</td></tr><tr><td>HGO</td><td>Hidalgo</td></tr><tr><td>JAL</td><td>Jalisco</td></tr><tr><td>MICH</td><td>Michoacán</td></tr><tr><td>MOR</td><td>Morelos</td></tr><tr><td>NAY</td><td>Nayarit</td></tr><tr><td>NL</td><td>Nuevo León</td></tr><tr><td>OAX</td><td>Oaxaca</td></tr><tr><td>PUE</td><td>Puebla</td></tr><tr><td>QRO</td><td>Querétaro</td></tr><tr><td>QR</td><td>Quintana Roo</td></tr><tr><td>SLP</td><td>San Luis Potosí</td></tr><tr><td>SIN</td><td>Sinaloa</td></tr><tr><td>SON</td><td>Sonora</td></tr><tr><td>TAB</td><td>Tabasco</td></tr><tr><td>TAM</td><td>Tamaulipas</td></tr><tr><td>TLAX</td><td>Tlaxcala</td></tr><tr><td>VER</td><td>Veracruz</td></tr><tr><td>YUC</td><td>Yucatán</td></tr><tr><td>ZAC</td><td>Zacatecas</td></tr></table><br>MinLength: 2<br>MaxLength: 4<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"AGS\"", "\"BCN\"", "\"BCS\"", "\"CAM\"", "\"CDMX\"", "\"CHI\"", "\"CHS\"", "\"COA\"", "\"COL\"", "\"DGO\"", "\"EM\"", "\"GRO\"", "\"GTO\"", "\"HGO\"", "\"JAL\"", "\"MICH\"", "\"MOR\"", "\"NAY\"", "\"NL\"", "\"OAX\"", "\"PUE\"", "\"QR\"", "\"QRO\"", "\"SIN\"", "\"SLP\"", "\"SON\"", "\"TAB\"", "\"TAM\"", "\"TLAX\"", "\"VER\"", "\"YUC\"", "\"ZAC\"" ],
+          "example" : "CDMX",
+          "type" : "string"
+        },
+        "extension" : {
+          "description" : "<b>Extensión del número de teléfono</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fax" : {
+          "description" : "<b>Número telefónico del fax del cliente</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaReporteDireccion" : {
+          "type" : "string"
+        },
+        "fechaResidencia" : {
+          "description" : "<b>Fecha desde la que ocupa la residencia, en formato DDMMAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "20121995",
+          "type" : "string"
+        },
+        "indicadorEspecialDomicilio" : {
+          "description" : "<b>Indica el tipo de ubicación del domicilio</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>M</td><td>Militar</td></tr><tr><td>R</td><td>Rural</td></tr><tr><td>K</td><td>Domicilio conocido</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"K\"", "\"M\"", "\"R\"" ],
+          "example" : "K",
+          "type" : "string"
+        },
+        "numeroTelefono" : {
+          "description" : "<b>Teléfono de la casa del cliente</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "5554494900",
+          "type" : "string"
+        },
+        "tipoDomicilio" : {
+          "description" : "<b>Tipo de domicilio del cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>B</td><td>Negocio</td></tr><tr><td>C</td><td>Domicilio</td></tr><tr><td>H</td><td>Casa</td></tr><tr><td>H</td><td>Apartado postal</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"B\"", "\"C\"", "\"H\"", "\"P\"" ],
+          "example" : "B",
+          "type" : "string"
+        }
+      },
+      "title" : "DireccionRespBC"
+    },
+    "EmpleoBC" : {
+      "type" : "object",
+      "properties" : {
+        "baseSalarial" : {
+          "description" : "<b>Frecuencia con la que le pagan al cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>B</td><td>Bimestral</td></tr><tr><td>D</td><td>Diario</td></tr><tr><td>H</td><td>Por hora</td></tr><tr><td>K</td><td>Catorcenal</td></tr><tr><td>M</td><td>Mensual</td></tr><tr><td>S</td><td>Quincenal</td></tr><tr><td>W</td><td>Semanal</td></tr><tr><td>Y</td><td>Anual</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "cargo" : {
+          "description" : "<b>Cargo u ocupación del cliente</b><br>MinLength: 0<br>MaxLength: 30<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "ciudad" : {
+          "description" : "<b>Nombre de la ciudad del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "claveMonedaSalario" : {
+          "description" : "<b>Clave de la moneda en la cual le pagan al cliente</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "codPais" : {
+          "description" : "<b>Código del país del empleador</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AF</td><td>Afganistán</td></tr><tr><td>AL</td><td>Albania</td></tr><tr><td>DE</td><td>Alemania</td></tr><tr><td>AD</td><td>Andorra</td></tr><tr><td>AO</td><td>Angola</td></tr><tr><td>AI</td><td>Anguila</td></tr><tr><td>AQ</td><td>Antártida</td></tr><tr><td>AG</td><td>Antigua y Barbuda</td></tr><tr><td>SA</td><td>Arabia Saudita</td></tr><tr><td>DZ</td><td>Argelia</td></tr><tr><td>AR</td><td>Argentina</td></tr><tr><td>AM</td><td>Armenia</td></tr><tr><td>AW</td><td>Aruba</td></tr><tr><td>AU</td><td>Australia</td></tr><tr><td>AT</td><td>Austria</td></tr><tr><td>AZ</td><td>Azerbaiyán</td></tr><tr><td>BS</td><td>Bahamas</td></tr><tr><td>BH</td><td>Bareín</td></tr><tr><td>BD</td><td>Bangladés</td></tr><tr><td>BB</td><td>Barbados</td></tr><tr><td>BE</td><td>Bélgica</td></tr><tr><td>BZ</td><td>Belice</td></tr><tr><td>BJ</td><td>Benin</td></tr><tr><td>BM</td><td>Bermudas</td></tr><tr><td>BY</td><td>Bielorrusia</td></tr><tr><td>BO</td><td>Bolivia</td></tr><tr><td>BQ</td><td>Bonaire</td></tr><tr><td>BA</td><td>Bosnia</td></tr><tr><td>BW</td><td>Botsuana</td></tr><tr><td>BR</td><td>Brasil</td></tr><tr><td>BN</td><td>Brunéi</td></tr><tr><td>BG</td><td>Bulgaria</td></tr><tr><td>BF</td><td>Burkina</td></tr><tr><td>BI</td><td>Burundi</td></tr><tr><td>BT</td><td>Bután</td></tr><tr><td>CV</td><td>Cabo Verde</td></tr><tr><td>KH</td><td>Camboya</td></tr><tr><td>CM</td><td>Camerún</td></tr><tr><td>CA</td><td>Canadá</td></tr><tr><td>CL</td><td>Chile</td></tr><tr><td>CN</td><td>China</td></tr><tr><td>CY</td><td>Chipre</td></tr><tr><td>CO</td><td>Colombia</td></tr><tr><td>CI</td><td>Costa de Marfil</td></tr><tr><td>CR</td><td>Costa Rica</td></tr><tr><td>HR</td><td>Croacia</td></tr><tr><td>CU</td><td>Cuba</td></tr><tr><td>CW</td><td>Curacao</td></tr><tr><td>DK</td><td>Dinamarca</td></tr><tr><td>DJ</td><td>Yibuti</td></tr><tr><td>DM</td><td>Dominica</td></tr><tr><td>EC</td><td>Ecuador</td></tr><tr><td>EG</td><td>Egipto</td></tr><tr><td>SV</td><td>El Salvador</td></tr><tr><td>ER</td><td>Eritrea</td></tr><tr><td>SK</td><td>Eslovaquia</td></tr><tr><td>SI</td><td>Eslovenia</td></tr><tr><td>ES</td><td>EspaÃ±a</td></tr><tr><td>US</td><td>Estados Unidos</td></tr><tr><td>EE</td><td>Estonia</td></tr><tr><td>ET</td><td>Etiopía</td></tr><tr><td>FJ</td><td>Fiji</td></tr><tr><td>PH</td><td>Filipinas</td></tr><tr><td>FI</td><td>Finlandia</td></tr><tr><td>FR</td><td>Francia</td></tr><tr><td>GA</td><td>Gabón</td></tr><tr><td>GM</td><td>Gambia</td></tr><tr><td>GS</td><td>Georgia del sur</td></tr><tr><td>GH</td><td>Ghana</td></tr><tr><td>GI</td><td>Gibraltar</td></tr><tr><td>GD</td><td>Granada</td></tr><tr><td>GR</td><td>Grecia</td></tr><tr><td>GL</td><td>Groenlandia</td></tr><tr><td>GP</td><td>Gudalupe</td></tr><tr><td>GU</td><td>Guam</td></tr><tr><td>GT</td><td>Guatemala</td></tr><tr><td>GY</td><td>Guayana</td></tr><tr><td>GF</td><td>Guayana Francesa</td></tr><tr><td>GG</td><td>Guernsey</td></tr><tr><td>GN</td><td>Guinea Bisáu</td></tr><tr><td>GQ</td><td>Guinea Ecuatorial</td></tr><tr><td>GW</td><td>Guinea Bissau</td></tr><tr><td>HT</td><td>Haití</td></tr><tr><td>HN</td><td>Honduras</td></tr><tr><td>HK</td><td>Hong Kong</td></tr><tr><td>HU</td><td>Hungría</td></tr><tr><td>IN</td><td>India</td></tr><tr><td>ID</td><td>Indonesia</td></tr><tr><td>IQ</td><td>Irak</td></tr><tr><td>IR</td><td>Irán</td></tr><tr><td>IE</td><td>Irlanda</td></tr><tr><td>BV</td><td>Bouvet</td></tr><tr><td>IM</td><td>Isla de Man</td></tr><tr><td>CX</td><td>Isla de Navidad</td></tr><tr><td>HM</td><td>Isla Heard</td></tr><tr><td>NF</td><td>Isla Norfolk</td></tr><tr><td>Is</td><td>Islandia</td></tr><tr><td>AX</td><td>Islas Aland</td></tr><tr><td>KY</td><td>Islas Caimán</td></tr><tr><td>CK</td><td>Islas Cook</td></tr><tr><td>FK</td><td>Islas Malvinas</td></tr><tr><td>FO</td><td>Islas Faroe</td></tr><tr><td>MP</td><td>Islas Marianas</td></tr><tr><td>MH</td><td>Islas Marshall</td></tr><tr><td>PN</td><td>Islas Pitcairn</td></tr><tr><td>RE</td><td>Islas Reunión</td></tr><tr><td>SB</td><td>Islas Salomón</td></tr><tr><td>VI</td><td>Islas Vírgenes</td></tr><tr><td>VG</td><td>Islas Británicas</td></tr><tr><td>IL</td><td>Israel</td></tr><tr><td>IT</td><td>Italia</td></tr><tr><td>JM</td><td>Jamaica</td></tr><tr><td>JP</td><td>Japón</td></tr><tr><td>JE</td><td>Jersey</td></tr><tr><td>JO</td><td>Jordania</td></tr><tr><td>QA</td><td>Catar</td></tr><tr><td>KZ</td><td>Kazajistán</td></tr><tr><td>KE</td><td>Kenia</td></tr><tr><td>KG</td><td>Kirguistán</td></tr><tr><td>KI</td><td>Kiribatí</td></tr><tr><td>KW</td><td>Kuwait</td></tr><tr><td>SY</td><td>Siria</td></tr><tr><td>KR</td><td>Corea del Sur</td></tr><tr><td>CD</td><td>Congo</td></tr><tr><td>KP</td><td>Corea del Norte</td></tr><tr><td>LA</td><td>Lao</td></tr><tr><td>UM</td><td>Islas de Ultramar</td></tr><tr><td>TC</td><td>Islas Turcas</td></tr><tr><td>LS</td><td>Lesoto</td></tr><tr><td>LV</td><td>Letonia</td></tr><tr><td>LB</td><td>Líbano</td></tr><tr><td>LR</td><td>Liberia</td></tr><tr><td>LY</td><td>Libia</td></tr><tr><td>LI</td><td>Liechtenstein</td></tr><tr><td>LT</td><td>Lituania</td></tr><tr><td>AE</td><td>Emiratos árabes</td></tr><tr><td>NL</td><td>Países Bajos</td></tr><tr><td>LU</td><td>Luxemburgo</td></tr><tr><td>MO</td><td>Macao</td></tr><tr><td>MK</td><td>Macedonia</td></tr><tr><td>MG</td><td>Madagascar</td></tr><tr><td>MY</td><td>Malasia</td></tr><tr><td>MW</td><td>Malaui</td></tr><tr><td>MV</td><td>Maldivias</td></tr><tr><td>ML</td><td>Mali</td></tr><tr><td>MT</td><td>Malta</td></tr><tr><td>MA</td><td>Marruecos</td></tr><tr><td>MQ</td><td>Martinica</td></tr><tr><td>MU</td><td>Mauricio</td></tr><tr><td>MR</td><td>Mauritania</td></tr><tr><td>YT</td><td>Mayotte</td></tr><tr><td>MX</td><td>México</td></tr><tr><td>FM</td><td>Micronesia</td></tr><tr><td>MD</td><td>República de Moldavia</td></tr><tr><td>MC</td><td>Mónaco</td></tr><tr><td>MN</td><td>Mongolia</td></tr><tr><td>ME</td><td>Montenegro</td></tr><tr><td>MS</td><td>Montserrat</td></tr><tr><td>MZ</td><td>Mozambique</td></tr><tr><td>NA</td><td>Namibia</td></tr><tr><td>NR</td><td>Nauru</td></tr><tr><td>NP</td><td>Nepal</td></tr><tr><td>NI</td><td>Nicaragua</td></tr><tr><td>NE</td><td>Níger</td></tr><tr><td>NG</td><td>Nigeria</td></tr><tr><td>NU</td><td>Niue</td></tr><tr><td>NO</td><td>Noruega</td></tr><tr><td>NC</td><td>Nueva Caledonia</td></tr><tr><td>NZ</td><td>Nueva Zelandia</td></tr><tr><td>OM</td><td>Omán</td></tr><tr><td>PK</td><td>Pakistán</td></tr><tr><td>PW</td><td>Palaos</td></tr><tr><td>PS</td><td>Palestina</td></tr><tr><td>PA</td><td>Panamá</td></tr><tr><td>PG</td><td>Nueva Guinea</td></tr><tr><td>PY</td><td>Paraguay</td></tr><tr><td>PE</td><td>Perú</td></tr><tr><td>PF</td><td>Polinesia Francesa</td></tr><tr><td>PL</td><td>Polonia</td></tr><tr><td>PT</td><td>Portugal</td></tr><tr><td>PR</td><td>Puerto Rico</td></tr><tr><td>GB</td><td>Reino Unido</td></tr><tr><td>CF</td><td>República Centro Africana</td></tr><tr><td>CZ</td><td>República Checa</td></tr><tr><td>GE</td><td>Georgia</td></tr><tr><td>MM</td><td>Myanmar</td></tr><tr><td>TD</td><td>Chad</td></tr><tr><td>CG</td><td>Congo</td></tr><tr><td>ST</td><td>Santo Tomé y Príncipe</td></tr><tr><td>TL</td><td>Timor Oriental</td></tr><tr><td>DO</td><td>República Dominicana</td></tr><tr><td>TZ</td><td>Tanzania</td></tr><tr><td>RW</td><td>Ruanda</td></tr><tr><td>RO</td><td>Rumania</td></tr><tr><td>RU</td><td>Rusia</td></tr><tr><td>EH</td><td>Sahara </td></tr><tr><td>AS</td><td>Samoa Americana</td></tr><tr><td>WS</td><td>Samoa</td></tr><tr><td>BL</td><td>San Bartolomé</td></tr><tr><td>KN</td><td>San Cristóbal y Nieves</td></tr><tr><td>SM</td><td>San Marino</td></tr><tr><td>MF</td><td>San Martín</td></tr><tr><td>PM</td><td>San Pedro y Miquelón</td></tr><tr><td>VC</td><td>San Vicente</td></tr><tr><td>SH</td><td>Santa Helena</td></tr><tr><td>LC</td><td>Santa Lucía</td></tr><tr><td>SN</td><td>Senegal</td></tr><tr><td>RS</td><td>Serbia</td></tr><tr><td>SC</td><td>Seychelles</td></tr><tr><td>SL</td><td>Sierra Leona</td></tr><tr><td>SG</td><td>Singapur</td></tr><tr><td>SX</td><td>Sint Maarten</td></tr><tr><td>SO</td><td>Somalia</td></tr><tr><td>LK</td><td>Sri Lanka</td></tr><tr><td>ZA</td><td>Sudáfrica</td></tr><tr><td>SD</td><td>Sudán del Norte</td></tr><tr><td>SS</td><td>Sudán del Sur</td></tr><tr><td>SE</td><td>Suecia</td></tr><tr><td>CH</td><td>Suiza</td></tr><tr><td>SR</td><td>Surinam</td></tr><tr><td>SJ</td><td>Svalbard</td></tr><tr><td>SZ</td><td>Swazilandia</td></tr><tr><td>TH</td><td>Tailandia</td></tr><tr><td>TW</td><td>Taiwán</td></tr><tr><td>TJ</td><td>Tayijistán</td></tr><tr><td>IO</td><td>Territorio Británico</td></tr><tr><td>CC</td><td>Islas Cocos</td></tr><tr><td>TF</td><td>Territorios Australes</td></tr><tr><td>TG</td><td>Togo</td></tr><tr><td>TK</td><td>Tokelau</td></tr><tr><td>TO</td><td>Tonga</td></tr><tr><td>TT</td><td>Trinidad y Tobago</td></tr><tr><td>TN</td><td>Túnes</td></tr><tr><td>TM</td><td>Turkmenistán</td></tr><tr><td>TR</td><td>Turquía</td></tr><tr><td>TV</td><td>Tuvalu</td></tr><tr><td>UA</td><td>Ucrania</td></tr><tr><td>UG</td><td>Uganda</td></tr><tr><td>KM</td><td>Unión de las Comoras</td></tr><tr><td>UY</td><td>Uruguay</td></tr><tr><td>UZ</td><td>Uzbekistán</td></tr><tr><td>VU</td><td>Vanuatu</td></tr><tr><td>VA</td><td>Ciudad del Vaticano</td></tr><tr><td>VE</td><td>Venezuela</td></tr><tr><td>VN</td><td>Viet Nam</td></tr><tr><td>WF</td><td>Wallis y Futuna</td></tr><tr><td>YE</td><td>Yemen</td></tr><tr><td>ZM</td><td>Zambia</td></tr><tr><td>ZW</td><td>Zimbabue</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"AD\"", "\"AE\"", "\"AF\"", "\"AG\"", "\"AI\"", "\"AL\"", "\"AM\"", "\"AO\"", "\"AQ\"", "\"AR\"", "\"AS\"", "\"AT\"", "\"AU\"", "\"AW\"", "\"AX\"", "\"AZ\"", "\"BA\"", "\"BB\"", "\"BD\"", "\"BE\"", "\"BF\"", "\"BG\"", "\"BH\"", "\"BI\"", "\"BJ\"", "\"BL\"", "\"BM\"", "\"BN\"", "\"BO\"", "\"BQ\"", "\"BR\"", "\"BS\"", "\"BT\"", "\"BV\"", "\"BW\"", "\"BY\"", "\"BZ\"", "\"CA\"", "\"CC\"", "\"CD\"", "\"CF\"", "\"CG\"", "\"CH\"", "\"CI\"", "\"CK\"", "\"CL\"", "\"CM\"", "\"CN\"", "\"CO\"", "\"CR\"", "\"CU\"", "\"CV\"", "\"CW\"", "\"CX\"", "\"CY\"", "\"CZ\"", "\"DE\"", "\"DJ\"", "\"DK\"", "\"DM\"", "\"DO\"", "\"DZ\"", "\"EC\"", "\"EE\"", "\"EG\"", "\"EH\"", "\"ER\"", "\"ES\"", "\"ET\"", "\"FI\"", "\"FJ\"", "\"FK\"", "\"FM\"", "\"FO\"", "\"FR\"", "\"GA\"", "\"GB\"", "\"GD\"", "\"GE\"", "\"GF\"", "\"GG\"", "\"GH\"", "\"GI\"", "\"GL\"", "\"GM\"", "\"GN\"", "\"GP\"", "\"GQ\"", "\"GR\"", "\"GS\"", "\"GT\"", "\"GU\"", "\"GW\"", "\"GY\"", "\"HK\"", "\"HM\"", "\"HN\"", "\"HR\"", "\"HT\"", "\"HU\"", "\"ID\"", "\"IE\"", "\"IL\"", "\"IM\"", "\"IN\"", "\"IO\"", "\"IQ\"", "\"IR\"", "\"IT\"", "\"Is\"", "\"JE\"", "\"JM\"", "\"JO\"", "\"JP\"", "\"KE\"", "\"KG\"", "\"KH\"", "\"KI\"", "\"KM\"", "\"KN\"", "\"KP\"", "\"KR\"", "\"KW\"", "\"KY\"", "\"KZ\"", "\"LA\"", "\"LB\"", "\"LC\"", "\"LI\"", "\"LK\"", "\"LR\"", "\"LS\"", "\"LT\"", "\"LU\"", "\"LV\"", "\"LY\"", "\"MA\"", "\"MC\"", "\"MD\"", "\"ME\"", "\"MF\"", "\"MG\"", "\"MH\"", "\"MK\"", "\"ML\"", "\"MM\"", "\"MN\"", "\"MO\"", "\"MP\"", "\"MQ\"", "\"MR\"", "\"MS\"", "\"MT\"", "\"MU\"", "\"MV\"", "\"MW\"", "\"MX\"", "\"MY\"", "\"MZ\"", "\"NA\"", "\"NC\"", "\"NE\"", "\"NF\"", "\"NG\"", "\"NI\"", "\"NL\"", "\"NO\"", "\"NP\"", "\"NR\"", "\"NU\"", "\"NZ\"", "\"OM\"", "\"PA\"", "\"PE\"", "\"PF\"", "\"PG\"", "\"PH\"", "\"PK\"", "\"PL\"", "\"PM\"", "\"PN\"", "\"PR\"", "\"PS\"", "\"PT\"", "\"PW\"", "\"PY\"", "\"QA\"", "\"RE\"", "\"RO\"", "\"RS\"", "\"RU\"", "\"RW\"", "\"SA\"", "\"SB\"", "\"SC\"", "\"SD\"", "\"SE\"", "\"SG\"", "\"SH\"", "\"SI\"", "\"SJ\"", "\"SK\"", "\"SL\"", "\"SM\"", "\"SN\"", "\"SO\"", "\"SR\"", "\"SS\"", "\"ST\"", "\"SV\"", "\"SX\"", "\"SY\"", "\"SZ\"", "\"TC\"", "\"TD\"", "\"TF\"", "\"TG\"", "\"TH\"", "\"TJ\"", "\"TK\"", "\"TL\"", "\"TM\"", "\"TN\"", "\"TO\"", "\"TR\"", "\"TT\"", "\"TV\"", "\"TW\"", "\"TZ\"", "\"UA\"", "\"UG\"", "\"UM\"", "\"US\"", "\"UY\"", "\"UZ\"", "\"VA\"", "\"VC\"", "\"VE\"", "\"VG\"", "\"VI\"", "\"VN\"", "\"VU\"", "\"WF\"", "\"WS\"", "\"YE\"", "\"YT\"", "\"ZA\"", "\"ZM\"", "\"ZW\"" ],
+          "example" : "",
+          "type" : "string"
+        },
+        "coloniaPoblacion" : {
+          "description" : "<b>Colonia o población del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "cp" : {
+          "description" : "<b>Código postal del empleador</b><br>MinLength: 0<br>MaxLength: 5<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "delegacionMunicipio" : {
+          "description" : "<b>Alcaldía o municipio del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "direccion1" : {
+          "description" : "<b>Dirección del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "direccion2" : {
+          "description" : "<b>Dirección del empleador si no es suficiente el primer campo</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "estado" : {
+          "description" : "<b>Código del estado del empleador</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AGS</td><td>Aguascalientes</td></tr></tbody><tr><td>BCN</td><td>Baja California</td></tr><tr><td>BCS</td><td>Baja California Sur</td></tr><tr><td>CAM</td><td>Campeche</td></tr><tr><td>CHS</td><td>Chiapas</td></tr><tr><td>CHI</td><td>Chihuahua</td></tr><tr><td>CDMX</td><td>Ciudad de México</td></tr><tr><td>COA</td><td>Coahuila</td></tr><tr><td>COL</td><td>Colima</td></tr><tr><td>DGO</td><td>Durango</td></tr><tr><td>EM</td><td>Estado de México</td></tr><tr><td>GTO</td><td>Guanajuato</td></tr><tr><td>GRO</td><td>Guerrero</td></tr><tr><td>HGO</td><td>Hidalgo</td></tr><tr><td>JAL</td><td>Jalisco</td></tr><tr><td>MICH</td><td>Michoacán</td></tr><tr><td>MOR</td><td>Morelos</td></tr><tr><td>NAY</td><td>Nayarit</td></tr><tr><td>NL</td><td>Nuevo León</td></tr><tr><td>OAX</td><td>Oaxaca</td></tr><tr><td>PUE</td><td>Puebla</td></tr><tr><td>QRO</td><td>Querétaro</td></tr><tr><td>QR</td><td>Quintana Roo</td></tr><tr><td>SLP</td><td>San Luis Potosí</td></tr><tr><td>SIN</td><td>Sinaloa</td></tr><tr><td>SON</td><td>Sonora</td></tr><tr><td>TAB</td><td>Tabasco</td></tr><tr><td>TAM</td><td>Tamaulipas</td></tr><tr><td>TLAX</td><td>Tlaxcala</td></tr><tr><td>VER</td><td>Veracruz</td></tr><tr><td>YUC</td><td>Yucatán</td></tr><tr><td>ZAC</td><td>Zacatecas</td></tr></table><br>MinLength: 0<br>MaxLength: 4<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"AGS\"", "\"BCN\"", "\"BCS\"", "\"CAM\"", "\"CDMX\"", "\"CHI\"", "\"CHS\"", "\"COA\"", "\"COL\"", "\"DGO\"", "\"EM\"", "\"GRO\"", "\"GTO\"", "\"HGO\"", "\"JAL\"", "\"MICH\"", "\"MOR\"", "\"NAY\"", "\"NL\"", "\"OAX\"", "\"PUE\"", "\"QR\"", "\"QRO\"", "\"SIN\"", "\"SLP\"", "\"SON\"", "\"TAB\"", "\"TAM\"", "\"TLAX\"", "\"VER\"", "\"YUC\"", "\"ZAC\"" ],
+          "example" : "",
+          "type" : "string"
+        },
+        "extension" : {
+          "description" : "<b>Extensión del número de teléfono</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fax" : {
+          "description" : "<b>Número de teléfono del fax del empleador</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaContratacion" : {
+          "description" : "<b>Fecha en la que el empleador contrató al cliente, en formato DDMMAAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaUltimoDiaEmpleo" : {
+          "description" : "<b>Fecha en la que trabajó por última vez el cliente, en formato DDMMAAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "nombreEmpresa" : {
+          "description" : "<b>Nombre o razón social del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroEmpleado" : {
+          "description" : "<b>Número de empleado o de nómina del cliente</b><br>MinLength: 0<br>MaxLength: 15<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroTelefono" : {
+          "description" : "<b>Número de teléfono del empleador</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "salario" : {
+          "description" : "<b>Monto del ingreso que tiene el cliente</b><br>MinLength: 0<br>MaxLength: 9<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        }
+      },
+      "title" : "EmpleoBC"
+    },
+    "EmpleoRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "baseSalarial" : {
+          "description" : "<b>Frecuencia con la que le pagan al cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>B</td><td>Bimestral</td></tr><tr><td>D</td><td>Diario</td></tr><tr><td>H</td><td>Por hora</td></tr><tr><td>K</td><td>Catorcenal</td></tr><tr><td>M</td><td>Mensual</td></tr><tr><td>S</td><td>Quincenal</td></tr><tr><td>W</td><td>Semanal</td></tr><tr><td>Y</td><td>Anual</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "cargo" : {
+          "description" : "<b>Cargo u ocupación del cliente</b><br>MinLength: 0<br>MaxLength: 30<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "ciudad" : {
+          "description" : "<b>Nombre de la ciudad del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "claveMonedaSalario" : {
+          "description" : "<b>Clave de la moneda en la cual le pagan al cliente</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "codPais" : {
+          "description" : "<b>Código del país del empleador</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AF</td><td>Afganistán</td></tr><tr><td>AL</td><td>Albania</td></tr><tr><td>DE</td><td>Alemania</td></tr><tr><td>AD</td><td>Andorra</td></tr><tr><td>AO</td><td>Angola</td></tr><tr><td>AI</td><td>Anguila</td></tr><tr><td>AQ</td><td>Antártida</td></tr><tr><td>AG</td><td>Antigua y Barbuda</td></tr><tr><td>SA</td><td>Arabia Saudita</td></tr><tr><td>DZ</td><td>Argelia</td></tr><tr><td>AR</td><td>Argentina</td></tr><tr><td>AM</td><td>Armenia</td></tr><tr><td>AW</td><td>Aruba</td></tr><tr><td>AU</td><td>Australia</td></tr><tr><td>AT</td><td>Austria</td></tr><tr><td>AZ</td><td>Azerbaiyán</td></tr><tr><td>BS</td><td>Bahamas</td></tr><tr><td>BH</td><td>Bareín</td></tr><tr><td>BD</td><td>Bangladés</td></tr><tr><td>BB</td><td>Barbados</td></tr><tr><td>BE</td><td>Bélgica</td></tr><tr><td>BZ</td><td>Belice</td></tr><tr><td>BJ</td><td>Benin</td></tr><tr><td>BM</td><td>Bermudas</td></tr><tr><td>BY</td><td>Bielorrusia</td></tr><tr><td>BO</td><td>Bolivia</td></tr><tr><td>BQ</td><td>Bonaire</td></tr><tr><td>BA</td><td>Bosnia</td></tr><tr><td>BW</td><td>Botsuana</td></tr><tr><td>BR</td><td>Brasil</td></tr><tr><td>BN</td><td>Brunéi</td></tr><tr><td>BG</td><td>Bulgaria</td></tr><tr><td>BF</td><td>Burkina</td></tr><tr><td>BI</td><td>Burundi</td></tr><tr><td>BT</td><td>Bután</td></tr><tr><td>CV</td><td>Cabo Verde</td></tr><tr><td>KH</td><td>Camboya</td></tr><tr><td>CM</td><td>Camerún</td></tr><tr><td>CA</td><td>Canadá</td></tr><tr><td>CL</td><td>Chile</td></tr><tr><td>CN</td><td>China</td></tr><tr><td>CY</td><td>Chipre</td></tr><tr><td>CO</td><td>Colombia</td></tr><tr><td>CI</td><td>Costa de Marfil</td></tr><tr><td>CR</td><td>Costa Rica</td></tr><tr><td>HR</td><td>Croacia</td></tr><tr><td>CU</td><td>Cuba</td></tr><tr><td>CW</td><td>Curacao</td></tr><tr><td>DK</td><td>Dinamarca</td></tr><tr><td>DJ</td><td>Yibuti</td></tr><tr><td>DM</td><td>Dominica</td></tr><tr><td>EC</td><td>Ecuador</td></tr><tr><td>EG</td><td>Egipto</td></tr><tr><td>SV</td><td>El Salvador</td></tr><tr><td>ER</td><td>Eritrea</td></tr><tr><td>SK</td><td>Eslovaquia</td></tr><tr><td>SI</td><td>Eslovenia</td></tr><tr><td>ES</td><td>EspaÃ±a</td></tr><tr><td>US</td><td>Estados Unidos</td></tr><tr><td>EE</td><td>Estonia</td></tr><tr><td>ET</td><td>Etiopía</td></tr><tr><td>FJ</td><td>Fiji</td></tr><tr><td>PH</td><td>Filipinas</td></tr><tr><td>FI</td><td>Finlandia</td></tr><tr><td>FR</td><td>Francia</td></tr><tr><td>GA</td><td>Gabón</td></tr><tr><td>GM</td><td>Gambia</td></tr><tr><td>GS</td><td>Georgia del sur</td></tr><tr><td>GH</td><td>Ghana</td></tr><tr><td>GI</td><td>Gibraltar</td></tr><tr><td>GD</td><td>Granada</td></tr><tr><td>GR</td><td>Grecia</td></tr><tr><td>GL</td><td>Groenlandia</td></tr><tr><td>GP</td><td>Gudalupe</td></tr><tr><td>GU</td><td>Guam</td></tr><tr><td>GT</td><td>Guatemala</td></tr><tr><td>GY</td><td>Guayana</td></tr><tr><td>GF</td><td>Guayana Francesa</td></tr><tr><td>GG</td><td>Guernsey</td></tr><tr><td>GN</td><td>Guinea Bisáu</td></tr><tr><td>GQ</td><td>Guinea Ecuatorial</td></tr><tr><td>GW</td><td>Guinea Bissau</td></tr><tr><td>HT</td><td>Haití</td></tr><tr><td>HN</td><td>Honduras</td></tr><tr><td>HK</td><td>Hong Kong</td></tr><tr><td>HU</td><td>Hungría</td></tr><tr><td>IN</td><td>India</td></tr><tr><td>ID</td><td>Indonesia</td></tr><tr><td>IQ</td><td>Irak</td></tr><tr><td>IR</td><td>Irán</td></tr><tr><td>IE</td><td>Irlanda</td></tr><tr><td>BV</td><td>Bouvet</td></tr><tr><td>IM</td><td>Isla de Man</td></tr><tr><td>CX</td><td>Isla de Navidad</td></tr><tr><td>HM</td><td>Isla Heard</td></tr><tr><td>NF</td><td>Isla Norfolk</td></tr><tr><td>Is</td><td>Islandia</td></tr><tr><td>AX</td><td>Islas Aland</td></tr><tr><td>KY</td><td>Islas Caimán</td></tr><tr><td>CK</td><td>Islas Cook</td></tr><tr><td>FK</td><td>Islas Malvinas</td></tr><tr><td>FO</td><td>Islas Faroe</td></tr><tr><td>MP</td><td>Islas Marianas</td></tr><tr><td>MH</td><td>Islas Marshall</td></tr><tr><td>PN</td><td>Islas Pitcairn</td></tr><tr><td>RE</td><td>Islas Reunión</td></tr><tr><td>SB</td><td>Islas Salomón</td></tr><tr><td>VI</td><td>Islas Vírgenes</td></tr><tr><td>VG</td><td>Islas Británicas</td></tr><tr><td>IL</td><td>Israel</td></tr><tr><td>IT</td><td>Italia</td></tr><tr><td>JM</td><td>Jamaica</td></tr><tr><td>JP</td><td>Japón</td></tr><tr><td>JE</td><td>Jersey</td></tr><tr><td>JO</td><td>Jordania</td></tr><tr><td>QA</td><td>Catar</td></tr><tr><td>KZ</td><td>Kazajistán</td></tr><tr><td>KE</td><td>Kenia</td></tr><tr><td>KG</td><td>Kirguistán</td></tr><tr><td>KI</td><td>Kiribatí</td></tr><tr><td>KW</td><td>Kuwait</td></tr><tr><td>SY</td><td>Siria</td></tr><tr><td>KR</td><td>Corea del Sur</td></tr><tr><td>CD</td><td>Congo</td></tr><tr><td>KP</td><td>Corea del Norte</td></tr><tr><td>LA</td><td>Lao</td></tr><tr><td>UM</td><td>Islas de Ultramar</td></tr><tr><td>TC</td><td>Islas Turcas</td></tr><tr><td>LS</td><td>Lesoto</td></tr><tr><td>LV</td><td>Letonia</td></tr><tr><td>LB</td><td>Líbano</td></tr><tr><td>LR</td><td>Liberia</td></tr><tr><td>LY</td><td>Libia</td></tr><tr><td>LI</td><td>Liechtenstein</td></tr><tr><td>LT</td><td>Lituania</td></tr><tr><td>AE</td><td>Emiratos árabes</td></tr><tr><td>NL</td><td>Países Bajos</td></tr><tr><td>LU</td><td>Luxemburgo</td></tr><tr><td>MO</td><td>Macao</td></tr><tr><td>MK</td><td>Macedonia</td></tr><tr><td>MG</td><td>Madagascar</td></tr><tr><td>MY</td><td>Malasia</td></tr><tr><td>MW</td><td>Malaui</td></tr><tr><td>MV</td><td>Maldivias</td></tr><tr><td>ML</td><td>Mali</td></tr><tr><td>MT</td><td>Malta</td></tr><tr><td>MA</td><td>Marruecos</td></tr><tr><td>MQ</td><td>Martinica</td></tr><tr><td>MU</td><td>Mauricio</td></tr><tr><td>MR</td><td>Mauritania</td></tr><tr><td>YT</td><td>Mayotte</td></tr><tr><td>MX</td><td>México</td></tr><tr><td>FM</td><td>Micronesia</td></tr><tr><td>MD</td><td>República de Moldavia</td></tr><tr><td>MC</td><td>Mónaco</td></tr><tr><td>MN</td><td>Mongolia</td></tr><tr><td>ME</td><td>Montenegro</td></tr><tr><td>MS</td><td>Montserrat</td></tr><tr><td>MZ</td><td>Mozambique</td></tr><tr><td>NA</td><td>Namibia</td></tr><tr><td>NR</td><td>Nauru</td></tr><tr><td>NP</td><td>Nepal</td></tr><tr><td>NI</td><td>Nicaragua</td></tr><tr><td>NE</td><td>Níger</td></tr><tr><td>NG</td><td>Nigeria</td></tr><tr><td>NU</td><td>Niue</td></tr><tr><td>NO</td><td>Noruega</td></tr><tr><td>NC</td><td>Nueva Caledonia</td></tr><tr><td>NZ</td><td>Nueva Zelandia</td></tr><tr><td>OM</td><td>Omán</td></tr><tr><td>PK</td><td>Pakistán</td></tr><tr><td>PW</td><td>Palaos</td></tr><tr><td>PS</td><td>Palestina</td></tr><tr><td>PA</td><td>Panamá</td></tr><tr><td>PG</td><td>Nueva Guinea</td></tr><tr><td>PY</td><td>Paraguay</td></tr><tr><td>PE</td><td>Perú</td></tr><tr><td>PF</td><td>Polinesia Francesa</td></tr><tr><td>PL</td><td>Polonia</td></tr><tr><td>PT</td><td>Portugal</td></tr><tr><td>PR</td><td>Puerto Rico</td></tr><tr><td>GB</td><td>Reino Unido</td></tr><tr><td>CF</td><td>República Centro Africana</td></tr><tr><td>CZ</td><td>República Checa</td></tr><tr><td>GE</td><td>Georgia</td></tr><tr><td>MM</td><td>Myanmar</td></tr><tr><td>TD</td><td>Chad</td></tr><tr><td>CG</td><td>Congo</td></tr><tr><td>ST</td><td>Santo Tomé y Príncipe</td></tr><tr><td>TL</td><td>Timor Oriental</td></tr><tr><td>DO</td><td>República Dominicana</td></tr><tr><td>TZ</td><td>Tanzania</td></tr><tr><td>RW</td><td>Ruanda</td></tr><tr><td>RO</td><td>Rumania</td></tr><tr><td>RU</td><td>Rusia</td></tr><tr><td>EH</td><td>Sahara </td></tr><tr><td>AS</td><td>Samoa Americana</td></tr><tr><td>WS</td><td>Samoa</td></tr><tr><td>BL</td><td>San Bartolomé</td></tr><tr><td>KN</td><td>San Cristóbal y Nieves</td></tr><tr><td>SM</td><td>San Marino</td></tr><tr><td>MF</td><td>San Martín</td></tr><tr><td>PM</td><td>San Pedro y Miquelón</td></tr><tr><td>VC</td><td>San Vicente</td></tr><tr><td>SH</td><td>Santa Helena</td></tr><tr><td>LC</td><td>Santa Lucía</td></tr><tr><td>SN</td><td>Senegal</td></tr><tr><td>RS</td><td>Serbia</td></tr><tr><td>SC</td><td>Seychelles</td></tr><tr><td>SL</td><td>Sierra Leona</td></tr><tr><td>SG</td><td>Singapur</td></tr><tr><td>SX</td><td>Sint Maarten</td></tr><tr><td>SO</td><td>Somalia</td></tr><tr><td>LK</td><td>Sri Lanka</td></tr><tr><td>ZA</td><td>Sudáfrica</td></tr><tr><td>SD</td><td>Sudán del Norte</td></tr><tr><td>SS</td><td>Sudán del Sur</td></tr><tr><td>SE</td><td>Suecia</td></tr><tr><td>CH</td><td>Suiza</td></tr><tr><td>SR</td><td>Surinam</td></tr><tr><td>SJ</td><td>Svalbard</td></tr><tr><td>SZ</td><td>Swazilandia</td></tr><tr><td>TH</td><td>Tailandia</td></tr><tr><td>TW</td><td>Taiwán</td></tr><tr><td>TJ</td><td>Tayijistán</td></tr><tr><td>IO</td><td>Territorio Británico</td></tr><tr><td>CC</td><td>Islas Cocos</td></tr><tr><td>TF</td><td>Territorios Australes</td></tr><tr><td>TG</td><td>Togo</td></tr><tr><td>TK</td><td>Tokelau</td></tr><tr><td>TO</td><td>Tonga</td></tr><tr><td>TT</td><td>Trinidad y Tobago</td></tr><tr><td>TN</td><td>Túnes</td></tr><tr><td>TM</td><td>Turkmenistán</td></tr><tr><td>TR</td><td>Turquía</td></tr><tr><td>TV</td><td>Tuvalu</td></tr><tr><td>UA</td><td>Ucrania</td></tr><tr><td>UG</td><td>Uganda</td></tr><tr><td>KM</td><td>Unión de las Comoras</td></tr><tr><td>UY</td><td>Uruguay</td></tr><tr><td>UZ</td><td>Uzbekistán</td></tr><tr><td>VU</td><td>Vanuatu</td></tr><tr><td>VA</td><td>Ciudad del Vaticano</td></tr><tr><td>VE</td><td>Venezuela</td></tr><tr><td>VN</td><td>Viet Nam</td></tr><tr><td>WF</td><td>Wallis y Futuna</td></tr><tr><td>YE</td><td>Yemen</td></tr><tr><td>ZM</td><td>Zambia</td></tr><tr><td>ZW</td><td>Zimbabue</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"AD\"", "\"AE\"", "\"AF\"", "\"AG\"", "\"AI\"", "\"AL\"", "\"AM\"", "\"AO\"", "\"AQ\"", "\"AR\"", "\"AS\"", "\"AT\"", "\"AU\"", "\"AW\"", "\"AX\"", "\"AZ\"", "\"BA\"", "\"BB\"", "\"BD\"", "\"BE\"", "\"BF\"", "\"BG\"", "\"BH\"", "\"BI\"", "\"BJ\"", "\"BL\"", "\"BM\"", "\"BN\"", "\"BO\"", "\"BQ\"", "\"BR\"", "\"BS\"", "\"BT\"", "\"BV\"", "\"BW\"", "\"BY\"", "\"BZ\"", "\"CA\"", "\"CC\"", "\"CD\"", "\"CF\"", "\"CG\"", "\"CH\"", "\"CI\"", "\"CK\"", "\"CL\"", "\"CM\"", "\"CN\"", "\"CO\"", "\"CR\"", "\"CU\"", "\"CV\"", "\"CW\"", "\"CX\"", "\"CY\"", "\"CZ\"", "\"DE\"", "\"DJ\"", "\"DK\"", "\"DM\"", "\"DO\"", "\"DZ\"", "\"EC\"", "\"EE\"", "\"EG\"", "\"EH\"", "\"ER\"", "\"ES\"", "\"ET\"", "\"FI\"", "\"FJ\"", "\"FK\"", "\"FM\"", "\"FO\"", "\"FR\"", "\"GA\"", "\"GB\"", "\"GD\"", "\"GE\"", "\"GF\"", "\"GG\"", "\"GH\"", "\"GI\"", "\"GL\"", "\"GM\"", "\"GN\"", "\"GP\"", "\"GQ\"", "\"GR\"", "\"GS\"", "\"GT\"", "\"GU\"", "\"GW\"", "\"GY\"", "\"HK\"", "\"HM\"", "\"HN\"", "\"HR\"", "\"HT\"", "\"HU\"", "\"ID\"", "\"IE\"", "\"IL\"", "\"IM\"", "\"IN\"", "\"IO\"", "\"IQ\"", "\"IR\"", "\"IT\"", "\"Is\"", "\"JE\"", "\"JM\"", "\"JO\"", "\"JP\"", "\"KE\"", "\"KG\"", "\"KH\"", "\"KI\"", "\"KM\"", "\"KN\"", "\"KP\"", "\"KR\"", "\"KW\"", "\"KY\"", "\"KZ\"", "\"LA\"", "\"LB\"", "\"LC\"", "\"LI\"", "\"LK\"", "\"LR\"", "\"LS\"", "\"LT\"", "\"LU\"", "\"LV\"", "\"LY\"", "\"MA\"", "\"MC\"", "\"MD\"", "\"ME\"", "\"MF\"", "\"MG\"", "\"MH\"", "\"MK\"", "\"ML\"", "\"MM\"", "\"MN\"", "\"MO\"", "\"MP\"", "\"MQ\"", "\"MR\"", "\"MS\"", "\"MT\"", "\"MU\"", "\"MV\"", "\"MW\"", "\"MX\"", "\"MY\"", "\"MZ\"", "\"NA\"", "\"NC\"", "\"NE\"", "\"NF\"", "\"NG\"", "\"NI\"", "\"NL\"", "\"NO\"", "\"NP\"", "\"NR\"", "\"NU\"", "\"NZ\"", "\"OM\"", "\"PA\"", "\"PE\"", "\"PF\"", "\"PG\"", "\"PH\"", "\"PK\"", "\"PL\"", "\"PM\"", "\"PN\"", "\"PR\"", "\"PS\"", "\"PT\"", "\"PW\"", "\"PY\"", "\"QA\"", "\"RE\"", "\"RO\"", "\"RS\"", "\"RU\"", "\"RW\"", "\"SA\"", "\"SB\"", "\"SC\"", "\"SD\"", "\"SE\"", "\"SG\"", "\"SH\"", "\"SI\"", "\"SJ\"", "\"SK\"", "\"SL\"", "\"SM\"", "\"SN\"", "\"SO\"", "\"SR\"", "\"SS\"", "\"ST\"", "\"SV\"", "\"SX\"", "\"SY\"", "\"SZ\"", "\"TC\"", "\"TD\"", "\"TF\"", "\"TG\"", "\"TH\"", "\"TJ\"", "\"TK\"", "\"TL\"", "\"TM\"", "\"TN\"", "\"TO\"", "\"TR\"", "\"TT\"", "\"TV\"", "\"TW\"", "\"TZ\"", "\"UA\"", "\"UG\"", "\"UM\"", "\"US\"", "\"UY\"", "\"UZ\"", "\"VA\"", "\"VC\"", "\"VE\"", "\"VG\"", "\"VI\"", "\"VN\"", "\"VU\"", "\"WF\"", "\"WS\"", "\"YE\"", "\"YT\"", "\"ZA\"", "\"ZM\"", "\"ZW\"" ],
+          "example" : "",
+          "type" : "string"
+        },
+        "coloniaPoblacion" : {
+          "description" : "<b>Colonia o población del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "cp" : {
+          "description" : "<b>Código postal del empleador</b><br>MinLength: 0<br>MaxLength: 5<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "delegacionMunicipio" : {
+          "description" : "<b>Alcaldía o municipio del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "direccion1" : {
+          "description" : "<b>Dirección del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "direccion2" : {
+          "description" : "<b>Dirección del empleador si no es suficiente el primer campo</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "estado" : {
+          "description" : "<b>Código del estado del empleador</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AGS</td><td>Aguascalientes</td></tr></tbody><tr><td>BCN</td><td>Baja California</td></tr><tr><td>BCS</td><td>Baja California Sur</td></tr><tr><td>CAM</td><td>Campeche</td></tr><tr><td>CHS</td><td>Chiapas</td></tr><tr><td>CHI</td><td>Chihuahua</td></tr><tr><td>CDMX</td><td>Ciudad de México</td></tr><tr><td>COA</td><td>Coahuila</td></tr><tr><td>COL</td><td>Colima</td></tr><tr><td>DGO</td><td>Durango</td></tr><tr><td>EM</td><td>Estado de México</td></tr><tr><td>GTO</td><td>Guanajuato</td></tr><tr><td>GRO</td><td>Guerrero</td></tr><tr><td>HGO</td><td>Hidalgo</td></tr><tr><td>JAL</td><td>Jalisco</td></tr><tr><td>MICH</td><td>Michoacán</td></tr><tr><td>MOR</td><td>Morelos</td></tr><tr><td>NAY</td><td>Nayarit</td></tr><tr><td>NL</td><td>Nuevo León</td></tr><tr><td>OAX</td><td>Oaxaca</td></tr><tr><td>PUE</td><td>Puebla</td></tr><tr><td>QRO</td><td>Querétaro</td></tr><tr><td>QR</td><td>Quintana Roo</td></tr><tr><td>SLP</td><td>San Luis Potosí</td></tr><tr><td>SIN</td><td>Sinaloa</td></tr><tr><td>SON</td><td>Sonora</td></tr><tr><td>TAB</td><td>Tabasco</td></tr><tr><td>TAM</td><td>Tamaulipas</td></tr><tr><td>TLAX</td><td>Tlaxcala</td></tr><tr><td>VER</td><td>Veracruz</td></tr><tr><td>YUC</td><td>Yucatán</td></tr><tr><td>ZAC</td><td>Zacatecas</td></tr></table><br>MinLength: 0<br>MaxLength: 4<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"AGS\"", "\"BCN\"", "\"BCS\"", "\"CAM\"", "\"CDMX\"", "\"CHI\"", "\"CHS\"", "\"COA\"", "\"COL\"", "\"DGO\"", "\"EM\"", "\"GRO\"", "\"GTO\"", "\"HGO\"", "\"JAL\"", "\"MICH\"", "\"MOR\"", "\"NAY\"", "\"NL\"", "\"OAX\"", "\"PUE\"", "\"QR\"", "\"QRO\"", "\"SIN\"", "\"SLP\"", "\"SON\"", "\"TAB\"", "\"TAM\"", "\"TLAX\"", "\"VER\"", "\"YUC\"", "\"ZAC\"" ],
+          "example" : "",
+          "type" : "string"
+        },
+        "extension" : {
+          "description" : "<b>Extensión del número de teléfono</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fax" : {
+          "description" : "<b>Número de teléfono del fax del empleador</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaContratacion" : {
+          "description" : "<b>Fecha en la que el empleador contrató al cliente, en formato DDMMAAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaReportoEmpleo" : {
+          "type" : "string"
+        },
+        "fechaUltimoDiaEmpleo" : {
+          "description" : "<b>Fecha en la que trabajó por última vez el cliente, en formato DDMMAAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "fechaVerificacion" : {
+          "type" : "string"
+        },
+        "modoVerificacion" : {
+          "type" : "string"
+        },
+        "nombreEmpresa" : {
+          "description" : "<b>Nombre o razón social del empleador</b><br>MinLength: 0<br>MaxLength: 40<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroEmpleado" : {
+          "description" : "<b>Número de empleado o de nómina del cliente</b><br>MinLength: 0<br>MaxLength: 15<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroTelefono" : {
+          "description" : "<b>Número de teléfono del empleador</b><br>MinLength: 0<br>MaxLength: 11<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "salario" : {
+          "description" : "<b>Monto del ingreso que tiene el cliente</b><br>MinLength: 0<br>MaxLength: 9<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        }
+      },
+      "title" : "EmpleoRespBC"
+    },
+    "EncabezadoBC" : {
+      "type" : "object",
+      "properties" : {
+        "clavePais" : {
+          "description" : "<b>Deberá contener las letras \"MX\"</b><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "example" : "MX",
+          "type" : "string"
+        },
+        "claveUnidadMonetaria" : {
+          "description" : "<b>Tipo de moneda del crédito</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>MX</td><td>Pesos mexicanos</td></tr><tr><td>US</td><td>Dólares</td></tr><tr><td>UD</td><td>Unidades de inversión</td></tr></tbody></table><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"MX\"", "\"UD\"", "\"US\"" ],
+          "example" : "MX",
+          "type" : "string"
+        },
+        "identificadorBuro" : {
+          "description" : "<b>Uso reservado, se deben indicar 4 ceros</b><br>MinLength: 4<br>MaxLength: 4<br><br><i>- Requerido -</i>",
+          "example" : "0000",
+          "type" : "string"
+        },
+        "idioma" : {
+          "description" : "<b>Se indica el idioma en el que deberá emitirse el informe</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>SP</td><td>EspaÃ±ol</td></tr><tr><td>EN</td><td>Inglés</td></tr></tbody></table><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"EN\"", "\"SP\"" ],
+          "example" : "SP",
+          "type" : "string"
+        },
+        "importeContrato" : {
+          "description" : "<b>Se deben de indicar 9 ceros</b><br>MinLength: 0<br>MaxLength: 9<br><br><i>- Opcional -</i>",
+          "example" : "000000000",
+          "type" : "string"
+        },
+        "numeroReferenciaOperador" : {
+          "description" : "<b>Se indica una referencia para identificar la consulta. Se pueden colocar espacios en blanco para completar los 25 caracteres</b><br>MinLength: 25<br>MaxLength: 25<br><br><i>- Requerido -</i>",
+          "example" : "12345678",
+          "type" : "string"
+        },
+        "productoRequerido" : {
+          "description" : "<b>Código del producto que se requiere</b><br>MinLength: 3<br>MaxLength: 3<br><br><i>- Requerido -</i>",
+          "example" : "001",
+          "type" : "string"
+        },
+        "tipoConsulta" : {
+          "description" : "<b>Se debe de indicar el tipo de responsabilidad</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>A</td><td>Usuario autorizado</td></tr><tr><td>I</td><td>Individual</td></tr><tr><td>J</td><td>Mancomunado</td></tr></tbody></table><br>MinLength: 1<br>MaxLength: 1<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"A\"", "\"I\"", "\"J\"" ],
+          "example" : "I",
+          "type" : "string"
+        },
+        "tipoContrato" : {
+          "description" : "<b>Clave del producto de la solicitud del cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>AF</td><td>Aparatos/Muebles</td></tr><tr><td>AG</td><td>Agropecuario</td></tr><tr><td>AL</td><td>Automotriz</td></tr><tr><td>AP</td><td>Aviación</td></tr><tr><td>AU</td><td>Compra de Automóvil</td></tr><tr><td>BD</td><td>Fianza</td></tr><tr><td>BT</td><td>Bote/Lancha</td></tr><tr><td>CC</td><td>Tarjeta de Crédito</td></tr><tr><td>CE</td><td>Cartas de Crédito</td></tr><tr><td>CF</td><td>Crédito Fiscal</td></tr><tr><td>CL</td><td>Línea de Crédito</td></tr><tr><td>CO</td><td>Consolidación</td></tr><tr><td>CS</td><td>Crédito Simple</td></tr><tr><td>CT</td><td>Con Colateral</td></tr><tr><td>DE</td><td>Descuentos</td></tr><tr><td>EQ</td><td>Equipo</td></tr><tr><td>FI</td><td>Fideicomiso</td></tr><tr><td>FT</td><td>Factoraje</td></tr><tr><td>HA</td><td>Habilitación o Avío</td></tr><tr><td>HE</td><td>Préstamo tipo \"Home Equity\"</td></tr><tr><td>HI</td><td>Mejoras a la casa</td></tr><tr><td>LS</td><td>Arrendamiento</td></tr><tr><td>LR</td><td>Línea de Crédito Reinstalable</td></tr><tr><td>MI</td><td>Otros</td></tr><tr><td>OA</td><td>Otros adeudos vencidos</td></tr><tr><td>PA</td><td>Préstamo para PF con AE</td></tr><tr><td>PB</td><td>Editorial</td></tr><tr><td>PG</td><td>Préstamo como garantía</td></tr><tr><td>PL</td><td>Préstamo personal</td></tr><tr><td>PN</td><td>Préstamo de nómina</td></tr><tr><td>PQ</td><td>Quirografario</td></tr><tr><td>PR</td><td>Prendario</td></tr><tr><td>PS</td><td>Pago de Servicios</td></tr><tr><td>RC</td><td>Reestructurado</td></tr><tr><td>RD</td><td>Redescuento</td></tr><tr><td>RE</td><td>Bienes Raíces</td></tr><tr><td>RF</td><td>Refaccionario</td></tr><tr><td>RN</td><td>Renovado</td></tr><tr><td>RV</td><td>Vehículo Recreativo</td></tr><tr><td>SC</td><td>Tarjeta Garantizada</td></tr><tr><td>SE</td><td>Préstamo Garantizado</td></tr><tr><td>SG</td><td>Seguros</td></tr><tr><td>SM</td><td>Segunda Hipoteca</td></tr><tr><td>ST</td><td>Préstamo para Estudiante</td></tr><tr><td>TE</td><td>Tarjeta de Crédito Empresarial</td></tr><tr><td>UK</td><td>Desconocido</td></tr><tr><td>US</td><td>Préstamo no Garantizado</td></tr></tbody></table><br>MinLength: 2<br>MaxLength: 2<br><br><i>- Requerido -</i>",
+          "enum" : [ "\"AF\"", "\"AG\"", "\"AL\"", "\"AP\"", "\"AU\"", "\"BD\"", "\"BT\"", "\"CC\"", "\"CE\"", "\"CF\"", "\"CL\"", "\"CO\"", "\"CS\"", "\"CT\"", "\"DE\"", "\"EQ\"", "\"FI\"", "\"FT\"", "\"HA\"", "\"HE\"", "\"HI\"", "\"LR\"", "\"LS\"", "\"MI\"", "\"OA\"", "\"PA\"", "\"PB\"", "\"PG\"", "\"PL\"", "\"PN\"", "\"PQ\"", "\"PR\"", "\"PS\"", "\"RC\"", "\"RD\"", "\"RE\"", "\"RF\"", "\"RN\"", "\"RV\"", "\"SC\"", "\"SE\"", "\"SG\"", "\"SM\"", "\"ST\"", "\"TE\"", "\"UK\"", "\"US\"" ],
+          "example" : "CC",
+          "type" : "string"
+        }
+      },
+      "title" : "EncabezadoBC"
+    },
+    "EncabezadoRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "claveOtorgante" : {
+          "type" : "string"
+        },
+        "clavePais" : {
+          "type" : "string"
+        },
+        "claveRetornoConsumidorPrincipal" : {
+          "type" : "string"
+        },
+        "claveRetornoConsumidorSecundario" : {
+          "type" : "string"
+        },
+        "claveUnidadMonetaria" : {
+          "type" : "string"
+        },
+        "claveUsuario" : {
+          "type" : "string"
+        },
+        "identificadorBuro" : {
+          "type" : "string"
+        },
+        "idioma" : {
+          "type" : "string"
+        },
+        "importeContrato" : {
+          "type" : "string"
+        },
+        "numeroControlConsulta" : {
+          "type" : "string"
+        },
+        "numeroReferenciaOperador" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "productoRequerido" : {
+          "type" : "string"
+        },
+        "tipoConsulta" : {
+          "type" : "string"
+        },
+        "tipoContrato" : {
+          "type" : "string"
+        },
+        "tipoSalida" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        }
+      },
+      "title" : "EncabezadoRespBC"
+    },
+    "ErrorResp" : {
+      "type" : "object",
+      "properties" : {
+        "causa" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "format" : "date-time",
+          "type" : "string"
+        }
+      },
+      "title" : "ErrorResp"
+    },
+    "ErrorRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "ar" : {
+          "$ref" : "#/definitions/AR"
+        },
+        "ur" : {
+          "$ref" : "#/definitions/UR"
+        }
+      },
+      "title" : "ErrorRespBC"
+    },
+    "FR" : {
+      "type" : "object",
+      "properties" : {
+        "leyendaReporteBloqueado" : {
+          "type" : "string"
+        }
+      },
+      "title" : "FR"
+    },
+    "HawkAlertBDRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "codigoClave" : {
+          "type" : "string"
+        },
+        "fechaReporte" : {
+          "type" : "string"
+        },
+        "mensaje" : {
+          "type" : "string"
+        },
+        "tipoInstitucion" : {
+          "type" : "string"
+        }
+      },
+      "title" : "HawkAlertBDRespBC"
+    },
+    "HawkAlertConsultaRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "codigoClave" : {
+          "type" : "string"
+        },
+        "fechaReporte" : {
+          "type" : "string"
+        },
+        "mensaje" : {
+          "type" : "string"
+        },
+        "tipoInstitucion" : {
+          "type" : "string"
+        }
+      },
+      "title" : "HawkAlertConsultaRespBC"
+    },
+    "NombreBC" : {
+      "type" : "object",
+      "required" : [ "apellidoPaterno" ],
+      "properties" : {
+        "apellidoAdicional" : {
+          "description" : "<b>Apellido adicional del cliente o prospecto</b><br>MinLength: 2<br>MaxLength: 26<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "apellidoMaterno" : {
+          "description" : "<b>Apellido materno del cliente o prospecto</b><br>MinLength: 2<br>MaxLength: 26<br><br><i>- Requerido -</i>",
+          "example" : "APELLIDOMATERNO",
+          "type" : "string"
+        },
+        "apellidoPaterno" : {
+          "description" : "<b>Apellido paterno del cliente o prospecto</b><br>MinLength: 2<br>MaxLength: 26<br><br><i>- Requerido -</i>",
+          "example" : "APELLIDOPATERNO",
+          "type" : "string"
+        },
+        "claveImpuestosOtroPais" : {
+          "description" : "<b>Clave de impuestos del país de ciudadanía</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "claveOtroPais" : {
+          "description" : "<b>Clave del país de ciudadanía del cliente</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "edadesDependientes" : {
+          "description" : "<b>Edades consecutivas en formato de 2 dígitos EE</b><br>MinLength: 0<br>MaxLength: 30<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "estadoCivil" : {
+          "description" : "<b>Estado civil del cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>D</td><td>Divorciado</td></tr><tr><td>S</td><td>Soltero</td></tr><tr><td>F</td><td>Unión Libre</td></tr><tr><td>W</td><td>Viudo</td></tr><tr><td>M</td><td>Casado</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"D\"", "\"F\"", "\"M\"", "\"S\"", "\"W\"" ],
+          "example" : "1",
+          "type" : "string"
+        },
+        "fechaNacimiento" : {
+          "description" : "<b>Fecha de nacimiento en formato DDMMAAAA</b><br>MinLength: 0<br>MaxLength: 8<br><br><i>- Opcional -</i>",
+          "example" : "02011980",
+          "type" : "string"
+        },
+        "nacionalidad" : {
+          "description" : "<b>Nacionalidad del cliente o prospecto</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroCedulaProfesional" : {
+          "description" : "<b>Número de cédula profesional del cliente</b><br>MinLength: 0<br>MaxLength: 20<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroDependientes" : {
+          "description" : "<b>Número de personas que dependen económicamente del cliente</b><br>MinLength: 0<br>MaxLength: 2<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroLicenciaConducir" : {
+          "description" : "<b>Número de licencia de conducir</b><br>MinLength: 0<br>MaxLength: 20<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "numeroRegistroElectoral" : {
+          "description" : "<b>Número de identificación oficial del cliente</b><br>MinLength: 0<br>MaxLength: 20<br><br><i>- Opcional -</i>",
+          "example" : "",
+          "type" : "string"
+        },
+        "prefijo" : {
+          "description" : "<b>Prefijo personal o profesional</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>ACT</td><td>Actuario</td></tr><tr><td>ADM</td><td>Administrador</td></tr><tr><td>ARQ</td><td>Arquitecto</td></tr><tr><td>CP</td><td>Contador</td></tr><tr><td>DENT</td><td>Dentista</td></tr><tr><td>DIP</td><td>Diputado</td></tr><tr><td>DIR</td><td>Director</td></tr><tr><td>DON</td><td>Don</td></tr><tr><td>DONA</td><td>DoÃ±a</td></tr><tr><td>DR</td><td>Doctor</td></tr><tr><td>DRA</td><td>Doctora</td></tr><tr><td>FIS</td><td>Físico</td></tr><tr><td>GIN</td><td>Ginecólogo</td></tr><tr><td>ING</td><td>Ingeniero</td></tr><tr><td>ISC</td><td>Ing. En Cómputo</td></tr><tr><td>LAE</td><td>Lic. En Administración</td></tr><tr><td>LIC</td><td>Abogado</td></tr><tr><td>LIC</td><td>Licenciado</td></tr><tr><td>LRI</td><td>Lic. Relaciones Internacionales</td></tr><tr><td>MAE</td><td>Maestro</td></tr><tr><td>MR</td><td>Mr.</td></tr><tr><td>MRS</td><td>Mrs.</td></tr><tr><td>MS</td><td>Ms</td></tr><tr><td>MVZ</td><td>Veterinario</td></tr><tr><td>NOT</td><td>Notario</td></tr><tr><td>OFTA</td><td>Oftalmólogo</td></tr><tr><td>ORTO</td><td>Ortodonsista</td></tr><tr><td>PROF</td><td>Profesor</td></tr><tr><td>PROF</td><td>Profesora</td></tr><tr><td>PSIC</td><td>Psicólogo</td></tr><tr><td>PSIQ</td><td>Psiquiatra</td></tr><tr><td>QF</td><td>Químico físico</td></tr><tr><td>QFB</td><td>Químico farmacobiólogo</td></tr><tr><td>QUIM</td><td>Químico</td></tr><tr><td>SR</td><td>SeÃ±or</td></tr><tr><td>SRA</td><td>SeÃ±ora</td></tr><tr><td>SRTA</td><td>SeÃ±orita</td></tr><tr><td>VDA</td><td>Viuda</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 4<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"ACT\"", "\"ADM\"", "\"ARQ\"", "\"CP\"", "\"DENT\"", "\"DIP\"", "\"DIR\"", "\"DON\"", "\"DONA\"", "\"DR\"", "\"DRA\"", "\"FIS\"", "\"GIN\"", "\"ING\"", "\"ISC\"", "\"LAE\"", "\"LIC\"", "\"LRI\"", "\"MAE\"", "\"MR\"", "\"MRS\"", "\"MS\"", "\"MVZ\"", "\"NOT\"", "\"OFTA\"", "\"ORTO\"", "\"PROF\"", "\"PSIC\"", "\"PSIQ\"", "\"QF\"", "\"QFB\"", "\"QUIM\"", "\"SR\"", "\"SRA\"", "\"SRTA\"", "\"VDA\"" ],
+          "example" : "",
+          "type" : "string"
+        },
+        "primerNombre" : {
+          "description" : "<b>Primer nombre del cliente o prospecto</b><br>MinLength: 2<br>MaxLength: 26<br><br><i>- Requerido -</i>",
+          "example" : "PRIMERNOMBRE",
+          "type" : "string"
+        },
+        "residencia" : {
+          "description" : "<b>Estado de la vivienda del cliente</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>1</td><td>Propietario</td></tr><tr><td>2</td><td>Renta</td></tr><tr><td>3</td><td>Pensión/Familiares</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "1", "2", "3" ],
+          "example" : "1",
+          "type" : "string"
+        },
+        "rfc" : {
+          "description" : "<b>RFC del cliente en formato AAAANNNNNNZZZ</b><br>MinLength: 0<br>MaxLength: 13<br><br><i>- Opcional -</i>",
+          "example" : "DOPJ800102",
+          "type" : "string"
+        },
+        "segundoNombre" : {
+          "description" : "<b>Segundo nombre del cliente o prospecto</b><br>MinLength: 2<br>MaxLength: 26<br><br><i>- Opcional -</i>",
+          "example" : "SEGUNDONOMBRE",
+          "type" : "string"
+        },
+        "sexo" : {
+          "description" : "<b>Género del cliente o prospecto</b><br><table><thead><tr><th>Valor</th><th>Descripción</th></tr></thead><tbody><tr><td>F</td><td>Femenino</td></tr><tr><td>M</td><td>Masculino</td></tr></tbody></table><br>MinLength: 0<br>MaxLength: 1<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"F\"", "\"M\"" ],
+          "example" : "1",
+          "type" : "string"
+        },
+        "sufijo" : {
+          "description" : "<b>Sufijo personal del cliente</b><br>MinLength: 0<br>MaxLength: 4<br><br><i>- Opcional -</i>",
+          "enum" : [ "\"II\"", "\"III\"", "\"JR\"" ],
+          "example" : "JR",
+          "type" : "string"
+        }
+      },
+      "title" : "NombreBC"
+    },
+    "NombreRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "apellidoAdicional" : {
+          "type" : "string"
+        },
+        "apellidoMaterno" : {
+          "type" : "string"
+        },
+        "apellidoPaterno" : {
+          "type" : "string"
+        },
+        "claveImpuestosOtroPais" : {
+          "type" : "string"
+        },
+        "claveOtroPais" : {
+          "type" : "string"
+        },
+        "edadesDependientes" : {
+          "type" : "string"
+        },
+        "estadoCivil" : {
+          "type" : "string"
+        },
+        "fechaDefuncion" : {
+          "type" : "string"
+        },
+        "fechaNacimiento" : {
+          "type" : "string"
+        },
+        "fechaRecepcionInformacionDependientes" : {
+          "type" : "string"
+        },
+        "nacionalidad" : {
+          "type" : "string"
+        },
+        "numeroCedulaProfesional" : {
+          "type" : "string"
+        },
+        "numeroDependientes" : {
+          "type" : "string"
+        },
+        "numeroLicenciaConducir" : {
+          "type" : "string"
+        },
+        "numeroRegistroElectoral" : {
+          "type" : "string"
+        },
+        "prefijo" : {
+          "type" : "string"
+        },
+        "primerNombre" : {
+          "type" : "string"
+        },
+        "residencia" : {
+          "type" : "string"
+        },
+        "rfc" : {
+          "type" : "string"
+        },
+        "segundoNombre" : {
+          "type" : "string"
+        },
+        "sexo" : {
+          "type" : "string"
+        },
+        "sufijo" : {
+          "type" : "string"
+        }
+      },
+      "title" : "NombreRespBC"
+    },
+    "PersonaBC" : {
+      "type" : "object",
+      "properties" : {
+        "cuentaC" : {
+          "items" : {
+            "$ref" : "#/definitions/CuentaClienteBC"
+          },
+          "type" : "array"
+        },
+        "domicilios" : {
+          "items" : {
+            "$ref" : "#/definitions/Direccion"
+          },
+          "type" : "array"
+        },
+        "empleos" : {
+          "items" : {
+            "$ref" : "#/definitions/EmpleoBC"
+          },
+          "type" : "array"
+        },
+        "encabezado" : {
+          "$ref" : "#/definitions/EncabezadoBC"
+        },
+        "nombre" : {
+          "$ref" : "#/definitions/NombreBC"
+        }
+      },
+      "title" : "PersonaBC"
+    },
+    "PersonaRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "consultaEfectuadas" : {
+          "items" : {
+            "$ref" : "#/definitions/ConsultaEfectuadaRespBC"
+          },
+          "type" : "array"
+        },
+        "cuentas" : {
+          "items" : {
+            "$ref" : "#/definitions/CuentasRespBC"
+          },
+          "type" : "array"
+        },
+        "declaracionesCliente" : {
+          "$ref" : "#/definitions/DeclaracionesClienteRespBC"
+        },
+        "domicilios" : {
+          "items" : {
+            "$ref" : "#/definitions/DireccionRespBC"
+          },
+          "type" : "array"
+        },
+        "empleos" : {
+          "items" : {
+            "$ref" : "#/definitions/EmpleoRespBC"
+          },
+          "type" : "array"
+        },
+        "encabezado" : {
+          "$ref" : "#/definitions/EncabezadoRespBC"
+        },
+        "error" : {
+          "$ref" : "#/definitions/ErrorRespBC"
+        },
+        "fr" : {
+          "$ref" : "#/definitions/FR"
+        },
+        "hawkAlertBD" : {
+          "items" : {
+            "$ref" : "#/definitions/HawkAlertBDRespBC"
+          },
+          "type" : "array"
+        },
+        "hawkAlertConsulta" : {
+          "items" : {
+            "$ref" : "#/definitions/HawkAlertConsultaRespBC"
+          },
+          "type" : "array"
+        },
+        "nombre" : {
+          "$ref" : "#/definitions/NombreRespBC"
+        },
+        "resumenReporte" : {
+          "items" : {
+            "$ref" : "#/definitions/ResumenReporteRespBC"
+          },
+          "type" : "array"
+        },
+        "scoreBuroCredito" : {
+          "items" : {
+            "$ref" : "#/definitions/ScoreBuroCreditoRespBC"
+          },
+          "type" : "array"
+        }
+      },
+      "title" : "PersonaRespBC"
+    },
+    "RespuestaBC" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "$ref" : "#/definitions/ErrorResp"
+        },
+        "persona" : {
+          "$ref" : "#/definitions/PersonaRespBC"
+        }
+      },
+      "title" : "RespuestaBC"
+    },
+    "ResumenReporteRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "cuentasCerradas" : {
+          "type" : "string"
+        },
+        "cuentasClavesHistoriaNegativa" : {
+          "type" : "string"
+        },
+        "cuentasDisputa" : {
+          "type" : "string"
+        },
+        "cuentasNegativasActuales" : {
+          "type" : "string"
+        },
+        "cuentasPagosFijosHipotecas" : {
+          "type" : "string"
+        },
+        "cuentasRevolventesAbiertas" : {
+          "type" : "string"
+        },
+        "existenciaDeclaracionesConsumidor" : {
+          "type" : "string"
+        },
+        "fechaAperturaCuentaMasAntigua" : {
+          "type" : "string"
+        },
+        "fechaAperturaCuentaMasReciente" : {
+          "type" : "string"
+        },
+        "fechaAperturaCuentaMasRecienteDespachoCobranza" : {
+          "type" : "string"
+        },
+        "fechaIngresoBD" : {
+          "type" : "string"
+        },
+        "fechaSolicitudMasRecienteDespachoCobranza" : {
+          "type" : "string"
+        },
+        "fechaSolicitudReporteMasReciente" : {
+          "type" : "string"
+        },
+        "mensajesAlerta" : {
+          "type" : "string"
+        },
+        "nuevaDireccionReportadaUltimos60Dias" : {
+          "type" : "string"
+        },
+        "numeroCuentas" : {
+          "type" : "string"
+        },
+        "numeroMOP0" : {
+          "type" : "string"
+        },
+        "numeroMOP1" : {
+          "type" : "string"
+        },
+        "numeroMOP2" : {
+          "type" : "string"
+        },
+        "numeroMOP3" : {
+          "type" : "string"
+        },
+        "numeroMOP4" : {
+          "type" : "string"
+        },
+        "numeroMOP5" : {
+          "type" : "string"
+        },
+        "numeroMOP6" : {
+          "type" : "string"
+        },
+        "numeroMOP7" : {
+          "type" : "string"
+        },
+        "numeroMOP96" : {
+          "type" : "string"
+        },
+        "numeroMOP97" : {
+          "type" : "string"
+        },
+        "numeroMOP99" : {
+          "type" : "string"
+        },
+        "numeroMOPUR" : {
+          "type" : "string"
+        },
+        "numeroSolicitudesUltimos6Meses" : {
+          "type" : "string"
+        },
+        "numeroTotalCuentasDespachoCobranza" : {
+          "type" : "string"
+        },
+        "numeroTotalSolicitudesDespachosCobranza" : {
+          "type" : "string"
+        },
+        "pctLimiteCreditoUtilizadoRevolventes" : {
+          "type" : "string"
+        },
+        "tipoMoneda" : {
+          "type" : "string"
+        },
+        "totalCreditosMaximosPagosFijos" : {
+          "type" : "string"
+        },
+        "totalCreditosMaximosRevolventes" : {
+          "type" : "string"
+        },
+        "totalLimitesCreditoRevolventes" : {
+          "type" : "string"
+        },
+        "totalPagosPagosFijos" : {
+          "type" : "string"
+        },
+        "totalPagosRevolventes" : {
+          "type" : "string"
+        },
+        "totalSaldosActualesPagosFijos" : {
+          "type" : "string"
+        },
+        "totalSaldosActualesRevolventes" : {
+          "type" : "string"
+        },
+        "totalSaldosVencidosPagosFijos" : {
+          "type" : "string"
+        },
+        "totalSaldosVencidosRevolventes" : {
+          "type" : "string"
+        },
+        "totalSolicitudesReporte" : {
+          "type" : "string"
+        }
+      },
+      "title" : "ResumenReporteRespBC"
+    },
+    "ScoreBuroCreditoRespBC" : {
+      "type" : "object",
+      "properties" : {
+        "codigoError" : {
+          "type" : "string"
+        },
+        "codigoRazon" : {
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "codigoScore" : {
+          "type" : "string"
+        },
+        "nombreScore" : {
+          "type" : "string"
+        },
+        "valorScore" : {
+          "type" : "string"
+        }
+      },
+      "title" : "ScoreBuroCreditoRespBC"
+    },
+    "UR" : {
+      "type" : "object",
+      "properties" : {
+        "errorReporteBloqueado" : {
+          "type" : "string"
+        },
+        "errorSistemaBuroCredito" : {
+          "type" : "string"
+        },
+        "etiquetaSegmentoErronea" : {
+          "type" : "string"
+        },
+        "faltaCampoRequerido" : {
+          "type" : "string"
+        },
+        "informacionErroneaParaConsulta" : {
+          "type" : "string"
+        },
+        "numeroErroneoSegmentos" : {
+          "type" : "string"
+        },
+        "numeroReferenciaOperador" : {
+          "type" : "string"
+        },
+        "ordenErroneoSegmento" : {
+          "type" : "string"
+        },
+        "passwordOClaveErronea" : {
+          "type" : "string"
+        },
+        "productoSolicitadoErroneo" : {
+          "type" : "string"
+        },
+        "segmentoRequeridoNoProporcionado" : {
+          "type" : "string"
+        },
+        "solicitudClienteErronea" : {
+          "type" : "string"
+        },
+        "ultimaInformacionValidaCliente" : {
+          "type" : "string"
+        },
+        "valorErroneoCampoRelacionado" : {
+          "type" : "string"
+        },
+        "versionProporcionadaErronea" : {
+          "type" : "string"
+        }
+      },
+      "title" : "UR"
+    }
+  },
+  "host" : "api.burodecredito.com.mx:4431/devpf/reporte-de-credito",
+  "info" : {
+    "description" : "Permite obtener datos transaccionales de Reporte de crédito",
+    "title" : "API Reporte de crédito",
+    "version" : "v1"
+  },
+  "paths" : {
+    "/credit-report-api/v1/reporte-de-credito" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "reporteDeCreditoUsingPOST",
+        "parameters" : [ {
+          "description" : "Datos para la busqueda del expediente de una persona.",
+          "in" : "body",
+          "name" : "request",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CreditReportRequest"
+          }
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos generados para el reporte de crédito",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/CreditReportResponse"
+              },
+              "type" : "array"
+            }
+          },
+          "202" : {
+            "description" : "Informacion requerida no encontrada",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/CreditReportResponse"
+              },
+              "type" : "array"
+            }
+          },
+          "400" : {
+            "description" : "Los Datos de la solicitud no son validos",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/ErrorResp"
+              },
+              "type" : "array"
+            }
+          },
+          "401" : {
+            "description" : "La petición no cuenta con un token válido"
+          },
+          "403" : {
+            "description" : "El servicio requiere de un token"
+          },
+          "500" : {
+            "description" : "Error interno del sistema",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/ErrorResp"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "portal_oauth2" : [ ]
+        } ],
+        "summary" : "Se obtiene el Reporte de Crédito Integrado del Cliente que contiene la información reportada.",
+        "tags" : [ "Reporte de Crédito" ]
+      },
+      "parameters" : [ ]
+    }
+  },
+  "securityDefinitions" : {
+    "portal_oauth2" : {
+      "flow" : "application",
+      "tokenUrl" : "https://apigateway1.burodecredito.com.mx:8443/auth/oauth/v2/token",
+      "type" : "oauth2"
+    }
+  },
+  "swagger" : "2.0",
+  "tags" : [ {
+    "description" : "Reporte Credito Controller",
+    "name" : "Reporte de Crédito"
+  } ]
+}
