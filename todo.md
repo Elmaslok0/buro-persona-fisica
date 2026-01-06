@@ -70,3 +70,14 @@
 - [ ] Configurar variables de entorno en Koyeb
 - [ ] Desplegar proyecto
 - [ ] Verificar funcionamiento de API de Buró
+
+## Despliegue Automático en Koyeb
+
+- [ ] Obtener usuario de GitHub
+- [ ] Crear repositorio en GitHub con el código
+- [ ] Subir código al repositorio
+- [ ] Crear servicio en Koyeb mediante API
+- [ ] Configurar variables de entorno en Koyeb
+- [ ] Iniciar despliegue
+- [ ] Verificar que el servicio esté corriendo
+- [ ] Probar URL pública del panel
