@@ -7,6 +7,12 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import NewClient from "./pages/NewClient";
 import Modules from "./pages/Modules";
+import Autenticador from "./pages/modules/Autenticador";
+import ReporteCredito from "./pages/modules/ReporteCredito";
+import InformeBuro from "./pages/modules/InformeBuro";
+import Monitor from "./pages/modules/Monitor";
+import Prospector from "./pages/modules/Prospector";
+import EstimadorIngresos from "./pages/modules/EstimadorIngresos";
 
 function Router() {
   return (
@@ -14,6 +20,12 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/clients/new"} component={NewClient} />
       <Route path={"/modules"} component={Modules} />
+      <Route path={"/modules/autenticador"} component={Autenticador} />
+      <Route path={"/modules/reporte-credito"} component={ReporteCredito} />
+      <Route path={"/modules/informe-buro"} component={InformeBuro} />
+      <Route path={"/modules/monitor"} component={Monitor} />
+      <Route path={"/modules/prospector"} component={Prospector} />
+      <Route path={"/modules/estimador-ingresos"} component={EstimadorIngresos} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
