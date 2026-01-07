@@ -155,7 +155,13 @@ export async function getClientsByUserId(userId: number) {
     return Array.from(inMemoryStorage.clients.values()).filter(c => c.userId === userId);
   }
   
-  return await db.select().from(clients).where(eq(clients.userId, userId));
+  try {
+    return await db.select().from(clients).where(eq(clients.userId, userId));
+  } catch (error) {
+    console.error("[Database] Error fetching clients for userId", userId, ":", error);
+    // Retornar array vacío en caso de error
+    return [];
+  }
 }
 
 export async function getClientById(clientId: number) {
@@ -164,8 +170,13 @@ export async function getClientById(clientId: number) {
     return inMemoryStorage.clients.get(clientId);
   }
   
-  const result = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1);
-  return result.length > 0 ? result[0] : undefined;
+  try {
+    const result = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Error fetching client by id", clientId, ":", error);
+    return undefined;
+  }
 }
 
 export async function updateClient(clientId: number, data: Partial<InsertClient>) {
@@ -178,7 +189,12 @@ export async function updateClient(clientId: number, data: Partial<InsertClient>
     return { affectedRows: existing ? 1 : 0 };
   }
   
-  return await db.update(clients).set(data).where(eq(clients.id, clientId));
+  try {
+    return await db.update(clients).set(data).where(eq(clients.id, clientId));
+  } catch (error) {
+    console.error("[Database] Error updating client", clientId, ":", error);
+    return { affectedRows: 0 };
+  }
 }
 
 // ============ ADDRESS FUNCTIONS ============
@@ -295,9 +311,14 @@ export async function getCreditReportsByClientId(clientId: number) {
       .sort((a, b) => b.createdAt - a.createdAt);
   }
   
-  return await db.select().from(creditReports)
-    .where(eq(creditReports.clientId, clientId))
-    .orderBy(desc(creditReports.createdAt));
+  try {
+    return await db.select().from(creditReports)
+      .where(eq(creditReports.clientId, clientId))
+      .orderBy(desc(creditReports.createdAt));
+  } catch (error) {
+    console.error("[Database] Error fetching credit reports for clientId", clientId, ":", error);
+    return [];
+  }
 }
 
 export async function getCreditReportById(reportId: number) {
@@ -306,8 +327,13 @@ export async function getCreditReportById(reportId: number) {
     return inMemoryStorage.creditReports.get(reportId);
   }
   
-  const result = await db.select().from(creditReports).where(eq(creditReports.id, reportId)).limit(1);
-  return result.length > 0 ? result[0] : undefined;
+  try {
+    const result = await db.select().from(creditReports).where(eq(creditReports.id, reportId)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Error fetching credit report by id", reportId, ":", error);
+    return undefined;
+  }
 }
 
 // ============ DOCUMENT FUNCTIONS ============
