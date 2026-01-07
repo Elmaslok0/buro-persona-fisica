@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Shield, FileText, BarChart3, Eye, Users, DollarSign } from "lucide-react";
+import { ArrowLeft, Shield, FileText, BarChart3, Eye, Users, DollarSign, TrendingUp } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function Modules() {
@@ -48,6 +48,13 @@ export default function Modules() {
       description: "Estimación de ingresos basada en historial y límites de crédito",
       icon: DollarSign,
       path: "/modules/estimador-ingresos",
+    },
+    {
+      id: "e-score",
+      title: "E-SCORE",
+      description: "Puntuación de crédito electrónica basada en perfil crediticio",
+      icon: TrendingUp,
+      path: "/modules/e-score",
     },
   ];
 
