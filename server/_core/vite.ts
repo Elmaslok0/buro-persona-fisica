@@ -48,22 +48,38 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  // En Koyeb/Producción, los archivos están en dist/public relativo a la raíz
-  // o en ./public relativo a donde se ejecuta el servidor
-  const distPath = path.resolve(process.cwd(), "dist", "public");
-  const fallbackPath = path.resolve(process.cwd(), "public");
-  
-  const finalPath = fs.existsSync(distPath) ? distPath : fallbackPath;
+  // Intentar múltiples rutas posibles para encontrar los archivos estáticos en Koyeb
+  const pathsToTry = [
+    path.resolve(process.cwd(), "dist", "public"),
+    path.resolve(process.cwd(), "public"),
+    path.resolve(import.meta.dirname, "public"),
+    path.resolve(import.meta.dirname, "..", "public"),
+    path.resolve(import.meta.dirname, "..", "dist", "public"),
+  ];
+
+  let finalPath = "";
+  for (const p of pathsToTry) {
+    if (fs.existsSync(path.resolve(p, "index.html"))) {
+      finalPath = p;
+      break;
+    }
+  }
+
+  if (!finalPath) {
+    console.error("[Static] ERROR: No se encontró index.html en ninguna de las rutas probadas:", pathsToTry);
+    // Fallback al primer path por si acaso
+    finalPath = pathsToTry[0];
+  }
 
   console.log(`[Static] Sirviendo archivos desde: ${finalPath}`);
 
   app.use(express.static(finalPath));
 
-  // IMPORTANTE: Para que React Router funcione, cualquier ruta que no sea un archivo
+  // IMPORTANTE: Para que React Router funcione (SPA), cualquier ruta que no sea un archivo
   // debe devolver el index.html
   app.get("*", (req, res) => {
-    // No aplicar a rutas de la API
-    if (req.path.startsWith('/api')) {
+    // No aplicar a rutas de la API o tRPC
+    if (req.path.startsWith('/api') || req.path.startsWith('/trpc')) {
       return res.status(404).json({ message: "API route not found" });
     }
     
@@ -71,7 +87,7 @@ export function serveStatic(app: Express) {
     if (fs.existsSync(indexPath)) {
       res.sendFile(indexPath);
     } else {
-      res.status(404).send("Frontend build not found. Please run pnpm build.");
+      res.status(404).send(`Frontend build not found at ${indexPath}. Please check build logs.`);
     }
   });
 }
