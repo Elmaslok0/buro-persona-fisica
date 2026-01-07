@@ -167,8 +167,56 @@ export class BuroClient {
       return this.getMockProspector(data);
     } else if (endpoint.includes('estimador-ingresos')) {
       return this.getMockEstimadorIngresos(data);
+    } else if (endpoint.includes('e-score')) {
+      return this.getMockEScore(data);
     }
     return { success: true, data: {} };
+  }
+
+  private getMockEScore(data: any): any {
+    return {
+      eScore: {
+        puntuacion: Math.floor(Math.random() * (850 - 600) + 600),
+        rango: "0-1000",
+        factores: [
+          {
+            nombre: "Historial de Pagos",
+            valor: 35,
+            impacto: "POSITIVO",
+            descripcion: "Registro consistente de pagos a tiempo",
+          },
+          {
+            nombre: "Utilización de Crédito",
+            valor: 30,
+            impacto: "POSITIVO",
+            descripcion: "Bajo porcentaje de crédito utilizado",
+          },
+          {
+            nombre: "Antigüedad Crediticia",
+            valor: 15,
+            impacto: "POSITIVO",
+            descripcion: "Largo historial crediticio",
+          },
+          {
+            nombre: "Consultas Recientes",
+            valor: 10,
+            impacto: "NEGATIVO",
+            descripcion: "Consultas recientes de crédito",
+          },
+          {
+            nombre: "Mix de Crédito",
+            valor: 10,
+            impacto: "POSITIVO",
+            descripcion: "Variedad de tipos de crédito",
+          },
+        ],
+        recomendaciones: [
+          "Mantener pagos al día",
+          "Reducir saldos de tarjetas de crédito",
+          "No solicitar crédito innecesariamente",
+        ],
+      },
+    };
   }
 
   private getMockReporteDeCredito(data: any): any {
@@ -382,6 +430,13 @@ export class BuroClient {
    */
   async estimadorIngresos(data: any) {
     return this.makeRequest('/credit-report-api/v1/estimador-ingresos', data);
+  }
+
+  /**
+   * E-Score - Puntuación de crédito electrónica
+   */
+  async eScore(data: any) {
+    return this.makeRequest('/credit-report-api/v1/e-score', data);
   }
 
   /**
