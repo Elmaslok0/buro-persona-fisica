@@ -42,19 +42,10 @@ const inMemoryStorage = {
 };
 
 export async function getDb() {
-  // Siempre usar null para forzar almacenamiento en memoria
-  // Esto permite que el sistema funcione sin base de datos
-  if (!_db && process.env.DATABASE_URL && process.env.DATABASE_URL !== 'memory') {
-    try {
-      _db = drizzle(process.env.DATABASE_URL);
-      console.log("[Database] Connected successfully");
-    } catch (error) {
-      console.warn("[Database] Failed to connect, using in-memory storage:", error);
-      _db = null;
-    }
-  }
-  // Si no hay DATABASE_URL o es 'memory', usar almacenamiento en memoria
-  return _db;
+  // FORCE IN-MEMORY STORAGE - No intentar conectar a base de datos
+  // Esto permite que el sistema funcione completamente sin base de datos
+  console.log("[Database] Using in-memory storage (DATABASE_URL:", process.env.DATABASE_URL, ")");
+  return null; // Siempre retornar null para usar almacenamiento en memoria
 }
 
 export async function upsertUser(user: InsertUser): Promise<void> {
