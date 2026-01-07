@@ -169,9 +169,8 @@ export default function ReporteCredito() {
                       <Label className="text-xl font-black uppercase">CLAVE OTORGANTE *</Label>
                       <Input
                         name="claveOtorgante"
-                        value={formData.claveOtorgante}
+                        value={formData.claveOtorgante || "0000000000"}
                         onChange={handleChange}
-                        required
                         placeholder="0000000000"
                         className="border-4 border-black text-lg font-bold mt-2"
                       />
@@ -182,7 +181,6 @@ export default function ReporteCredito() {
                         name="nombreOtorgante"
                         value={formData.nombreOtorgante}
                         onChange={handleChange}
-                        required
                         placeholder="NOMBRE DE LA INSTITUCIÓN"
                         className="border-4 border-black text-lg font-bold mt-2"
                       />
