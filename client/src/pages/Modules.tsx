@@ -49,13 +49,7 @@ export default function Modules() {
       icon: DollarSign,
       path: "/modules/estimador-ingresos",
     },
-    {
-      id: "e-score",
-      title: "E-SCORE",
-      description: "Puntuación de crédito electrónica basada en perfil crediticio",
-      icon: TrendingUp,
-      path: "/modules/e-score",
-    },
+
   ];
 
   return (

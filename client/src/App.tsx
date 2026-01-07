@@ -13,7 +13,7 @@ import InformeBuro from "./pages/modules/InformeBuro";
 import Monitor from "./pages/modules/Monitor";
 import Prospector from "./pages/modules/Prospector";
 import EstimadorIngresos from "./pages/modules/EstimadorIngresos";
-import EScore from "./pages/modules/EScore";
+
 
 function Router() {
   return (
@@ -27,7 +27,7 @@ function Router() {
       <Route path={"/modules/monitor"} component={Monitor} />
       <Route path={"/modules/prospector"} component={Prospector} />
       <Route path={"/modules/estimador-ingresos"} component={EstimadorIngresos} />
-      <Route path={"/modules/e-score"} component={EScore} />
+      
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
