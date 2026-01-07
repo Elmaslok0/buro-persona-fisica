@@ -1,6 +1,5 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import type { User } from "../../drizzle/schema";
-import { sdk } from "./sdk";
 
 export type TrpcContext = {
   req: CreateExpressContextOptions["req"];
@@ -8,21 +7,25 @@ export type TrpcContext = {
   user: User | null;
 };
 
+// Usuario por defecto para el panel (sin OAuth externo)
+const defaultUser: User = {
+  id: 1,
+  openId: 'panel-user',
+  name: 'Usuario Panel',
+  email: null,
+  role: 'admin',
+  loginMethod: 'local',
+  lastSignedIn: new Date(),
+  createdAt: new Date(),
+};
+
 export async function createContext(
   opts: CreateExpressContextOptions
 ): Promise<TrpcContext> {
-  let user: User | null = null;
-
-  try {
-    user = await sdk.authenticateRequest(opts.req);
-  } catch (error) {
-    // Authentication is optional for public procedures.
-    user = null;
-  }
-
+  // Usar usuario por defecto - no requiere OAuth externo
   return {
     req: opts.req,
     res: opts.res,
-    user,
+    user: defaultUser,
   };
 }

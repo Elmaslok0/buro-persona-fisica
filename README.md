@@ -50,68 +50,58 @@ El sistema utiliza una **estética brutalist tipográfica** con:
    - Patrones de consumo
    - Capacidad de pago
 
-### Funcionalidades Adicionales
-
-- **Gestión de Clientes**: CRUD completo de personas físicas
-- **Almacenamiento S3**: Documentos y reportes en la nube
-- **Análisis Inteligente**: LLM para recomendaciones personalizadas
-- **Exportación PDF**: Generación de reportes descargables
-- **Sistema de Alertas**: Notificaciones de cambios importantes
-- **Historial de Consultas**: Registro completo de operaciones
-
 ## 🏗️ Arquitectura
 
 ### Stack Tecnológico
 
 - **Frontend**: React 19 + Tailwind CSS 4
 - **Backend**: Express + tRPC 11
-- **Base de Datos**: MySQL/TiDB (via Drizzle ORM)
-- **Autenticación**: Manus OAuth
-- **Almacenamiento**: S3
-- **IA**: LLM integrado para análisis
+- **Base de Datos**: MySQL/TiDB (via Drizzle ORM) o almacenamiento en memoria
+- **API**: Buró de Crédito OAuth2
 
-### Estructura de Base de Datos
+### URLs de la API de Buró de Crédito
 
 ```
-- users: Usuarios del sistema
-- clients: Personas físicas
-- addresses: Direcciones de clientes
-- employments: Historial de empleo
-- credit_accounts: Cuentas de crédito
-- credit_queries: Consultas realizadas
-- credit_reports: Reportes generados
-- documents: Documentos almacenados
-- alerts: Alertas y notificaciones
-- llm_analysis: Análisis inteligente
+https://api.burodecredito.com.mx:4431/devpf/autenticador
+https://api.burodecredito.com.mx:4431/devpf/reporte-de-credito
+https://api.burodecredito.com.mx:4431/devpf/informe-buro
+https://api.burodecredito.com.mx:4431/devpf/monitor
+https://api.burodecredito.com.mx:4431/devpf/prospector
+https://api.burodecredito.com.mx:4431/devpf/estimador-ingresos
 ```
 
 ## 🔧 Configuración
 
-### Variables de Entorno
-
-Las siguientes credenciales están configuradas en `.env.local`:
+### Variables de Entorno Requeridas
 
 ```env
+# API de Buró de Crédito
 BURO_API_BASE_URL=https://api.burodecredito.com.mx:4431/devpf
 BURO_API_USERNAME=apif.burodecredito.com.mx:Onsite:Onsite007$$
+BURO_API_PASSWORD=
 BURO_API_CLIENT_ID=l7f4ab9619923343069e3a48c3209b61e4
 BURO_API_CLIENT_SECRET=ee9ba699e9f54cd7bbe7948e0884ccc9
+BURO_TOKEN_URL=https://apigateway1.burodecredito.com.mx:8443/auth/oauth/v2/token
+
+# Servidor
+NODE_ENV=production
+PORT=3000
+
+# JWT Secret (generar uno seguro para producción)
+JWT_SECRET=tu-clave-secreta-aqui
+
+# Base de datos (opcional)
+# DATABASE_URL=mysql://usuario:password@host:puerto/base_de_datos
 ```
 
-### Instalación
+### Instalación Local
 
 ```bash
 # Instalar dependencias
 pnpm install
 
-# Aplicar migraciones de base de datos
-pnpm db:push
-
 # Iniciar servidor de desarrollo
 pnpm dev
-
-# Ejecutar tests
-pnpm test
 
 # Build para producción
 pnpm build
@@ -120,69 +110,64 @@ pnpm build
 pnpm start
 ```
 
-## 📡 API de Buró de Crédito
+## 📦 Despliegue en Koyeb
 
-### Endpoints Integrados
+### Opción 1: Desde GitHub
 
-Todos los endpoints están implementados y funcionando:
+1. Sube el código a un repositorio de GitHub
+2. En Koyeb, crea un nuevo servicio
+3. Conecta tu repositorio de GitHub
+4. Configura las variables de entorno (ver sección anterior)
+5. Configura:
+   - **Build command**: `pnpm install && pnpm build`
+   - **Run command**: `pnpm start`
+   - **Port**: `3000`
 
-- `POST /autenticador` - Autenticación con preguntas de seguridad
-- `POST /reporte-de-credito` - Reporte completo de crédito
-- `POST /informe-buro` - Informe detallado del buró
-- `POST /monitor` - Monitoreo de cambios
-- `POST /prospector` - Análisis de prospección
-- `POST /estimador-ingresos` - Estimación de ingresos
+### Opción 2: Desde Docker
 
-### Estructura de Request
+Crea un archivo `Dockerfile`:
 
-Cada módulo requiere datos de la persona y encabezado de consulta:
+```dockerfile
+FROM node:20-alpine
 
-```typescript
-{
-  consulta: {
-    persona: {
-      primerNombre: string,
-      apellidoPaterno: string,
-      apellidoMaterno?: string,
-      fechaNacimiento: string,
-      rfc?: string,
-      curp?: string,
-      nacionalidad?: string,
-      domicilio: {
-        direccion1: string,
-        coloniaPoblacion: string,
-        delegacionMunicipio: string,
-        ciudad: string,
-        estado: string,
-        cp: string,
-        codPais: string
-      }
-    },
-    encabezado: {
-      claveOtorgante: string,
-      nombreOtorgante: string,
-      folioConsulta?: string,
-      // ... otros campos según el módulo
-    }
-  }
-}
+WORKDIR /app
+
+# Instalar pnpm
+RUN npm install -g pnpm
+
+# Copiar archivos de dependencias
+COPY package.json pnpm-lock.yaml ./
+
+# Instalar dependencias
+RUN pnpm install --frozen-lockfile
+
+# Copiar código fuente
+COPY . .
+
+# Build
+RUN pnpm build
+
+# Exponer puerto
+EXPOSE 3000
+
+# Comando de inicio
+CMD ["pnpm", "start"]
 ```
 
-## 🧪 Testing
+### Variables de Entorno en Koyeb
 
-El proyecto incluye tests completos con Vitest:
+En el panel de Koyeb, agrega las siguientes variables de entorno:
 
-```bash
-# Ejecutar todos los tests
-pnpm test
-
-# Tests incluidos:
-# - Autenticación y logout
-# - Creación de clientes
-# - Endpoints de Buró de Crédito
-# - Almacenamiento de documentos
-# - Análisis LLM
-```
+| Variable | Valor |
+|----------|-------|
+| `BURO_API_BASE_URL` | `https://api.burodecredito.com.mx:4431/devpf` |
+| `BURO_API_USERNAME` | `apif.burodecredito.com.mx:Onsite:Onsite007$$` |
+| `BURO_API_CLIENT_ID` | `l7f4ab9619923343069e3a48c3209b61e4` |
+| `BURO_API_CLIENT_SECRET` | `ee9ba699e9f54cd7bbe7948e0884ccc9` |
+| `BURO_TOKEN_URL` | `https://apigateway1.burodecredito.com.mx:8443/auth/oauth/v2/token` |
+| `NODE_ENV` | `production` |
+| `PORT` | `3000` |
+| `JWT_SECRET` | `(genera una clave segura)` |
 
 ## 🎯 Uso del Sistema
 
@@ -194,62 +179,26 @@ pnpm test
 
 ### 2. Consultar Buró
 
-1. Click en "CONSULTAR BURÓ"
-2. Seleccionar módulo deseado
-3. Elegir cliente
-4. Completar datos requeridos
-5. Ejecutar consulta
+1. Click en cualquier módulo (Autenticador, Reporte de Crédito, etc.)
+2. Seleccionar cliente
+3. Completar datos requeridos
+4. Ejecutar consulta
 
-### 3. Ver Reportes
+### 3. Ver Resultados
 
-1. Acceder a sección de reportes
-2. Filtrar por cliente, fecha o tipo
-3. Ver detalles o exportar PDF
-
-### 4. Análisis Inteligente
-
-El sistema genera automáticamente:
-- Análisis de riesgo crediticio
-- Recomendaciones personalizadas
-- Sugerencias de mejora de score
-- Predicciones de comportamiento
+Los resultados se muestran en formato JSON con toda la información del buró de crédito.
 
 ## 🔒 Seguridad
 
-- Autenticación OAuth obligatoria
-- Credenciales de API almacenadas de forma segura
+- Credenciales de API almacenadas en variables de entorno
 - Comunicación HTTPS con Buró de Crédito
+- Autenticación OAuth2 con la API de Buró
 - Validación de datos en backend
-- Protección contra inyección SQL (Drizzle ORM)
-
-## 📦 Despliegue en Koyeb
-
-El proyecto está optimizado para despliegue en Koyeb:
-
-1. Conectar repositorio Git
-2. Configurar variables de entorno
-3. Comando de build: `pnpm build`
-4. Comando de start: `pnpm start`
-5. Puerto: 3000
-
-### Variables de Entorno Requeridas en Koyeb
-
-```
-DATABASE_URL=<tu_conexión_mysql>
-BURO_API_BASE_URL=https://api.burodecredito.com.mx:4431/devpf
-BURO_API_USERNAME=apif.burodecredito.com.mx:Onsite:Onsite007$$
-BURO_API_CLIENT_ID=l7f4ab9619923343069e3a48c3209b61e4
-BURO_API_CLIENT_SECRET=ee9ba699e9f54cd7bbe7948e0884ccc9
-```
 
 ## 📄 Licencia
 
 MIT
 
-## 👥 Soporte
-
-Para soporte técnico o preguntas sobre la integración con Buró de Crédito, contactar al equipo de desarrollo.
-
 ---
 
-**Desarrollado con estética brutalist tipográfica para máximo impacto visual y usabilidad.**
+**Panel Nanoeste - Buró de Crédito Persona Física**

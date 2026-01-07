@@ -1,5 +1,4 @@
-import { NOT_ADMIN_ERR_MSG, UNAUTHED_ERR_MSG } from '@shared/const';
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import type { TrpcContext } from "./context";
 
@@ -10,17 +9,28 @@ const t = initTRPC.context<TrpcContext>().create({
 export const router = t.router;
 export const publicProcedure = t.procedure;
 
+// Procedimiento protegido - ahora funciona sin OAuth externo
+// Para producción, se puede implementar autenticación básica o JWT local
 const requireUser = t.middleware(async opts => {
   const { ctx, next } = opts;
 
-  if (!ctx.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED", message: UNAUTHED_ERR_MSG });
-  }
+  // Por ahora, permitir acceso sin autenticación OAuth
+  // El usuario se puede crear automáticamente o usar un usuario por defecto
+  const defaultUser = ctx.user || {
+    id: 1,
+    openId: 'default-user',
+    name: 'Usuario Panel',
+    email: null,
+    role: 'admin',
+    loginMethod: 'local',
+    lastSignedIn: new Date(),
+    createdAt: new Date(),
+  };
 
   return next({
     ctx: {
       ...ctx,
-      user: ctx.user,
+      user: defaultUser,
     },
   });
 });
@@ -31,14 +41,22 @@ export const adminProcedure = t.procedure.use(
   t.middleware(async opts => {
     const { ctx, next } = opts;
 
-    if (!ctx.user || ctx.user.role !== 'admin') {
-      throw new TRPCError({ code: "FORBIDDEN", message: NOT_ADMIN_ERR_MSG });
-    }
+    // Permitir acceso admin por defecto
+    const defaultUser = ctx.user || {
+      id: 1,
+      openId: 'default-user',
+      name: 'Usuario Panel',
+      email: null,
+      role: 'admin',
+      loginMethod: 'local',
+      lastSignedIn: new Date(),
+      createdAt: new Date(),
+    };
 
     return next({
       ctx: {
         ...ctx,
-        user: ctx.user,
+        user: defaultUser,
       },
     });
   }),
