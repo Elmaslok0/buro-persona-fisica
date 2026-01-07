@@ -94,7 +94,7 @@ export class BuroClient {
    */
   private async makeRequest(endpoint: string, data: any): Promise<any> {
     try {
-      console.log(`[BuroClient] Realizando petición a ${endpoint}`);
+      console.log(`[BuroClient] Realizando petición a ${endpoint}`, JSON.stringify(data, null, 2));
       const response = await this.client.post(endpoint, data);
       console.log(`[BuroClient] Respuesta exitosa de ${endpoint}`);
       return response.data;
@@ -143,9 +143,38 @@ export class BuroClient {
 
   /**
    * Reporte de Crédito - Reporte completo de historial crediticio
+   * Formato correcto según especificación de Buró
    */
-  async reporteDeCredito(data: any) {
-    return this.makeRequest('/credit-report-api/v1/reporte-de-credito', data);
+  async reporteDeCredito(clientData: any, otorgante: any) {
+    // Construir el objeto de solicitud con el formato exacto esperado por Buró
+    const request = {
+      consulta: {
+        persona: {
+          encabezado: {
+            clavePais: 'MX',
+            claveUnidadMonetaria: 'MX',
+            identificadorBuro: '0000',
+            idioma: 'SP',
+            importeContrato: otorgante.importeContrato?.padStart(9, '0') || '000000000',
+            numeroReferenciaOperador: (otorgante.folioConsulta || 'REF').padEnd(25, ' '),
+            productoRequerido: '001',
+            tipoConsulta: 'I',
+            tipoContrato: otorgante.tipoContrato || 'CC'
+          },
+          nombre: {
+            apellidoPaterno: clientData.apellidoPaterno || '',
+            apellidoMaterno: clientData.apellidoMaterno || '',
+            nombre: clientData.nombres || '',
+            nombreCompleto: `${clientData.nombres} ${clientData.apellidoPaterno} ${clientData.apellidoMaterno}`.trim()
+          },
+          domicilios: [],
+          empleos: [],
+          cuentaC: []
+        }
+      }
+    };
+
+    return this.makeRequest('/credit-report-api/v1/reporte-de-credito', request);
   }
 
   /**
