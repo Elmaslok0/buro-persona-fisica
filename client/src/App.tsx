@@ -26,9 +26,10 @@ function Router() {
       <Route path={"/modules/informe-buro"} component={InformeBuro} />
       <Route path={"/modules/monitor"} component={Monitor} />
       <Route path={"/modules/prospector"} component={Prospector} />
-      <Route path={"/ modules/estimador-ingresos"} component={EstimadorIngresos} />
-      <Route path={"/ modules/e-score"} component={EScore} />
-      <Route path={"/404"} component={NotFound} />      <Route component={NotFound} />
+      <Route path={"/modules/estimador-ingresos"} component={EstimadorIngresos} />
+      <Route path={"/modules/e-score"} component={EScore} />
+      <Route path={"/404"} component={NotFound} />
+      <Route component={NotFound} />
     </Switch>
   );
 }
