@@ -460,12 +460,12 @@ export function initializeSampleData() {
     const sampleClient = {
       id: 1,
       userId: 1,
-      nombres: 'Juan Carlos',
-      apellidoPaterno: 'Perez',
-      apellidoMaterno: 'Garcia',
+      nombres: 'JUAN CARLOS',
+      apellidoPaterno: 'PEREZ',
+      apellidoMaterno: 'GARCIA',
       rfc: 'PEGJ800101ABC',
       curp: 'PEGJ800101HDFRRN09',
-      fechaNacimiento: '1980-01-01',
+      fechaNacimiento: '01011980',
       nacionalidad: 'MX',
       telefono: '5551234567',
       celular: '5559876543',
@@ -477,6 +477,6 @@ export function initializeSampleData() {
     
     inMemoryStorage.clients.set(1, sampleClient);
     inMemoryStorage.nextId.clients = 2;
-    console.log('[Database] Sample client initialized');
+    console.log('[Database] Sample client initialized with Buro requirements');
   }
 }
