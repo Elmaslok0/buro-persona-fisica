@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 
 /**
  * Cliente para la API de Buró de Crédito
- * Implementa autenticación OAuth2 client_credentials y llamadas a todos los endpoints
- * Con fallback a datos simulados cuando hay errores de autenticación
+ * Implementa autenticación OAuth2 client_credentials
+ * SIN fallback a datos simulados - SIEMPRE intenta conectar a la API real
  */
 export class BuroClient {
   private client: AxiosInstance;
@@ -13,7 +13,6 @@ export class BuroClient {
   private tokenUrl: string;
   private accessToken: string | null = null;
   private tokenExpiry: number = 0;
-  private useMockData: boolean = false;
 
   constructor() {
     // Base URL for API endpoints
@@ -50,58 +49,59 @@ export class BuroClient {
    * Obtiene un token de acceso OAuth2 usando client_credentials
    */
   private async getAccessToken(): Promise<string | null> {
-    // Si el token aún es válido, reutilizarlo
-    if (this.accessToken && Date.now() < this.tokenExpiry) {
-      return this.accessToken;
-    }
-
     try {
-      console.log('[BuroClient] Solicitando nuevo token...');
-      
-      // Preparar credenciales en formato Base64
-      const credentials = Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64');
-      
-      const params = new URLSearchParams();
-      params.append('grant_type', 'client_credentials');
+      // Si el token aún es válido, devolverlo
+      if (this.accessToken && this.tokenExpiry > Date.now()) {
+        return this.accessToken;
+      }
 
-      const response = await axios.post(this.tokenUrl, params, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Basic ${credentials}`,
-        },
-        timeout: 30000,
-        rejectUnauthorizedSSL: false,
-      });
+      console.log('[BuroClient] Obteniendo nuevo token OAuth2...');
+      
+      const response = await axios.post(
+        this.tokenUrl,
+        new URLSearchParams({
+          grant_type: 'client_credentials',
+          client_id: this.clientId,
+          client_secret: this.clientSecret,
+        }).toString(),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          timeout: 30000,
+          rejectUnauthorizedSSL: false,
+        }
+      );
 
       this.accessToken = response.data.access_token;
-      const expiresIn = response.data.expires_in || 3600;
-      this.tokenExpiry = Date.now() + (expiresIn - 300) * 1000;
-
-      console.log('[BuroClient] Token obtenido exitosamente, expira en:', expiresIn, 'segundos');
-      this.useMockData = false;
+      this.tokenExpiry = Date.now() + (response.data.expires_in * 1000);
+      
+      console.log(`[BuroClient] Token obtenido exitosamente. Expira en ${response.data.expires_in}s`);
       return this.accessToken;
     } catch (error: any) {
-      console.error('[BuroClient] Error obteniendo token:', {
+      const errorData = error.response?.data;
+      
+      console.error('[BuroClient] Error al obtener token:', {
         status: error.response?.status,
         statusText: error.response?.statusText,
-        data: error.response?.data,
+        data: errorData,
         message: error.message,
       });
-      
-      // Activar modo mock data si hay error de autenticación
-      this.useMockData = true;
-      return null;
+
+      throw new Error(`Error al obtener token de Buró: ${errorData?.error_description || error.message}`);
     }
   }
 
   /**
-   * Realiza una petición a la API con manejo de errores y fallback a mock data
+   * Realiza una petición a la API - SIN fallback a mock data
    */
   private async makeRequest(endpoint: string, data: any): Promise<any> {
     try {
-      console.log(`[BuroClient] Realizando petición a ${endpoint}`);
+      console.log(`[BuroClient] Realizando petición POST a ${endpoint}`);
       console.log(`[BuroClient] Datos enviados:`, JSON.stringify(data, null, 2));
+      
       const response = await this.client.post(endpoint, data);
+      
       console.log(`[BuroClient] Respuesta exitosa de ${endpoint}:`, JSON.stringify(response.data, null, 2));
       return response.data;
     } catch (error: any) {
@@ -113,180 +113,15 @@ export class BuroClient {
         statusText: error.response?.statusText,
         data: errorData,
         message: error.message,
-        fullError: error
       });
 
-      // Lanzar el error real sin fallback
-      throw new Error(`Error ${statusCode} en ${endpoint}: ${JSON.stringify(errorData) || error.message}`);
+      // Lanzar el error sin fallback
+      throw new Error(`Error al conectar con Buró (${statusCode}): ${errorData?.mensaje || errorData?.message || error.message}`);
     }
   }
 
   /**
-   * Genera respuestas simuladas realistas basadas en el endpoint
-   */
-  private getMockResponse(endpoint: string, data: any): any {
-    if (endpoint.includes('reporte-de-credito')) {
-      return this.getMockReporteDeCredito(data);
-    } else if (endpoint.includes('autenticador')) {
-      return this.getMockAutenticador(data);
-    } else if (endpoint.includes('informe-buro')) {
-      return this.getMockInformeBuro(data);
-    } else if (endpoint.includes('monitor')) {
-      return this.getMockMonitor(data);
-    } else if (endpoint.includes('prospector')) {
-      return this.getMockProspector(data);
-    } else if (endpoint.includes('estimador-ingresos')) {
-      return this.getMockEstimadorIngresos(data);
-    }
-    return { success: true, data: {} };
-  }
-
-  private getMockReporteDeCredito(data: any): any {
-    return {
-      respuesta: {
-        persona: {
-          encabezado: {
-            clavePais: 'MX',
-            claveUnidadMonetaria: 'MX',
-            identificadorBuro: '0000',
-            idioma: 'SP',
-            numeroReferenciaOperador: data.consulta?.persona?.encabezado?.numeroReferenciaOperador || 'REF001',
-            productoRequerido: '001',
-            tipoConsulta: 'I',
-            tipoContrato: data.consulta?.persona?.encabezado?.tipoContrato || 'CC'
-          },
-          nombre: data.consulta?.persona?.nombre || {},
-          consultaEfectuadas: [
-            {
-              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
-              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
-              tipoContrato: data.consulta?.encabezado?.tipoContrato || 'CC',
-              importeContrato: data.consulta?.encabezado?.importeContrato || '5000.00',
-              fechaConsulta: new Date().toISOString().split('T')[0],
-              resultadoFinal: 'APROBADO'
-            }
-          ],
-          cuentasActivas: [
-            {
-              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
-              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
-              tipoContrato: data.consulta?.encabezado?.tipoContrato || 'CC',
-              saldo: '2500.00',
-              limiteCredito: '5000.00',
-              mop: '00',
-              fechaApertura: '2020-01-15',
-              fechaUltimoMovimiento: new Date().toISOString().split('T')[0]
-            }
-          ],
-          cuentasCerradas: [],
-          consultasRealizadas: [
-            {
-              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
-              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
-              tipoConsulta: 'I',
-              fechaConsulta: new Date().toISOString().split('T')[0]
-            }
-          ]
-        }
-      },
-      respuestaAutenticador: 'AUTENTICADO'
-    };
-  }
-
-  private getMockAutenticador(data: any): any {
-    return {
-      respuestaAutenticador: 'AUTENTICADO',
-      preguntasSeguridad: [
-        {
-          pregunta: '¿Ha ejercido crédito automotriz?',
-          respuesta: 'SI'
-        },
-        {
-          pregunta: '¿Ha ejercido crédito hipotecario?',
-          respuesta: 'NO'
-        }
-      ]
-    };
-  }
-
-  private getMockInformeBuro(data: any): any {
-    return {
-      informe: {
-        fechaConsulta: new Date().toISOString().split('T')[0],
-        consumidorNuevo: 'N',
-        calificacionGeneral: 'BUENO',
-        riesgo: 'BAJO',
-        detallesCuentas: [
-          {
-            institucion: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
-            tipoProducto: 'Tarjeta de Crédito',
-            estado: 'ACTIVA',
-            saldo: '2500.00',
-            mop: '00'
-          }
-        ]
-      }
-    };
-  }
-
-  private getMockMonitor(data: any): any {
-    return {
-      cambios: [
-        {
-          fecha: new Date().toISOString().split('T')[0],
-          tipo: 'NUEVA_CONSULTA',
-          descripcion: 'Nueva consulta realizada'
-        }
-      ],
-      resumenCambios: {
-        nuevasConsultas: 1,
-        nuevasCuentas: 0,
-        cuentasCerradas: 0,
-        cambiosCalificacion: 0
-      }
-    };
-  }
-
-  private getMockProspector(data: any): any {
-    return {
-      prospectiva: {
-        probabilidadAprobacion: 0.85,
-        limiteRecomendado: '5000.00',
-        tasaRecomendada: 18.5,
-        riesgo: 'BAJO',
-        recomendaciones: [
-          'Cliente con buen historial crediticio',
-          'Recomendado para productos de crédito',
-          'Considerar límite de crédito moderado'
-        ]
-      }
-    };
-  }
-
-  private getMockEstimadorIngresos(data: any): any {
-    return {
-      estimacion: {
-        ingresoEstimado: '25000.00',
-        periodicidad: 'MENSUAL',
-        confiabilidad: 0.80,
-        fuentes: [
-          {
-            tipo: 'SALARIO',
-            monto: '20000.00',
-            porcentaje: 80
-          },
-          {
-            tipo: 'OTROS',
-            monto: '5000.00',
-            porcentaje: 20
-          }
-        ]
-      }
-    };
-  }
-
-  /**
-   * Autenticador - Autenticación con preguntas de seguridad
+   * Autenticador - Preguntas de seguridad basadas en historial crediticio
    */
   async autenticador(data: any) {
     return this.makeRequest('/credit-report-api/v1/autenticador', data);
@@ -357,33 +192,50 @@ export class BuroClient {
   /**
    * Verifica la conexión con la API de Buró de Crédito
    */
-  async testConnection(): Promise<{ success: boolean; message: string; usingMockData: boolean }> {
+  async testConnection(): Promise<{ success: boolean; message: string }> {
     try {
-      const token = await this.getAccessToken();
-      if (token) {
-        return { 
-          success: true, 
-          message: 'Conexión exitosa con Buró de Crédito',
-          usingMockData: false
-        };
-      }
-      return { 
-        success: false, 
-        message: 'No se pudo obtener token de acceso. Usando datos simulados.',
-        usingMockData: true
+      const testData = {
+        consulta: {
+          persona: {
+            encabezado: {
+              clavePais: 'MX',
+              claveUnidadMonetaria: 'MX',
+              identificadorBuro: '0000',
+              idioma: 'SP',
+              importeContrato: '000000000',
+              numeroReferenciaOperador: 'TEST'.padEnd(25, ' '),
+              productoRequerido: '001',
+              tipoConsulta: 'I',
+              tipoContrato: 'CC'
+            },
+            nombre: {
+              apellidoPaterno: 'TEST',
+              apellidoMaterno: 'TEST',
+              nombre: 'TEST',
+              nombreCompleto: 'TEST TEST TEST'
+            },
+            domicilios: [],
+            empleos: [],
+            cuentaC: []
+          }
+        }
+      };
+
+      const result = await this.makeRequest('/credit-report-api/v1/autenticador', testData);
+      return {
+        success: true,
+        message: 'Conexión exitosa con Buró de Crédito'
       };
     } catch (error: any) {
-      return { 
-        success: false, 
-        message: `Error: ${error.message}. Usando datos simulados.`,
-        usingMockData: true
+      return {
+        success: false,
+        message: `Error de conexión: ${error.message}`
       };
     }
   }
 }
 
-export const buroClient = new BuroClient();
-
 export async function testBuroConnection() {
-  return buroClient.testConnection();
+  const client = new BuroClient();
+  return await client.testConnection();
 }
