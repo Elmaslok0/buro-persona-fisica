@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
@@ -22,6 +22,26 @@ export default function NewClient() {
     celular: "",
     email: "",
   });
+
+  // Initialize form from URL query parameters
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const initialData = {
+      nombres: params.get('nombres') || '',
+      apellidoPaterno: params.get('apellidoPaterno') || '',
+      apellidoMaterno: params.get('apellidoMaterno') || '',
+      rfc: params.get('rfc') || '',
+      curp: params.get('curp') || '',
+      fechaNacimiento: params.get('fechaNacimiento') || '',
+      nacionalidad: params.get('nacionalidad') || 'MX',
+      telefono: params.get('telefono') || '',
+      celular: params.get('celular') || '',
+      email: params.get('email') || '',
+    };
+    if (initialData.nombres) {
+      setFormData(initialData);
+    }
+  }, []);
 
   const createClient = trpc.clientManagement.create.useMutation({
     onSuccess: () => {
