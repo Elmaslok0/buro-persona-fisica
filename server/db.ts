@@ -42,7 +42,9 @@ const inMemoryStorage = {
 };
 
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  // Siempre usar null para forzar almacenamiento en memoria
+  // Esto permite que el sistema funcione sin base de datos
+  if (!_db && process.env.DATABASE_URL && process.env.DATABASE_URL !== 'memory') {
     try {
       _db = drizzle(process.env.DATABASE_URL);
       console.log("[Database] Connected successfully");
@@ -51,6 +53,7 @@ export async function getDb() {
       _db = null;
     }
   }
+  // Si no hay DATABASE_URL o es 'memory', usar almacenamiento en memoria
   return _db;
 }
 
@@ -445,8 +448,35 @@ export function clearInMemoryStorage() {
   inMemoryStorage.llmAnalysis.clear();
   inMemoryStorage.users.clear();
   
-  // Reset IDs
   Object.keys(inMemoryStorage.nextId).forEach(key => {
     (inMemoryStorage.nextId as any)[key] = 1;
   });
+}
+
+export function initializeSampleData() {
+  const existingClients = Array.from(inMemoryStorage.clients.values()).filter(c => c.userId === 1);
+  
+  if (existingClients.length === 0) {
+    const sampleClient = {
+      id: 1,
+      userId: 1,
+      nombres: 'Juan Carlos',
+      apellidoPaterno: 'Perez',
+      apellidoMaterno: 'Garcia',
+      rfc: 'PEGJ800101ABC',
+      curp: 'PEGJ800101HDFRRN09',
+      fechaNacimiento: '1980-01-01',
+      nacionalidad: 'MX',
+      telefono: '5551234567',
+      celular: '5559876543',
+      email: 'juan@example.com',
+      identificacionBuro: 'ID-001',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    
+    inMemoryStorage.clients.set(1, sampleClient);
+    inMemoryStorage.nextId.clients = 2;
+    console.log('[Database] Sample client initialized');
+  }
 }
