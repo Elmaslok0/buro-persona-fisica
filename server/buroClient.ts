@@ -169,19 +169,19 @@ export class BuroClient {
           nombre: data.consulta?.persona?.nombre || {},
           consultaEfectuadas: [
             {
-              claveOtorgante: data.consulta?.persona?.encabezado?.numeroReferenciaOperador?.substring(0, 4) || '0001',
-              nombreOtorgante: 'BANCO PRUEBA',
-              tipoContrato: 'CC',
-              importeContrato: data.consulta?.persona?.encabezado?.importeContrato || '5000.00',
+              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
+              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
+              tipoContrato: data.consulta?.encabezado?.tipoContrato || 'CC',
+              importeContrato: data.consulta?.encabezado?.importeContrato || '5000.00',
               fechaConsulta: new Date().toISOString().split('T')[0],
               resultadoFinal: 'APROBADO'
             }
           ],
           cuentasActivas: [
             {
-              claveOtorgante: '0001',
-              nombreOtorgante: 'BANCO PRUEBA',
-              tipoContrato: 'CC',
+              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
+              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
+              tipoContrato: data.consulta?.encabezado?.tipoContrato || 'CC',
               saldo: '2500.00',
               limiteCredito: '5000.00',
               mop: '00',
@@ -192,8 +192,8 @@ export class BuroClient {
           cuentasCerradas: [],
           consultasRealizadas: [
             {
-              claveOtorgante: '0001',
-              nombreOtorgante: 'BANCO PRUEBA',
+              claveOtorgante: data.consulta?.encabezado?.claveOtorgante || '0001',
+              nombreOtorgante: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
               tipoConsulta: 'I',
               fechaConsulta: new Date().toISOString().split('T')[0]
             }
@@ -229,7 +229,7 @@ export class BuroClient {
         riesgo: 'BAJO',
         detallesCuentas: [
           {
-            institucion: 'BANCO PRUEBA',
+            institucion: data.consulta?.encabezado?.nombreOtorgante || 'INSTITUCIÓN FINANCIERA',
             tipoProducto: 'Tarjeta de Crédito',
             estado: 'ACTIVA',
             saldo: '2500.00',

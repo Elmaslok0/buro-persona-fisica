@@ -104,9 +104,68 @@ export default function ReporteCredito() {
           </div>
         </header>
 
-        <main className="container py-12">
+        <main className="container py-12 space-y-8">
+          {/* Resumen del Reporte */}
           <Card className="border-4 border-black p-8">
-            <h2 className="text-3xl font-black uppercase mb-6">DATOS DE LA RESPUESTA</h2>
+            <h2 className="text-3xl font-black uppercase mb-6">RESUMEN DEL REPORTE</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="border-2 border-black p-4">
+                <p className="text-sm font-bold text-gray-600">CALIFICACIÓN GENERAL</p>
+                <p className="text-2xl font-black">{result?.informe?.calificacionGeneral || 'N/A'}</p>
+              </div>
+              <div className="border-2 border-black p-4">
+                <p className="text-sm font-bold text-gray-600">NIVEL DE RIESGO</p>
+                <p className="text-2xl font-black">{result?.informe?.riesgo || 'N/A'}</p>
+              </div>
+              <div className="border-2 border-black p-4">
+                <p className="text-sm font-bold text-gray-600">FECHA DE CONSULTA</p>
+                <p className="text-2xl font-black">{result?.informe?.fechaConsulta || 'N/A'}</p>
+              </div>
+              <div className="border-2 border-black p-4">
+                <p className="text-sm font-bold text-gray-600">CONSUMIDOR NUEVO</p>
+                <p className="text-2xl font-black">{result?.informe?.consumidorNuevo === 'S' ? 'SÍ' : 'NO'}</p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Detalles de Cuentas */}
+          {result?.informe?.detallesCuentas && result.informe.detallesCuentas.length > 0 && (
+            <Card className="border-4 border-black p-8">
+              <h2 className="text-3xl font-black uppercase mb-6">DETALLES DE CUENTAS</h2>
+              <div className="space-y-4">
+                {result.informe.detallesCuentas.map((cuenta: any, idx: number) => (
+                  <div key={idx} className="border-4 border-black p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm font-bold text-gray-600">INSTITUCIÓN</p>
+                        <p className="text-lg font-black">{cuenta.institucion}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-gray-600">TIPO DE PRODUCTO</p>
+                        <p className="text-lg font-black">{cuenta.tipoProducto}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-gray-600">ESTADO</p>
+                        <p className="text-lg font-black">{cuenta.estado}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-gray-600">SALDO</p>
+                        <p className="text-lg font-black">${parseFloat(cuenta.saldo).toLocaleString('es-MX', {minimumFractionDigits: 2})}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-gray-600">MOP (Meses de Pago)</p>
+                        <p className="text-lg font-black">{cuenta.mop}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* JSON Completo */}
+          <Card className="border-4 border-black p-8">
+            <h2 className="text-3xl font-black uppercase mb-6">DATOS COMPLETOS DE LA RESPUESTA</h2>
             <pre className="text-sm font-mono overflow-auto bg-secondary p-6">
               {JSON.stringify(result, null, 2)}
             </pre>
@@ -221,9 +280,12 @@ export default function ReporteCredito() {
                       <Label className="text-xl font-black uppercase">IMPORTE CONTRATO</Label>
                       <Input
                         name="importeContrato"
-                        value={formData.importeContrato}
-                        onChange={handleChange}
-                        type="number"
+                        value={formData.importeContrato || "0.00"}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setFormData({ ...formData, importeContrato: value });
+                        }}
+                        type="text"
                         placeholder="0.00"
                         className="border-4 border-black text-lg font-bold mt-2"
                       />
