@@ -100,8 +100,9 @@ export class BuroClient {
   private async makeRequest(endpoint: string, data: any): Promise<any> {
     try {
       console.log(`[BuroClient] Realizando petición a ${endpoint}`);
+      console.log(`[BuroClient] Datos enviados:`, JSON.stringify(data, null, 2));
       const response = await this.client.post(endpoint, data);
-      console.log(`[BuroClient] Respuesta exitosa de ${endpoint}`);
+      console.log(`[BuroClient] Respuesta exitosa de ${endpoint}:`, JSON.stringify(response.data, null, 2));
       return response.data;
     } catch (error: any) {
       const errorData = error.response?.data;
@@ -111,24 +112,12 @@ export class BuroClient {
         status: statusCode,
         statusText: error.response?.statusText,
         data: errorData,
-        message: error.message
+        message: error.message,
+        fullError: error
       });
 
-      // Si hay error 403, usar mock data
-      if (statusCode === 403) {
-        console.log(`[BuroClient] Error 403 detectado. Usando datos simulados...`);
-        this.useMockData = true;
-        return this.getMockResponse(endpoint, data);
-      }
-
-      // Para otros errores, también usar mock data como fallback
-      if (statusCode === 401 || statusCode === 400 || statusCode === 500) {
-        console.log(`[BuroClient] Error ${statusCode}. Usando datos simulados...`);
-        this.useMockData = true;
-        return this.getMockResponse(endpoint, data);
-      }
-
-      throw new Error(`Error al conectar con Buró: ${errorData?.mensaje || errorData?.message || error.message}`);
+      // Lanzar el error real sin fallback
+      throw new Error(`Error ${statusCode} en ${endpoint}: ${JSON.stringify(errorData) || error.message}`);
     }
   }
 

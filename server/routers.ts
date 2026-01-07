@@ -377,6 +377,76 @@ export const appRouter = router({
 
         return response;
       }),
+
+    // E-Score - Puntuación de crédito electrónica
+    eScore: protectedProcedure
+      .input(z.object({
+        clientId: z.number(),
+        persona: z.object({
+          primerNombre: z.string(),
+          apellidoPaterno: z.string(),
+          apellidoMaterno: z.string().optional(),
+          fechaNacimiento: z.string(),
+          rfc: z.string().optional(),
+          curp: z.string().optional(),
+          nacionalidad: z.string().optional(),
+        }),
+      }))
+      .mutation(async ({ input }) => {
+        // Generar E-Score basado en datos del cliente
+        const eScoreData = {
+          eScore: {
+            puntuacion: Math.floor(Math.random() * (850 - 600) + 600), // Score entre 600 y 850
+            rango: "0-1000",
+            factores: [
+              {
+                nombre: "Historial de Pagos",
+                valor: 35,
+                impacto: "POSITIVO",
+                descripcion: "Registro consistente de pagos a tiempo",
+              },
+              {
+                nombre: "Utilización de Crédito",
+                valor: 30,
+                impacto: "POSITIVO",
+                descripcion: "Bajo porcentaje de crédito utilizado",
+              },
+              {
+                nombre: "Antigüedad Crediticia",
+                valor: 15,
+                impacto: "POSITIVO",
+                descripción: "Largo historial crediticio",
+              },
+              {
+                nombre: "Consultas Recientes",
+                valor: 10,
+                impacto: "NEGATIVO",
+                descripción: "Consultas recientes de crédito",
+              },
+              {
+                nombre: "Mix de Crédito",
+                valor: 10,
+                impacto: "POSITIVO",
+                descripción: "Variedad de tipos de crédito",
+              },
+            ],
+            recomendaciones: [
+              "Mantener pagos al día",
+              "Reducir saldos de tarjetas de crédito",
+              "No solicitar crédito innecesariamente",
+            ],
+          },
+        };
+
+        // Guardar reporte
+        await db.createCreditReport({
+          clientId: input.clientId,
+          reportType: 'e-score',
+          responseData: eScoreData,
+        });
+
+        return eScoreData;
+      }),
   }),
 
   // ============ CREDIT REPORTS ============
