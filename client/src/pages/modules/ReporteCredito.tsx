@@ -172,6 +172,8 @@ export default function ReporteCredito() {
                         value={formData.claveOtorgante || "0000000000"}
                         onChange={handleChange}
                         placeholder="0000000000"
+                        type="text"
+                        maxLength={10}
                         className="border-4 border-black text-lg font-bold mt-2"
                       />
                     </div>
