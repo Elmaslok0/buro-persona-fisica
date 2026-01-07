@@ -124,7 +124,7 @@ export class BuroClient {
    * Autenticador - Preguntas de seguridad basadas en historial crediticio
    */
   async autenticador(data: any) {
-    return this.makeRequest('/credit-report-api/v1/autenticador', data);
+    return this.makeRequest('/autenticador', data);
   }
 
   /**
@@ -158,35 +158,42 @@ export class BuroClient {
       }
     };
 
-    return this.makeRequest('/credit-report-api/v1/reporte-de-credito', request);
+    return this.makeRequest('/reporte-de-credito', request);
   }
 
   /**
    * Informe Buró - Informe detallado del buró de crédito
    */
   async informeBuro(data: any) {
-    return this.makeRequest('/credit-report-api/v1/informe-buro', data);
+    return this.makeRequest('/informe-buro', data);
   }
 
   /**
    * Monitor - Monitoreo continuo de cambios
    */
   async monitor(data: any) {
-    return this.makeRequest('/credit-report-api/v1/monitor', data);
+    return this.makeRequest('/monitor', data);
   }
 
   /**
    * Prospector - Análisis de clientes potenciales
    */
   async prospector(data: any) {
-    return this.makeRequest('/credit-report-api/v1/prospector', data);
+    return this.makeRequest('/prospector', data);
   }
 
   /**
    * Estimador de Ingresos - Estimación de ingresos
    */
   async estimadorIngresos(data: any) {
-    return this.makeRequest('/credit-report-api/v1/estimador-ingresos', data);
+    return this.makeRequest('/estimador-ingresos', data);
+  }
+
+  /**
+   * E-Score - Puntuación de crédito electrónica
+   */
+  async eScore(data: any) {
+    return this.makeRequest('/e-score', data);
   }
 
   /**
@@ -221,7 +228,7 @@ export class BuroClient {
         }
       };
 
-      const result = await this.makeRequest('/credit-report-api/v1/autenticador', testData);
+      const result = await this.makeRequest('/autenticador', testData);
       return {
         success: true,
         message: 'Conexión exitosa con Buró de Crédito'
