@@ -141,15 +141,22 @@ export async function createClient(client: InsertClient) {
     const newClient = {
       id,
       ...client,
+      userId: client.userId || 1,
       createdAt: new Date(),
+      updatedAt: new Date(),
     };
     inMemoryStorage.clients.set(id, newClient);
-    console.log("[Database] Client saved to in-memory storage:", id);
+    console.log("[Database] Client saved to in-memory storage:", id, newClient);
     return { insertId: id };
   }
   
-  const result = await db.insert(clients).values(client);
-  return result;
+  try {
+    const result = await db.insert(clients).values(client);
+    return result;
+  } catch (error) {
+    console.error("[Database] Error creating client:", error);
+    throw error;
+  }
 }
 
 export async function getClientsByUserId(userId: number) {
