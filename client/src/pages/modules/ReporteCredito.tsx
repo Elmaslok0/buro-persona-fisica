@@ -69,13 +69,13 @@ export default function ReporteCredito() {
         },
       },
       encabezado: {
-        claveOtorgante: formData.claveOtorgante,
-        nombreOtorgante: formData.nombreOtorgante,
+        claveOtorgante: formData.claveOtorgante || "0000000000",
+        nombreOtorgante: formData.nombreOtorgante || "BANCO PRUEBA",
         folioConsulta: formData.folioConsulta || new Date().getTime().toString(),
-        folioConsultaOtorgante: formData.folioConsultaOtorgante,
+        folioConsultaOtorgante: formData.folioConsultaOtorgante || "",
         claveUnidadMonetaria: "MX",
-        tipoContrato: formData.tipoContrato,
-        importeContrato: formData.importeContrato,
+        tipoContrato: formData.tipoContrato || "CC",
+        importeContrato: formData.importeContrato || "0.00",
         tipoReporte: "RCN",
       },
     });
