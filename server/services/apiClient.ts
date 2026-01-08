@@ -1,6 +1,6 @@
 /**
- * API Client Service - Senior Architect Version
- * Alineado con los parámetros obligatorios de Buró de Crédito
+ * API Client Service - Senior Architect Version (Persona Física)
+ * Alineado con los parámetros obligatorios de Buró de Crédito PF
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
@@ -33,15 +33,22 @@ class BuroApiClient {
   private tokenExpiry: number | null = null;
 
   constructor(config: ApiClientConfig) {
-    console.log(`[BuroApiClient] Initializing with baseURL: ${config.baseURL}`);
+    // Asegurar que usamos devpf para Persona Física
+    const finalBaseURL = config.baseURL.includes('devpm') 
+      ? config.baseURL.replace('devpm', 'devpf') 
+      : config.baseURL;
+
+    console.log(`[BuroApiClient-PF] Initializing with baseURL: ${finalBaseURL}`);
     
     this.client = axios.create({
-      baseURL: config.baseURL,
+      baseURL: finalBaseURL,
       timeout: config.timeout || 30000,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'x-api-key': config.apiKey,
+        // Añadir User-Agent para evitar bloqueos de WAF
+        'User-Agent': 'BuroPersonaFisicaPanel/1.0',
       },
     });
 
@@ -56,18 +63,15 @@ class BuroApiClient {
       (error) => Promise.reject(error)
     );
 
-    // Interceptor para manejo de errores con logs detallados
+    // Interceptor para manejo de errores
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
-        const errorData = {
+        console.error('!!! Buro PF API Error !!!', {
           status: error.response?.status,
           data: error.response?.data,
-          message: error.message,
           url: error.config?.url,
-          headers: error.config?.headers,
-        };
-        console.error('!!! Buro API Error 403/Forbidden Check !!!', JSON.stringify(errorData, null, 2));
+        });
         return Promise.reject(error);
       }
     );
@@ -75,12 +79,13 @@ class BuroApiClient {
 
   async authenticate(payload?: any): Promise<ApiResponse<AuthResponse>> {
     try {
+      // Para PF, el flujo es directo al endpoint /autenticador
       const authPayload = payload || {
         username: ENV.buroUsername,
         password: ENV.buroClientSecret
       };
 
-      console.log(`[BuroApiClient] Authenticating user: ${ENV.buroUsername}`);
+      console.log(`[BuroApiClient-PF] Authenticating: ${ENV.buroUsername}`);
       
       const response = await this.client.post<any>(
         '/autenticador',
@@ -145,6 +150,7 @@ class BuroApiClient {
     }
   }
 
+  // Endpoints específicos para PF
   async prospector(payload: any) { return this.post('/prospector', payload); }
   async monitor(payload: any) { return this.post('/monitor', payload); }
   async estimadorIngresos(payload: any) { return this.post('/estimador-ingresos', payload); }
