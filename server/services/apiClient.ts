@@ -82,7 +82,6 @@ class BuroApiClient {
 
       console.log(`[BuroApiClient-PF] Authenticating at /credit-report-api/v1/autenticador`);
       
-      // Buró de Crédito PF devuelve 201 y el token como string plano
       const response = await this.client.post<any>(
         '/credit-report-api/v1/autenticador',
         authPayload
@@ -136,7 +135,6 @@ class BuroApiClient {
     }
   }
 
-  // Endpoints oficiales con rutas completas
   async prospector(payload: any) { return this.post('/credit-report-api/v1/prospector', payload); }
   async monitor(payload: any) { return this.post('/credit-report-api/v1/monitor', payload); }
   async estimadorIngresos(payload: any) { return this.post('/credit-report-api/v1/estimador-ingresos', payload); }
@@ -145,6 +143,11 @@ class BuroApiClient {
 }
 
 let apiClientInstance: BuroApiClient | null = null;
+
+export function initializeApiClient(config: ApiClientConfig): BuroApiClient {
+  apiClientInstance = new BuroApiClient(config);
+  return apiClientInstance;
+}
 
 export function getApiClient(): BuroApiClient {
   if (!apiClientInstance) {
