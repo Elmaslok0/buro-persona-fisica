@@ -1,7 +1,7 @@
 /**
- * API Client Service
+ * API Client Service - Senior Architect Version
  * Gestiona la comunicación con las APIs del buró de crédito
- * Maneja autenticación, tokens y reutilización de credenciales
+ * Alineado con los parámetros obligatorios de Buró de Crédito
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
@@ -10,6 +10,7 @@ interface ApiClientConfig {
   baseURL: string;
   apiKey: string;
   apiSecret: string;
+  username?: string;
   timeout?: number;
 }
 
@@ -40,6 +41,7 @@ class BuroApiClient {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'x-api-key': config.apiKey,
       },
     });
 
@@ -58,10 +60,11 @@ class BuroApiClient {
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
-        console.error('API Error:', {
+        console.error('Buro API Error:', {
           status: error.response?.status,
           data: error.response?.data,
           message: error.message,
+          url: error.config?.url,
         });
         return Promise.reject(error);
       }
@@ -70,24 +73,29 @@ class BuroApiClient {
 
   /**
    * Autentica con el buró y obtiene un token
-   * Este token se reutiliza en todos los demás módulos
+   * Alineado con autenticador.json
    */
   async authenticate(payload: any): Promise<ApiResponse<AuthResponse>> {
     try {
+      // Si no se pasa payload, usar credenciales de configuración
+      const authPayload = payload || {
+        username: this.config.username,
+        password: this.config.apiSecret
+      };
+
       const response = await this.client.post<any>(
         '/autenticador',
-        payload
+        authPayload
       );
 
-      // Extraer token de la respuesta
+      // Extraer token según las diversas estructuras posibles en la documentación
       const token = response.data?.respuestaAutenticador || 
                    response.data?.respuesta?.token ||
                    response.data?.token;
 
       if (token) {
         this.token = token;
-        // Establecer expiración (por defecto 1 hora)
-        this.tokenExpiry = Date.now() + (3600 * 1000);
+        this.tokenExpiry = Date.now() + (3600 * 1000); // 1 hora por defecto
 
         return {
           success: true,
@@ -102,53 +110,27 @@ class BuroApiClient {
 
       return {
         success: false,
-        error: 'No token received from authentication',
+        error: 'No se recibió token de autenticación',
         statusCode: response.status,
       };
     } catch (error) {
       const axiosError = error as AxiosError;
       return {
         success: false,
-        error: axiosError.message,
+        error: (axiosError.response?.data as any)?.message || axiosError.message,
         statusCode: axiosError.response?.status || 500,
       };
     }
   }
 
-  /**
-   * Verifica si el token actual es válido
-   */
   isTokenValid(): boolean {
-    if (!this.token || !this.tokenExpiry) {
-      return false;
-    }
-    return Date.now() < this.tokenExpiry;
+    return !!this.token && (this.tokenExpiry ? Date.now() < this.tokenExpiry : true);
   }
 
   /**
-   * Obtiene el token actual
+   * Realiza una solicitud POST genérica
    */
-  getToken(): string | null {
-    return this.token;
-  }
-
-  /**
-   * Establece un token manualmente
-   */
-  setToken(token: string, expiresIn?: number): void {
-    this.token = token;
-    if (expiresIn) {
-      this.tokenExpiry = Date.now() + (expiresIn * 1000);
-    }
-  }
-
-  /**
-   * Realiza una solicitud POST genérica a un endpoint del buró
-   */
-  async post<T = any>(
-    endpoint: string,
-    payload: any
-  ): Promise<ApiResponse<T>> {
+  async post<T = any>(endpoint: string, payload: any): Promise<ApiResponse<T>> {
     try {
       const response = await this.client.post<T>(endpoint, payload);
       return {
@@ -160,70 +142,20 @@ class BuroApiClient {
       const axiosError = error as AxiosError;
       return {
         success: false,
-        error: axiosError.message,
+        error: (axiosError.response?.data as any)?.message || axiosError.message,
         statusCode: axiosError.response?.status || 500,
       };
     }
   }
 
-  /**
-   * Realiza una solicitud GET genérica a un endpoint del buró
-   */
-  async get<T = any>(endpoint: string): Promise<ApiResponse<T>> {
-    try {
-      const response = await this.client.get<T>(endpoint);
-      return {
-        success: true,
-        data: response.data,
-        statusCode: response.status,
-      };
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      return {
-        success: false,
-        error: axiosError.message,
-        statusCode: axiosError.response?.status || 500,
-      };
-    }
-  }
-
-  /**
-   * Prospección de cliente
-   */
-  async prospector(payload: any): Promise<ApiResponse> {
-    return this.post('/prospector', payload);
-  }
-
-  /**
-   * Monitoreo de crédito
-   */
-  async monitor(payload: any): Promise<ApiResponse> {
-    return this.post('/monitor', payload);
-  }
-
-  /**
-   * Estimación de ingresos
-   */
-  async estimadorIngresos(payload: any): Promise<ApiResponse> {
-    return this.post('/estimador-ingresos', payload);
-  }
-
-  /**
-   * Reporte de crédito
-   */
-  async reporteCredito(payload: any): Promise<ApiResponse> {
-    return this.post('/reporte-de-credito', payload);
-  }
-
-  /**
-   * Informe del buró
-   */
-  async informeBuro(payload: any): Promise<ApiResponse> {
-    return this.post('/informe-buro', payload);
-  }
+  // Métodos específicos alineados con los módulos
+  async prospector(payload: any) { return this.post('/prospector', payload); }
+  async monitor(payload: any) { return this.post('/monitor', payload); }
+  async estimadorIngresos(payload: any) { return this.post('/estimador-ingresos', payload); }
+  async reporteCredito(payload: any) { return this.post('/reporte-de-credito', payload); }
+  async informeBuro(payload: any) { return this.post('/informe-buro', payload); }
 }
 
-// Crear instancia singleton del cliente
 let apiClientInstance: BuroApiClient | null = null;
 
 export function initializeApiClient(config: ApiClientConfig): BuroApiClient {
@@ -233,7 +165,13 @@ export function initializeApiClient(config: ApiClientConfig): BuroApiClient {
 
 export function getApiClient(): BuroApiClient {
   if (!apiClientInstance) {
-    throw new Error('API Client not initialized. Call initializeApiClient first.');
+    // Fallback a variables de entorno si no está inicializado
+    return initializeApiClient({
+      baseURL: process.env.BURO_API_BASE_URL || '',
+      apiKey: process.env.BURO_API_CLIENT_ID || '',
+      apiSecret: process.env.BURO_API_CLIENT_SECRET || '',
+      username: process.env.BURO_API_USERNAME || '',
+    });
   }
   return apiClientInstance;
 }
