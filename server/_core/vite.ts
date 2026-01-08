@@ -48,46 +48,20 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  // Intentar múltiples rutas posibles para encontrar los archivos estáticos en Koyeb
-  const pathsToTry = [
-    path.resolve(process.cwd(), "dist", "public"),
-    path.resolve(process.cwd(), "public"),
-    path.resolve(import.meta.dirname, "public"),
-    path.resolve(import.meta.dirname, "..", "public"),
-    path.resolve(import.meta.dirname, "..", "dist", "public"),
-  ];
-
-  let finalPath = "";
-  for (const p of pathsToTry) {
-    if (fs.existsSync(path.resolve(p, "index.html"))) {
-      finalPath = p;
-      break;
-    }
+  const distPath =
+    process.env.NODE_ENV === "development"
+      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
+      : path.resolve(import.meta.dirname, "public");
+  if (!fs.existsSync(distPath)) {
+    console.error(
+      `Could not find the build directory: ${distPath}, make sure to build the client first`
+    );
   }
 
-  if (!finalPath) {
-    console.error("[Static] ERROR: No se encontró index.html en ninguna de las rutas probadas:", pathsToTry);
-    // Fallback al primer path por si acaso
-    finalPath = pathsToTry[0];
-  }
+  app.use(express.static(distPath));
 
-  console.log(`[Static] Sirviendo archivos desde: ${finalPath}`);
-
-  app.use(express.static(finalPath));
-
-  // IMPORTANTE: Para que React Router funcione (SPA), cualquier ruta que no sea un archivo
-  // debe devolver el index.html
-  app.get("*", (req, res) => {
-    // No aplicar a rutas de la API o tRPC
-    if (req.path.startsWith('/api') || req.path.startsWith('/trpc')) {
-      return res.status(404).json({ message: "API route not found" });
-    }
-    
-    const indexPath = path.resolve(finalPath, "index.html");
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.status(404).send(`Frontend build not found at ${indexPath}. Please check build logs.`);
-    }
+  // fall through to index.html if the file doesn't exist
+  app.use("*", (_req, res) => {
+    res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
