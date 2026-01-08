@@ -10,5 +10,6 @@ export const ENV = {
   buroApiBaseUrl: process.env.BURO_API_BASE_URL ?? "https://api.burodecredito.com.mx:4431/devpf",
   buroClientId: process.env.BURO_API_CLIENT_ID ?? "",
   buroClientSecret: process.env.BURO_API_CLIENT_SECRET ?? "",
-  buroUsername: process.env.BURO_API_USERNAME ?? "",
+  buroUsername: process.env.BURO_API_USERNAME ?? "Onsite",
+  buroPassword: process.env.BURO_API_PASSWORD ?? "Onsite007$$",
 };

@@ -1,6 +1,6 @@
 /**
  * API Client Service - Senior Architect Version (Persona Física)
- * Alineado con los parámetros obligatorios de Buró de Crédito PF
+ * Configurado con credenciales exactas y puerto 4431
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
@@ -11,6 +11,7 @@ interface ApiClientConfig {
   apiKey: string;
   apiSecret: string;
   username?: string;
+  password?: string;
   timeout?: number;
 }
 
@@ -33,21 +34,15 @@ class BuroApiClient {
   private tokenExpiry: number | null = null;
 
   constructor(config: ApiClientConfig) {
-    // Asegurar que usamos devpf para Persona Física
-    const finalBaseURL = config.baseURL.includes('devpm') 
-      ? config.baseURL.replace('devpm', 'devpf') 
-      : config.baseURL;
-
-    console.log(`[BuroApiClient-PF] Initializing with baseURL: ${finalBaseURL}`);
+    console.log(`[BuroApiClient-PF] Initializing with baseURL: ${config.baseURL}`);
     
     this.client = axios.create({
-      baseURL: finalBaseURL,
+      baseURL: config.baseURL,
       timeout: config.timeout || 30000,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'x-api-key': config.apiKey,
-        // Añadir User-Agent para evitar bloqueos de WAF
         'User-Agent': 'BuroPersonaFisicaPanel/1.0',
       },
     });
@@ -79,13 +74,13 @@ class BuroApiClient {
 
   async authenticate(payload?: any): Promise<ApiResponse<AuthResponse>> {
     try {
-      // Para PF, el flujo es directo al endpoint /autenticador
+      // Usar credenciales exactas: Onsite / Onsite007$$
       const authPayload = payload || {
         username: ENV.buroUsername,
-        password: ENV.buroClientSecret
+        password: ENV.buroPassword
       };
 
-      console.log(`[BuroApiClient-PF] Authenticating: ${ENV.buroUsername}`);
+      console.log(`[BuroApiClient-PF] Authenticating with user: ${ENV.buroUsername}`);
       
       const response = await this.client.post<any>(
         '/autenticador',
@@ -150,7 +145,6 @@ class BuroApiClient {
     }
   }
 
-  // Endpoints específicos para PF
   async prospector(payload: any) { return this.post('/prospector', payload); }
   async monitor(payload: any) { return this.post('/monitor', payload); }
   async estimadorIngresos(payload: any) { return this.post('/estimador-ingresos', payload); }
@@ -167,6 +161,7 @@ export function getApiClient(): BuroApiClient {
       apiKey: ENV.buroClientId,
       apiSecret: ENV.buroClientSecret,
       username: ENV.buroUsername,
+      password: ENV.buroPassword,
     });
   }
   return apiClientInstance;
