@@ -1,6 +1,6 @@
 /**
  * API Client Service - Senior Architect Version (Persona Física)
- * Implementación de cabeceras de seguridad avanzadas para evitar Error 403
+ * Alineado con la documentación oficial de APIHub de Buró de Crédito
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
@@ -41,9 +41,9 @@ class BuroApiClient {
       timeout: config.timeout || 30000,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json, text/plain',
         'x-api-key': config.apiKey,
-        'x-api-secret': config.apiSecret, // Cabecera de seguridad adicional
+        'x-api-secret': config.apiSecret,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       },
     });
@@ -59,17 +59,15 @@ class BuroApiClient {
       (error) => Promise.reject(error)
     );
 
-    // Interceptor para manejo de errores con diagnóstico profundo
+    // Interceptor para manejo de errores
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
-        const errorInfo = {
+        console.error('!!! BURO API ERROR !!!', {
           status: error.response?.status,
           data: error.response?.data,
-          headers: error.response?.headers,
           url: error.config?.url,
-        };
-        console.error('!!! BURO API SECURITY BLOCK (403) !!!', JSON.stringify(errorInfo, null, 2));
+        });
         return Promise.reject(error);
       }
     );
@@ -77,22 +75,27 @@ class BuroApiClient {
 
   async authenticate(payload?: any): Promise<ApiResponse<AuthResponse>> {
     try {
-      // Credenciales exactas según especificación
       const authPayload = payload || {
         username: ENV.buroUsername,
         password: ENV.buroPassword
       };
 
-      console.log(`[BuroApiClient-PF] Attempting authentication for: ${ENV.buroUsername}`);
+      console.log(`[BuroApiClient-PF] Authenticating at /credit-report-api/v1/autenticador`);
       
+      // Buró de Crédito PF devuelve 201 y el token como string plano
       const response = await this.client.post<any>(
-        '/autenticador',
+        '/credit-report-api/v1/autenticador',
         authPayload
       );
 
-      const token = response.data?.respuestaAutenticador || 
-                   response.data?.respuesta?.token ||
-                   response.data?.token;
+      let token = '';
+      if (response.status === 201 && typeof response.data === 'string') {
+        token = response.data;
+      } else {
+        token = response.data?.respuestaAutenticador || 
+                response.data?.respuesta?.token ||
+                response.data?.token;
+      }
 
       if (token) {
         this.token = token;
@@ -119,21 +122,6 @@ class BuroApiClient {
     }
   }
 
-  isTokenValid(): boolean {
-    return !!this.token && (this.tokenExpiry ? Date.now() < this.tokenExpiry : true);
-  }
-
-  setToken(token: string, expiresIn?: number): void {
-    this.token = token;
-    if (expiresIn) {
-      this.tokenExpiry = Date.now() + (expiresIn * 1000);
-    }
-  }
-
-  getToken(): string | null {
-    return this.token;
-  }
-
   async post<T = any>(endpoint: string, payload: any): Promise<ApiResponse<T>> {
     try {
       const response = await this.client.post<T>(endpoint, payload);
@@ -148,11 +136,12 @@ class BuroApiClient {
     }
   }
 
-  async prospector(payload: any) { return this.post('/prospector', payload); }
-  async monitor(payload: any) { return this.post('/monitor', payload); }
-  async estimadorIngresos(payload: any) { return this.post('/estimador-ingresos', payload); }
-  async reporteCredito(payload: any) { return this.post('/reporte-de-credito', payload); }
-  async informeBuro(payload: any) { return this.post('/informe-buro', payload); }
+  // Endpoints oficiales con rutas completas
+  async prospector(payload: any) { return this.post('/credit-report-api/v1/prospector', payload); }
+  async monitor(payload: any) { return this.post('/credit-report-api/v1/monitor', payload); }
+  async estimadorIngresos(payload: any) { return this.post('/credit-report-api/v1/estimador-ingresos', payload); }
+  async reporteCredito(payload: any) { return this.post('/credit-report-api/v1/reporte-de-credito', payload); }
+  async informeBuro(payload: any) { return this.post('/credit-report-api/v1/informe-buro', payload); }
 }
 
 let apiClientInstance: BuroApiClient | null = null;
