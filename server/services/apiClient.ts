@@ -123,6 +123,12 @@ class BuroApiClient {
 
   async post<T = any>(endpoint: string, payload: any): Promise<ApiResponse<T>> {
     try {
+      // Asegurar autenticación antes de cualquier petición
+      if (!this.token) {
+        const authResult = await this.authenticate();
+        if (!authResult.success) return authResult;
+      }
+      
       const response = await this.client.post<T>(endpoint, payload);
       return { success: true, data: response.data, statusCode: response.status };
     } catch (error) {
@@ -135,10 +141,11 @@ class BuroApiClient {
     }
   }
 
+  // Endpoints alineados con Reporte de Crédito v1 y APIHub
   async prospector(payload: any) { return this.post('/credit-report-api/v1/prospector', payload); }
   async monitor(payload: any) { return this.post('/credit-report-api/v1/monitor', payload); }
-  async estimadorIngresos(payload: any) { return this.post('/credit-report-api/v1/estimador-ingresos', payload); }
-  async reporteCredito(payload: any) { return this.post('/credit-report-api/v1/reporte-de-credito', payload); }
+  async estimadorIngresos(payload: any) { return this.post('/devpf/estimador-ingresos', payload); }
+  async reporteCredito(payload: any) { return this.post('/reporte-de-credito/v1/reporte-de-credito', payload); }
   async informeBuro(payload: any) { return this.post('/credit-report-api/v1/informe-buro', payload); }
 }
 
