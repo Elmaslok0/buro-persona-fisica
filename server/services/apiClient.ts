@@ -1,10 +1,10 @@
 /**
  * API Client Service - Senior Architect Version
- * Gestiona la comunicación con las APIs del buró de crédito
  * Alineado con los parámetros obligatorios de Buró de Crédito
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
+import { ENV } from '../_core/env';
 
 interface ApiClientConfig {
   baseURL: string;
@@ -31,10 +31,10 @@ class BuroApiClient {
   private client: AxiosInstance;
   private token: string | null = null;
   private tokenExpiry: number | null = null;
-  private config: ApiClientConfig;
 
   constructor(config: ApiClientConfig) {
-    this.config = config;
+    console.log(`[BuroApiClient] Initializing with baseURL: ${config.baseURL}`);
+    
     this.client = axios.create({
       baseURL: config.baseURL,
       timeout: config.timeout || 30000,
@@ -56,54 +56,47 @@ class BuroApiClient {
       (error) => Promise.reject(error)
     );
 
-    // Interceptor para manejo de errores
+    // Interceptor para manejo de errores con logs detallados
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
-        console.error('Buro API Error:', {
+        const errorData = {
           status: error.response?.status,
           data: error.response?.data,
           message: error.message,
           url: error.config?.url,
-        });
+          headers: error.config?.headers,
+        };
+        console.error('!!! Buro API Error 403/Forbidden Check !!!', JSON.stringify(errorData, null, 2));
         return Promise.reject(error);
       }
     );
   }
 
-  /**
-   * Autentica con el buró y obtiene un token
-   * Alineado con autenticador.json
-   */
-  async authenticate(payload: any): Promise<ApiResponse<AuthResponse>> {
+  async authenticate(payload?: any): Promise<ApiResponse<AuthResponse>> {
     try {
-      // Si no se pasa payload, usar credenciales de configuración
       const authPayload = payload || {
-        username: this.config.username,
-        password: this.config.apiSecret
+        username: ENV.buroUsername,
+        password: ENV.buroClientSecret
       };
 
+      console.log(`[BuroApiClient] Authenticating user: ${ENV.buroUsername}`);
+      
       const response = await this.client.post<any>(
         '/autenticador',
         authPayload
       );
 
-      // Extraer token según las diversas estructuras posibles en la documentación
       const token = response.data?.respuestaAutenticador || 
                    response.data?.respuesta?.token ||
                    response.data?.token;
 
       if (token) {
         this.token = token;
-        this.tokenExpiry = Date.now() + (3600 * 1000); // 1 hora por defecto
-
+        this.tokenExpiry = Date.now() + (3600 * 1000);
         return {
           success: true,
-          data: {
-            token,
-            expiresIn: 3600,
-            tokenType: 'Bearer',
-          },
+          data: { token, expiresIn: 3600, tokenType: 'Bearer' },
           statusCode: response.status,
         };
       }
@@ -127,17 +120,21 @@ class BuroApiClient {
     return !!this.token && (this.tokenExpiry ? Date.now() < this.tokenExpiry : true);
   }
 
-  /**
-   * Realiza una solicitud POST genérica
-   */
+  setToken(token: string, expiresIn?: number): void {
+    this.token = token;
+    if (expiresIn) {
+      this.tokenExpiry = Date.now() + (expiresIn * 1000);
+    }
+  }
+
+  getToken(): string | null {
+    return this.token;
+  }
+
   async post<T = any>(endpoint: string, payload: any): Promise<ApiResponse<T>> {
     try {
       const response = await this.client.post<T>(endpoint, payload);
-      return {
-        success: true,
-        data: response.data,
-        statusCode: response.status,
-      };
+      return { success: true, data: response.data, statusCode: response.status };
     } catch (error) {
       const axiosError = error as AxiosError;
       return {
@@ -148,7 +145,6 @@ class BuroApiClient {
     }
   }
 
-  // Métodos específicos alineados con los módulos
   async prospector(payload: any) { return this.post('/prospector', payload); }
   async monitor(payload: any) { return this.post('/monitor', payload); }
   async estimadorIngresos(payload: any) { return this.post('/estimador-ingresos', payload); }
@@ -158,22 +154,16 @@ class BuroApiClient {
 
 let apiClientInstance: BuroApiClient | null = null;
 
-export function initializeApiClient(config: ApiClientConfig): BuroApiClient {
-  apiClientInstance = new BuroApiClient(config);
-  return apiClientInstance;
-}
-
 export function getApiClient(): BuroApiClient {
   if (!apiClientInstance) {
-    // Fallback a variables de entorno si no está inicializado
-    return initializeApiClient({
-      baseURL: process.env.BURO_API_BASE_URL || '',
-      apiKey: process.env.BURO_API_CLIENT_ID || '',
-      apiSecret: process.env.BURO_API_CLIENT_SECRET || '',
-      username: process.env.BURO_API_USERNAME || '',
+    apiClientInstance = new BuroApiClient({
+      baseURL: ENV.buroApiBaseUrl,
+      apiKey: ENV.buroClientId,
+      apiSecret: ENV.buroClientSecret,
+      username: ENV.buroUsername,
     });
   }
   return apiClientInstance;
 }
 
-export { BuroApiClient, ApiClientConfig, ApiResponse, AuthResponse };
+export { BuroApiClient, ApiResponse, AuthResponse };
